@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c60x122x18yca"]
+[gd_scene load_steps=18 format=3 uid="uid://c60x122x18yca"]
 
 [ext_resource type="Script" uid="uid://cmlbdl25wtr5x" path="res://scripts/player/player.gd" id="1_hmply"]
 [ext_resource type="Script" uid="uid://bt2rpuuexcdqw" path="res://scripts/player/view.gd" id="2_b6sy1"]
@@ -10,10 +10,7 @@
 [ext_resource type="Script" uid="uid://c5cd0lxe4hvy0" path="res://scripts/components/input_component.gd" id="4_kai5h"]
 [ext_resource type="Script" uid="uid://cxsnelnl6fr6r" path="res://scripts/player/states/Idle.gd" id="5_ws782"]
 [ext_resource type="Script" uid="uid://bwrnvumrlu58t" path="res://scripts/player/states/Move.gd" id="6_0sm0w"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_enrq2"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_ws782"]
+[ext_resource type="Script" uid="uid://d1xtvn5e2ed2" path="res://scripts/player/states/Falling.gd" id="9_0sm0w"]
 
 [sub_resource type="Animation" id="Animation_p83wy"]
 resource_name = "Crouch"
@@ -126,6 +123,10 @@ _data = {
 &"Stand": SubResource("Animation_g0bbo")
 }
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_enrq2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ws782"]
+
 [node name="CharacterBody3D" type="CharacterBody3D"]
 rotation_edit_mode = 2
 collision_layer = 0
@@ -143,6 +144,18 @@ collision_mask = 4
 collide_with_areas = true
 collide_with_bodies = false
 script = ExtResource("3_ws782")
+
+[node name="ItemAttachment" type="Marker3D" parent="View"]
+transform = Transform3D(0.961262, -0.275637, 0, 0.275637, 0.961262, 0, 0, 0, 1, 1, -0.5, -1.2)
+
+[node name="ItemSprite" type="Sprite3D" parent="View/ItemAttachment"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+no_depth_test = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_g4jq6")
+}
 
 [node name="StandCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -181,15 +194,24 @@ state_machine = NodePath("..")
 script = ExtResource("2_enrq2")
 base_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("input", "move_state", "state_machine")]
+[node name="Idle" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("movement", "input", "move_state", "fall_state", "state_machine")]
 script = ExtResource("5_ws782")
+movement = NodePath("../../MoveComponent")
 input = NodePath("../../InputComponent")
 move_state = NodePath("../Moving")
+fall_state = NodePath("../Falling")
 state_machine = NodePath("..")
 
-[node name="Moving" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("input", "movement", "idle_state", "state_machine")]
+[node name="Moving" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("input", "movement", "idle_state", "fall_state", "state_machine")]
 script = ExtResource("6_0sm0w")
 input = NodePath("../../InputComponent")
+movement = NodePath("../../MoveComponent")
+idle_state = NodePath("../Idle")
+fall_state = NodePath("../Falling")
+state_machine = NodePath("..")
+
+[node name="Falling" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("movement", "idle_state", "state_machine")]
+script = ExtResource("9_0sm0w")
 movement = NodePath("../../MoveComponent")
 idle_state = NodePath("../Idle")
 state_machine = NodePath("..")
@@ -203,7 +225,4 @@ movement_speed = 1.5
 script = ExtResource("4_kai5h")
 mouse_mode = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_g4jq6")
-}
+[node name="InventoryComponent" type="Node" parent="."]
