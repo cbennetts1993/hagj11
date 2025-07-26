@@ -1,0 +1,209 @@
+[gd_scene load_steps=17 format=3 uid="uid://c60x122x18yca"]
+
+[ext_resource type="Script" uid="uid://cmlbdl25wtr5x" path="res://scripts/player/player.gd" id="1_hmply"]
+[ext_resource type="Script" uid="uid://bt2rpuuexcdqw" path="res://scripts/player/view.gd" id="2_b6sy1"]
+[ext_resource type="Script" uid="uid://bgclr5b06nrag" path="res://scripts/state/StateMachine.gd" id="2_enrq2"]
+[ext_resource type="Script" uid="uid://eq72tai6grx7" path="res://scripts/player/states/Standing.gd" id="3_5amry"]
+[ext_resource type="Script" uid="uid://dx3gufri5f4yk" path="res://scripts/components/interact_ray.gd" id="3_ws782"]
+[ext_resource type="Script" uid="uid://d34apem2rl34r" path="res://scripts/player/states/Crouching.gd" id="4_b6sy1"]
+[ext_resource type="Script" uid="uid://bjf5ygse8a66o" path="res://scripts/components/move_component.gd" id="4_dolh7"]
+[ext_resource type="Script" uid="uid://c5cd0lxe4hvy0" path="res://scripts/components/input_component.gd" id="4_kai5h"]
+[ext_resource type="Script" uid="uid://cxsnelnl6fr6r" path="res://scripts/player/states/Idle.gd" id="5_ws782"]
+[ext_resource type="Script" uid="uid://bwrnvumrlu58t" path="res://scripts/player/states/Move.gd" id="6_0sm0w"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_enrq2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ws782"]
+
+[sub_resource type="Animation" id="Animation_p83wy"]
+resource_name = "Crouch"
+length = 0.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("View")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 1.5, 0, 0.5, 1, 0, 0.75, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StandCollision:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CrouchCollision:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_j77er"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("View")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 1.5, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StandCollision:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CrouchCollision:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_g0bbo"]
+resource_name = "Stand"
+length = 0.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("View")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.75, 0, 0.5, 1, 0, 1.5, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StandCollision:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CrouchCollision:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g4jq6"]
+_data = {
+&"Crouch": SubResource("Animation_p83wy"),
+&"RESET": SubResource("Animation_j77er"),
+&"Stand": SubResource("Animation_g0bbo")
+}
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+rotation_edit_mode = 2
+collision_layer = 0
+script = ExtResource("1_hmply")
+
+[node name="View" type="Camera3D" parent="." node_paths=PackedStringArray("input")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("2_b6sy1")
+input = NodePath("../InputComponent")
+sensitivity = 0.01
+
+[node name="InteractRay" type="RayCast3D" parent="View"]
+target_position = Vector3(0, 0, -1.5)
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("3_ws782")
+
+[node name="StandCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_enrq2")
+
+[node name="CrouchCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_ws782")
+disabled = true
+
+[node name="StanceStateMachine" type="Node" parent="." node_paths=PackedStringArray("base_state")]
+script = ExtResource("2_enrq2")
+base_state = NodePath("Standing")
+
+[node name="Standing" type="Node" parent="StanceStateMachine" node_paths=PackedStringArray("animation_player", "movement", "input", "crouch_state", "state_machine")]
+script = ExtResource("3_5amry")
+animation = &"Stand"
+animation_player = NodePath("../../AnimationPlayer")
+movement = NodePath("../../MoveComponent")
+input = NodePath("../../InputComponent")
+crouch_state = NodePath("../Crouching")
+state_machine = NodePath("..")
+
+[node name="Crouching" type="Node" parent="StanceStateMachine" node_paths=PackedStringArray("animation_player", "movement", "crouch_collider", "input", "stand_state", "state_machine")]
+script = ExtResource("4_b6sy1")
+animation = &"Crouch"
+move_speed_modifier = 0.6
+animation_player = NodePath("../../AnimationPlayer")
+movement = NodePath("../../MoveComponent")
+crouch_collider = NodePath("../../CrouchCollision")
+input = NodePath("../../InputComponent")
+stand_state = NodePath("../Standing")
+state_machine = NodePath("..")
+
+[node name="MovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("base_state")]
+script = ExtResource("2_enrq2")
+base_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("input", "move_state", "state_machine")]
+script = ExtResource("5_ws782")
+input = NodePath("../../InputComponent")
+move_state = NodePath("../Moving")
+state_machine = NodePath("..")
+
+[node name="Moving" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("input", "movement", "idle_state", "state_machine")]
+script = ExtResource("6_0sm0w")
+input = NodePath("../../InputComponent")
+movement = NodePath("../../MoveComponent")
+idle_state = NodePath("../Idle")
+state_machine = NodePath("..")
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("body")]
+script = ExtResource("4_dolh7")
+body = NodePath("..")
+movement_speed = 1.5
+
+[node name="InputComponent" type="Node" parent="."]
+script = ExtResource("4_kai5h")
+mouse_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_g4jq6")
+}

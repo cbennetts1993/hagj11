@@ -1,0 +1,1 @@
+class_name InteractRay extends RayCast3D
