@@ -5,8 +5,12 @@ class_name Player extends CharacterBody3D
 func _ready():
 	Global.emit_register_local_player(self)
 
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		var pan_direction = event.screen_relative.x
 		rotation.y -= pan_direction * sensitivity
-	self.get_groups()
+
+
+func die():
+	print("Died!")

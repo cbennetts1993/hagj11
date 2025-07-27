@@ -23,6 +23,7 @@ func is_node_in_vision_cone(node: Node3D) -> bool:
 	return dot > vision_angle
 
 func is_node_in_line_of_sight(node: Node3D) -> bool:
+	vision_ray.target_position = node.global_position - self.global_position
 	return vision_ray.is_colliding() and vision_ray.get_collider() == node
 	
 	#var space = get_world_3d().direct_space_state

@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://cxsnelnl6fr6r" path="res://scripts/player/states/Idle.gd" id="5_ws782"]
 [ext_resource type="Script" uid="uid://bwrnvumrlu58t" path="res://scripts/player/states/Move.gd" id="6_0sm0w"]
 [ext_resource type="Script" uid="uid://d1xtvn5e2ed2" path="res://scripts/player/states/Falling.gd" id="9_0sm0w"]
+[ext_resource type="PackedScene" uid="uid://7l8f2mnhn2of" path="res://scripts/components/hit_box.tscn" id="14_p83wy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p83wy"]
 transparency = 2
@@ -138,8 +139,6 @@ _data = {
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ws782"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0sm0w"]
-
 [node name="CharacterBody3D" type="CharacterBody3D"]
 rotation_edit_mode = 2
 script = ExtResource("1_hmply")
@@ -220,9 +219,10 @@ state_machine = NodePath("..")
 script = ExtResource("2_enrq2")
 base_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("movement", "input", "move_state", "fall_state", "state_machine")]
+[node name="Idle" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("movement", "character", "input", "move_state", "fall_state", "state_machine")]
 script = ExtResource("5_ws782")
 movement = NodePath("../../MoveComponent")
+character = NodePath("../..")
 input = NodePath("../../InputComponent")
 move_state = NodePath("../Moving")
 fall_state = NodePath("../Falling")
@@ -253,9 +253,6 @@ mouse_mode = 2
 
 [node name="InventoryComponent" type="Node" parent="."]
 
-[node name="HitBox" type="Area3D" parent="."]
+[node name="HitBox" parent="." instance=ExtResource("14_p83wy")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_0sm0w")
-debug_color = Color(0.213196, 0.629658, 0.331986, 0.42)
+[connection signal="got_hit" from="HitBox" to="." method="die"]

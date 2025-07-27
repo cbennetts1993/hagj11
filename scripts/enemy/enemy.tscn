@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://dkkpifsllj6ru" path="res://scripts/enemy/states/Follow.gd" id="7_hhlal"]
 [ext_resource type="Script" uid="uid://bskldlbnanqgw" path="res://scripts/enemy/states/Attack.gd" id="8_escsu"]
 [ext_resource type="Script" uid="uid://cl4v3edg31e4b" path="res://scripts/enemy/states/Stunned.gd" id="9_escsu"]
+[ext_resource type="PackedScene" uid="uid://dafxdtgaudq7s" path="res://scripts/components/damage_shape.tscn" id="11_p5k8n"]
+[ext_resource type="PackedScene" uid="uid://7l8f2mnhn2of" path="res://scripts/components/hit_box.tscn" id="12_wohgq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_su13s"]
 
@@ -28,14 +30,6 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
-
-[sub_resource type="Curve3D" id="Curve3D_su13s"]
-closed = true
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 3.10013, 0.0987399, -10.9561, 0, 0, 0, 0, 0, 0, 3.04955, 0.0988686, -7.5641, 0, 0, 0, 0, 0, 0, 0.325364, 0.040596, -6.62308, 0, 0, 0, 0, 0, 0, -2.71555, 0.0603173, -6.99937, 0, 0, 0, 0, 0, 0, -3.66219, 0.0208429, -9.05925, 0, 0, 0, 0, 0, 0, -2.35415, 0.113058, -12.751),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
-}
-point_count = 6
 
 [sub_resource type="Animation" id="Animation_hhlal"]
 resource_name = "Attack"
@@ -92,16 +86,16 @@ tracks/1/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_wohgq"]
+resource_name = "Stunned"
+length = 0.5
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ipal1"]
 _data = {
 &"Attack": SubResource("Animation_hhlal"),
-&"RESET": SubResource("Animation_escsu")
+&"RESET": SubResource("Animation_escsu"),
+&"Stunned": SubResource("Animation_wohgq")
 }
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_5bwyd"]
-size = Vector3(1.2, 1, 1.2)
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7lgl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hhlal"]
 size = Vector3(10, 2, 10)
@@ -111,6 +105,7 @@ script = ExtResource("1_otvh8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+rotation_edit_mode = 2
 shape = SubResource("CapsuleShape3D_su13s")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
@@ -142,14 +137,11 @@ autostart = true
 script = ExtResource("4_su13s")
 vision = NodePath("../../VisionComponent")
 movement = NodePath("../../MovementComponent")
-path = NodePath("Path3D")
+path = NodePath("")
 idle_state = NodePath("../Idle")
 follow_state = NodePath("../Follow")
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://ojl4g8pguu4x"
-
-[node name="Path3D" type="Path3D" parent="StateMachine/Patrol"]
-curve = SubResource("Curve3D_su13s")
 
 [node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("vision", "movement", "leash_position", "idle_state", "follow_state", "state_machine")]
 script = ExtResource("5_x7lgl")
@@ -182,8 +174,11 @@ animation_player = NodePath("../../AnimationPlayer")
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://ojl4g8pguu4x"
 
-[node name="Stunned" type="Node" parent="StateMachine"]
+[node name="Stunned" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "state_machine")]
 script = ExtResource("9_escsu")
+animation = &"Stunned"
+animation_player = NodePath("../../AnimationPlayer")
+state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://ojl4g8pguu4x"
 
 [node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("body")]
@@ -197,22 +192,14 @@ libraries = {
 &"": SubResource("AnimationLibrary_ipal1")
 }
 
-[node name="DamageShape" type="Area3D" parent="."]
-monitorable = false
+[node name="DamageShape" parent="." node_paths=PackedStringArray("exclude") instance=ExtResource("11_p5k8n")]
+monitoring = true
+exclude = [NodePath("../HitBox")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DamageShape"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
-shape = SubResource("BoxShape3D_5bwyd")
-debug_color = Color(0.965282, 0.226589, 0.238807, 0.42)
-
-[node name="HitBox" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_x7lgl")
+[node name="HitBox" parent="." instance=ExtResource("12_wohgq")]
 
 [node name="VisionComponent" parent="." instance=ExtResource("5_uwy72")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 collision_mask = 1
 vision_angle = 0.0
 
@@ -222,5 +209,7 @@ shape = SubResource("BoxShape3D_hhlal")
 
 [node name="RayCast3D" parent="VisionComponent" index="1"]
 target_position = Vector3(0, 0, 10)
+
+[connection signal="got_hit" from="HitBox" to="StateMachine/Stunned" method="stun"]
 
 [editable path="VisionComponent"]

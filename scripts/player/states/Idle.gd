@@ -1,6 +1,7 @@
 extends State
 
 @export var movement: MovementComponent
+@export var character: CharacterBody3D
 @export var input: InputComponent
 
 @export var move_state: State
