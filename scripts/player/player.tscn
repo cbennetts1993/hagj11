@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c60x122x18yca"]
+[gd_scene load_steps=22 format=3 uid="uid://c60x122x18yca"]
 
 [ext_resource type="Script" uid="uid://cmlbdl25wtr5x" path="res://scripts/player/player.gd" id="1_hmply"]
 [ext_resource type="Script" uid="uid://bt2rpuuexcdqw" path="res://scripts/player/view.gd" id="2_b6sy1"]
@@ -9,9 +9,19 @@
 [ext_resource type="Script" uid="uid://bjf5ygse8a66o" path="res://scripts/components/move_component.gd" id="4_dolh7"]
 [ext_resource type="Texture2D" uid="uid://dsdob8i5i52bh" path="res://assets/sprites/Hand_Test.png" id="4_g0bbo"]
 [ext_resource type="Script" uid="uid://c5cd0lxe4hvy0" path="res://scripts/components/input_component.gd" id="4_kai5h"]
+[ext_resource type="Texture2D" uid="uid://cw32wut8m3x7u" path="res://assets/sprites/Hand_Test_n.png" id="5_j77er"]
 [ext_resource type="Script" uid="uid://cxsnelnl6fr6r" path="res://scripts/player/states/Idle.gd" id="5_ws782"]
 [ext_resource type="Script" uid="uid://bwrnvumrlu58t" path="res://scripts/player/states/Move.gd" id="6_0sm0w"]
 [ext_resource type="Script" uid="uid://d1xtvn5e2ed2" path="res://scripts/player/states/Falling.gd" id="9_0sm0w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p83wy"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("4_g0bbo")
+normal_enabled = true
+normal_scale = 0.25
+normal_texture = ExtResource("5_j77er")
 
 [sub_resource type="Animation" id="Animation_p83wy"]
 resource_name = "Crouch"
@@ -152,6 +162,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, -0.6, -1.2)
 
 [node name="ItemSprite" type="Sprite3D" parent="View/ItemAttachment"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_p83wy")
+cast_shadow = 0
 shaded = true
 no_depth_test = true
 texture = ExtResource("4_g0bbo")

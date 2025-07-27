@@ -1,15 +1,16 @@
-[gd_scene load_steps=18 format=3 uid="uid://b41ytihj2ky0p"]
+[gd_scene load_steps=22 format=3 uid="uid://b41ytihj2ky0p"]
 
 [ext_resource type="Script" uid="uid://cbmptno52lpj3" path="res://scripts/enemy/enemy.gd" id="1_otvh8"]
 [ext_resource type="Texture2D" uid="uid://cnwi1aty3t0fo" path="res://assets/REMOVE/Viking.webp" id="2_5bwyd"]
 [ext_resource type="Script" uid="uid://bgclr5b06nrag" path="res://scripts/state/StateMachine.gd" id="2_uwy72"]
-[ext_resource type="Script" uid="uid://ojl4g8pguu4x" path="res://scripts/state/State.gd" id="3_v4l2p"]
 [ext_resource type="Script" uid="uid://bhj0st6dmq61i" path="res://scripts/enemy/states/Idle.gd" id="3_x7lgl"]
 [ext_resource type="Script" uid="uid://cdlbo6knk1juo" path="res://scripts/enemy/states/Patrol.gd" id="4_su13s"]
 [ext_resource type="Script" uid="uid://bjf5ygse8a66o" path="res://scripts/components/move_component.gd" id="4_x7lgl"]
 [ext_resource type="PackedScene" uid="uid://dgj8pixxegnhw" path="res://scripts/components/vision_component.tscn" id="5_uwy72"]
 [ext_resource type="Script" uid="uid://tmxesv8kg4q2" path="res://scripts/enemy/states/Wander.gd" id="5_x7lgl"]
 [ext_resource type="Script" uid="uid://dkkpifsllj6ru" path="res://scripts/enemy/states/Follow.gd" id="7_hhlal"]
+[ext_resource type="Script" uid="uid://bskldlbnanqgw" path="res://scripts/enemy/states/Attack.gd" id="8_escsu"]
+[ext_resource type="Script" uid="uid://cl4v3edg31e4b" path="res://scripts/enemy/states/Stunned.gd" id="9_escsu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_su13s"]
 
@@ -29,6 +30,73 @@ animations = [{
 }]
 
 [sub_resource type="Curve3D" id="Curve3D_su13s"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 3.10013, 0.0987399, -10.9561, 0, 0, 0, 0, 0, 0, 3.04955, 0.0988686, -7.5641, 0, 0, 0, 0, 0, 0, 0.325364, 0.040596, -6.62308, 0, 0, 0, 0, 0, 0, -2.71555, 0.0603173, -6.99937, 0, 0, 0, 0, 0, 0, -3.66219, 0.0208429, -9.05925, 0, 0, 0, 0, 0, 0, -2.35415, 0.113058, -12.751),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[sub_resource type="Animation" id="Animation_hhlal"]
+resource_name = "Attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DamageShape:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DamageShape:monitorable")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_escsu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DamageShape:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DamageShape:monitorable")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ipal1"]
+_data = {
+&"Attack": SubResource("Animation_hhlal"),
+&"RESET": SubResource("Animation_escsu")
+}
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5bwyd"]
 size = Vector3(1.2, 1, 1.2)
@@ -55,13 +123,14 @@ script = ExtResource("2_uwy72")
 base_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://bgclr5b06nrag"
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("vision", "movement", "wander_timer", "wander_state", "follow_state", "state_machine")]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("vision", "movement", "wander_timer", "wander_state", "follow_state", "patrol_state", "state_machine")]
 script = ExtResource("3_x7lgl")
 vision = NodePath("../../VisionComponent")
 movement = NodePath("../../MovementComponent")
 wander_timer = NodePath("IdleTimer")
 wander_state = NodePath("../Wander")
 follow_state = NodePath("../Follow")
+patrol_state = NodePath("../Patrol")
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://ojl4g8pguu4x"
 
@@ -101,15 +170,20 @@ vision = NodePath("../../VisionComponent")
 movement = NodePath("../../MovementComponent")
 idle_state = NodePath("../Idle")
 attack_state = NodePath("../Attack")
+attack_range = 1.5
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://ojl4g8pguu4x"
 
-[node name="Attack" type="Node" parent="StateMachine"]
-script = ExtResource("3_v4l2p")
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "state_machine")]
+script = ExtResource("8_escsu")
+animation = &"Attack"
+attack_speed = 0.5
+animation_player = NodePath("../../AnimationPlayer")
+state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://ojl4g8pguu4x"
 
 [node name="Stunned" type="Node" parent="StateMachine"]
-script = ExtResource("3_v4l2p")
+script = ExtResource("9_escsu")
 metadata/_custom_type_script = "uid://ojl4g8pguu4x"
 
 [node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("body")]
@@ -119,8 +193,12 @@ movement_speed = 1.75
 metadata/_custom_type_script = "uid://bjf5ygse8a66o"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ipal1")
+}
 
 [node name="DamageShape" type="Area3D" parent="."]
+monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DamageShape"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)

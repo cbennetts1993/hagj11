@@ -22,8 +22,9 @@ func enter(from: State):
 
 
 func update(delta: float):
-	if movement.body.global_position.distance_to(target_position) <= 0.1:
+	if movement.body.global_position.distance_to(target_position) <= 0.25:
 		current_point_id = ( current_point_id + 1 ) % path.curve.point_count
+		target_position = path.curve.get_point_position(current_point_id)
 		return
 
 
