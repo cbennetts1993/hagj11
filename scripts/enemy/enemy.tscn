@@ -1,0 +1,148 @@
+[gd_scene load_steps=18 format=3 uid="uid://b41ytihj2ky0p"]
+
+[ext_resource type="Script" uid="uid://cbmptno52lpj3" path="res://scripts/enemy/enemy.gd" id="1_otvh8"]
+[ext_resource type="Texture2D" uid="uid://cnwi1aty3t0fo" path="res://assets/REMOVE/Viking.webp" id="2_5bwyd"]
+[ext_resource type="Script" uid="uid://bgclr5b06nrag" path="res://scripts/state/StateMachine.gd" id="2_uwy72"]
+[ext_resource type="Script" uid="uid://ojl4g8pguu4x" path="res://scripts/state/State.gd" id="3_v4l2p"]
+[ext_resource type="Script" uid="uid://bhj0st6dmq61i" path="res://scripts/enemy/states/Idle.gd" id="3_x7lgl"]
+[ext_resource type="Script" uid="uid://cdlbo6knk1juo" path="res://scripts/enemy/states/Patrol.gd" id="4_su13s"]
+[ext_resource type="Script" uid="uid://bjf5ygse8a66o" path="res://scripts/components/move_component.gd" id="4_x7lgl"]
+[ext_resource type="PackedScene" uid="uid://dgj8pixxegnhw" path="res://scripts/components/vision_component.tscn" id="5_uwy72"]
+[ext_resource type="Script" uid="uid://tmxesv8kg4q2" path="res://scripts/enemy/states/Wander.gd" id="5_x7lgl"]
+[ext_resource type="Script" uid="uid://dkkpifsllj6ru" path="res://scripts/enemy/states/Follow.gd" id="7_hhlal"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_su13s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhlal"]
+atlas = ExtResource("2_5bwyd")
+region = Rect2(0, 0, 474, 547)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_escsu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhlal")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Curve3D" id="Curve3D_su13s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5bwyd"]
+size = Vector3(1.2, 1, 1.2)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7lgl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hhlal"]
+size = Vector3(10, 2, 10)
+
+[node name="Enemy" type="CharacterBody3D"]
+script = ExtResource("1_otvh8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_su13s")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, 0)
+shaded = true
+sprite_frames = SubResource("SpriteFrames_escsu")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("base_state")]
+script = ExtResource("2_uwy72")
+base_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://bgclr5b06nrag"
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("vision", "movement", "wander_timer", "wander_state", "follow_state", "state_machine")]
+script = ExtResource("3_x7lgl")
+vision = NodePath("../../VisionComponent")
+movement = NodePath("../../MovementComponent")
+wander_timer = NodePath("IdleTimer")
+wander_state = NodePath("../Wander")
+follow_state = NodePath("../Follow")
+state_machine = NodePath("..")
+metadata/_custom_type_script = "uid://ojl4g8pguu4x"
+
+[node name="IdleTimer" type="Timer" parent="StateMachine/Idle"]
+wait_time = 2.5
+autostart = true
+
+[node name="Patrol" type="Node" parent="StateMachine" node_paths=PackedStringArray("vision", "movement", "path", "idle_state", "follow_state", "state_machine")]
+script = ExtResource("4_su13s")
+vision = NodePath("../../VisionComponent")
+movement = NodePath("../../MovementComponent")
+path = NodePath("Path3D")
+idle_state = NodePath("../Idle")
+follow_state = NodePath("../Follow")
+state_machine = NodePath("..")
+metadata/_custom_type_script = "uid://ojl4g8pguu4x"
+
+[node name="Path3D" type="Path3D" parent="StateMachine/Patrol"]
+curve = SubResource("Curve3D_su13s")
+
+[node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("vision", "movement", "leash_position", "idle_state", "follow_state", "state_machine")]
+script = ExtResource("5_x7lgl")
+vision = NodePath("../../VisionComponent")
+movement = NodePath("../../MovementComponent")
+wander_radius = 5.0
+leash_position = NodePath("LeashPoint3D")
+idle_state = NodePath("../Idle")
+follow_state = NodePath("../Follow")
+state_machine = NodePath("..")
+metadata/_custom_type_script = "uid://ojl4g8pguu4x"
+
+[node name="LeashPoint3D" type="Marker3D" parent="StateMachine/Wander"]
+
+[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("vision", "movement", "idle_state", "attack_state", "state_machine")]
+script = ExtResource("7_hhlal")
+vision = NodePath("../../VisionComponent")
+movement = NodePath("../../MovementComponent")
+idle_state = NodePath("../Idle")
+attack_state = NodePath("../Attack")
+state_machine = NodePath("..")
+metadata/_custom_type_script = "uid://ojl4g8pguu4x"
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("3_v4l2p")
+metadata/_custom_type_script = "uid://ojl4g8pguu4x"
+
+[node name="Stunned" type="Node" parent="StateMachine"]
+script = ExtResource("3_v4l2p")
+metadata/_custom_type_script = "uid://ojl4g8pguu4x"
+
+[node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("body")]
+script = ExtResource("4_x7lgl")
+body = NodePath("..")
+movement_speed = 1.75
+metadata/_custom_type_script = "uid://bjf5ygse8a66o"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="DamageShape" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DamageShape"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+shape = SubResource("BoxShape3D_5bwyd")
+debug_color = Color(0.965282, 0.226589, 0.238807, 0.42)
+
+[node name="HitBox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_x7lgl")
+
+[node name="VisionComponent" parent="." instance=ExtResource("5_uwy72")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_mask = 1
+vision_angle = 0.0
+
+[node name="CollisionShape3D" parent="VisionComponent/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+shape = SubResource("BoxShape3D_hhlal")
+
+[node name="RayCast3D" parent="VisionComponent" index="1"]
+target_position = Vector3(0, 0, 10)
+
+[editable path="VisionComponent"]

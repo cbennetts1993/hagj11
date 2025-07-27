@@ -19,8 +19,6 @@ func enter(from: State) -> void:
 
 func update(delta: float) -> void:
 	
-	print(can_stand())
-	
 	if not input.is_crouch_pressed() and can_stand():
 		state_machine.change_state(stand_state)
 		return

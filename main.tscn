@@ -1,8 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://fvtsy1iv4dkv"]
+[gd_scene load_steps=23 format=3 uid="uid://fvtsy1iv4dkv"]
 
 [ext_resource type="PackedScene" uid="uid://c60x122x18yca" path="res://scripts/player/player.tscn" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://dhlv4uictmf4l" path="res://textures/33-50/Asset 4.png" id="2_0xm2m"]
 [ext_resource type="Shader" uid="uid://c3komeodyogmp" path="res://shaders/water_shader.gdshader" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://btblysv6mlgr4" path="res://assets/REMOVE/VikingLongboat.webp" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://b41ytihj2ky0p" path="res://scripts/enemy/enemy.tscn" id="5_lquwl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -16,6 +18,10 @@ background_mode = 2
 sky = SubResource("Sky_0xm2m")
 tonemap_mode = 2
 glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.028
+volumetric_fog_albedo = Color(0.554554, 0.554554, 0.554554, 1)
+volumetric_fog_emission = Color(0.519558, 0.519558, 0.519558, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
 albedo_texture = ExtResource("2_0xm2m")
@@ -40,7 +46,9 @@ material = SubResource("StandardMaterial3D_1bvp3")
 size = Vector3(10, 2, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1bvp3"]
+noise_type = 3
 fractal_type = 2
+fractal_weighted_strength = 1.0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lquwl"]
 seamless = true
@@ -49,6 +57,10 @@ bump_strength = 5.0
 noise = SubResource("FastNoiseLite_1bvp3")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_h2yge"]
+noise_type = 3
+fractal_type = 2
+fractal_gain = 1.0
+fractal_weighted_strength = 1.0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1bvp3"]
 seamless = true
@@ -70,7 +82,7 @@ shader_parameter/depth_offset = -0.75
 shader_parameter/base_color = Color(0.0987552, 0.288992, 0.405499, 1)
 shader_parameter/metallic = 0.33
 shader_parameter/roughness = 0.0
-shader_parameter/speed = 0.01
+shader_parameter/speed = 0.005
 shader_parameter/wave_height = 3.5
 shader_parameter/noise_texture_1 = SubResource("NoiseTexture2D_lquwl")
 shader_parameter/noise_texture_2 = SubResource("NoiseTexture2D_1bvp3")
@@ -78,8 +90,19 @@ shader_parameter/noise_texture_2 = SubResource("NoiseTexture2D_1bvp3")
 [sub_resource type="PlaneMesh" id="PlaneMesh_272bh"]
 material = SubResource("ShaderMaterial_7mycd")
 size = Vector2(100, 100)
-subdivide_width = 20
-subdivide_depth = 20
+subdivide_width = 25
+subdivide_depth = 25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lquwl"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("4_1bvp3")
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_7mycd"]
+material = SubResource("StandardMaterial3D_lquwl")
+size = Vector2(6, 4)
 
 [node name="Node3D" type="Node3D"]
 
@@ -110,12 +133,13 @@ shape = SubResource("BoxShape3D_1bvp3")
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_ig7tw")]
 
 [node name="Wall" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.08247, -3.87227)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.08247, -3.87227)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wall"]
 shape = SubResource("BoxShape3D_0xm2m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 mesh = SubResource("BoxMesh_lquwl")
 skeleton = NodePath("../..")
 
@@ -150,4 +174,37 @@ mesh = SubResource("BoxMesh_lquwl")
 skeleton = NodePath("../..")
 
 [node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -3.5732, 0)
 mesh = SubResource("PlaneMesh_272bh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.1046, -0.215174, -27.3729)
+mesh = SubResource("QuadMesh_7mycd")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.0582, -0.215173, -18.8352)
+mesh = SubResource("QuadMesh_7mycd")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.7382, -0.215173, -24.395)
+mesh = SubResource("QuadMesh_7mycd")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.8, -0.215173, -16.352)
+mesh = SubResource("QuadMesh_7mycd")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2581, -0.215173, -8.19541)
+mesh = SubResource("QuadMesh_7mycd")
+
+[node name="Enemy" parent="." instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+
+[node name="IdleTimer" parent="Enemy/StateMachine/Idle" index="0"]
+one_shot = true
+
+[node name="LeashPoint3D" parent="Enemy/StateMachine/Wander" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+
+[editable path="Enemy"]
+[editable path="Enemy/VisionComponent"]

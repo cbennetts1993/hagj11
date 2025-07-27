@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c60x122x18yca"]
+[gd_scene load_steps=20 format=3 uid="uid://c60x122x18yca"]
 
 [ext_resource type="Script" uid="uid://cmlbdl25wtr5x" path="res://scripts/player/player.gd" id="1_hmply"]
 [ext_resource type="Script" uid="uid://bt2rpuuexcdqw" path="res://scripts/player/view.gd" id="2_b6sy1"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dx3gufri5f4yk" path="res://scripts/components/interact_ray.gd" id="3_ws782"]
 [ext_resource type="Script" uid="uid://d34apem2rl34r" path="res://scripts/player/states/Crouching.gd" id="4_b6sy1"]
 [ext_resource type="Script" uid="uid://bjf5ygse8a66o" path="res://scripts/components/move_component.gd" id="4_dolh7"]
+[ext_resource type="Texture2D" uid="uid://dsdob8i5i52bh" path="res://assets/sprites/Hand_Test.png" id="4_g0bbo"]
 [ext_resource type="Script" uid="uid://c5cd0lxe4hvy0" path="res://scripts/components/input_component.gd" id="4_kai5h"]
 [ext_resource type="Script" uid="uid://cxsnelnl6fr6r" path="res://scripts/player/states/Idle.gd" id="5_ws782"]
 [ext_resource type="Script" uid="uid://bwrnvumrlu58t" path="res://scripts/player/states/Move.gd" id="6_0sm0w"]
@@ -127,9 +128,10 @@ _data = {
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ws782"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0sm0w"]
+
 [node name="CharacterBody3D" type="CharacterBody3D"]
 rotation_edit_mode = 2
-collision_layer = 0
 script = ExtResource("1_hmply")
 
 [node name="View" type="Camera3D" parent="." node_paths=PackedStringArray("input")]
@@ -146,11 +148,23 @@ collide_with_bodies = false
 script = ExtResource("3_ws782")
 
 [node name="ItemAttachment" type="Marker3D" parent="View"]
-transform = Transform3D(0.961262, -0.275637, 0, 0.275637, 0.961262, 0, 0, 0, 1, 1, -0.5, -1.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, -0.6, -1.2)
 
 [node name="ItemSprite" type="Sprite3D" parent="View/ItemAttachment"]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shaded = true
 no_depth_test = true
+texture = ExtResource("4_g0bbo")
+
+[node name="ItemAttachment2" type="Marker3D" parent="View"]
+transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, -1.2, -0.7, -1.2)
+
+[node name="ItemSprite" type="Sprite3D" parent="View/ItemAttachment2"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+flip_h = true
+shaded = true
+no_depth_test = true
+texture = ExtResource("4_g0bbo")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -226,3 +240,10 @@ script = ExtResource("4_kai5h")
 mouse_mode = 2
 
 [node name="InventoryComponent" type="Node" parent="."]
+
+[node name="HitBox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_0sm0w")
+debug_color = Color(0.213196, 0.629658, 0.331986, 0.42)
