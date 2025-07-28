@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c60x122x18yca"]
+[gd_scene load_steps=26 format=3 uid="uid://c60x122x18yca"]
 
 [ext_resource type="Script" uid="uid://cmlbdl25wtr5x" path="res://scripts/player/player.gd" id="1_hmply"]
 [ext_resource type="Script" uid="uid://bt2rpuuexcdqw" path="res://scripts/player/view.gd" id="2_b6sy1"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://bwrnvumrlu58t" path="res://scripts/player/states/Move.gd" id="6_0sm0w"]
 [ext_resource type="Script" uid="uid://d1xtvn5e2ed2" path="res://scripts/player/states/Falling.gd" id="9_0sm0w"]
 [ext_resource type="PackedScene" uid="uid://7l8f2mnhn2of" path="res://scripts/components/hit_box.tscn" id="14_p83wy"]
+[ext_resource type="PackedScene" uid="uid://dwqrv743gcoqs" path="res://scripts/components/sound_source.tscn" id="15_g4jq6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p83wy"]
 transparency = 2
@@ -23,6 +24,10 @@ albedo_texture = ExtResource("4_g0bbo")
 normal_enabled = true
 normal_scale = 0.25
 normal_texture = ExtResource("5_j77er")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_enrq2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ws782"]
 
 [sub_resource type="Animation" id="Animation_p83wy"]
 resource_name = "Crouch"
@@ -135,11 +140,37 @@ _data = {
 &"Stand": SubResource("Animation_g0bbo")
 }
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_enrq2"]
+[sub_resource type="Animation" id="Animation_g4jq6"]
+resource_name = "Idle"
+length = 0.5
+loop_mode = 1
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_ws782"]
+[sub_resource type="Animation" id="Animation_yj7se"]
+resource_name = "Run"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SoundSource")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [4.0],
+"method": &"create_sound"
+}]
+}
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uyddv"]
+_data = {
+&"Idle": SubResource("Animation_g4jq6"),
+&"Run": SubResource("Animation_yj7se")
+}
+
+[node name="CharacterBody3D" type="CharacterBody3D" groups=["Player"]]
 rotation_edit_mode = 2
 script = ExtResource("1_hmply")
 
@@ -177,11 +208,6 @@ shaded = true
 no_depth_test = true
 texture = ExtResource("4_g0bbo")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_g4jq6")
-}
-
 [node name="StandCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_enrq2")
@@ -198,7 +224,7 @@ base_state = NodePath("Standing")
 [node name="Standing" type="Node" parent="StanceStateMachine" node_paths=PackedStringArray("animation_player", "movement", "input", "crouch_state", "state_machine")]
 script = ExtResource("3_5amry")
 animation = &"Stand"
-animation_player = NodePath("../../AnimationPlayer")
+animation_player = NodePath("../../StanceAnimationPlayer")
 movement = NodePath("../../MoveComponent")
 input = NodePath("../../InputComponent")
 crouch_state = NodePath("../Crouching")
@@ -208,7 +234,7 @@ state_machine = NodePath("..")
 script = ExtResource("4_b6sy1")
 animation = &"Crouch"
 move_speed_modifier = 0.6
-animation_player = NodePath("../../AnimationPlayer")
+animation_player = NodePath("../../StanceAnimationPlayer")
 movement = NodePath("../../MoveComponent")
 crouch_collider = NodePath("../../CrouchCollision")
 input = NodePath("../../InputComponent")
@@ -219,8 +245,10 @@ state_machine = NodePath("..")
 script = ExtResource("2_enrq2")
 base_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("movement", "character", "input", "move_state", "fall_state", "state_machine")]
+[node name="Idle" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("animation_player", "movement", "character", "input", "move_state", "fall_state", "state_machine")]
 script = ExtResource("5_ws782")
+animation_player = NodePath("../../MovementAnimationPlayer")
+animation = &"Idle"
 movement = NodePath("../../MoveComponent")
 character = NodePath("../..")
 input = NodePath("../../InputComponent")
@@ -228,16 +256,20 @@ move_state = NodePath("../Moving")
 fall_state = NodePath("../Falling")
 state_machine = NodePath("..")
 
-[node name="Moving" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("input", "movement", "idle_state", "fall_state", "state_machine")]
+[node name="Moving" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("animation_player", "input", "movement", "idle_state", "fall_state", "state_machine")]
 script = ExtResource("6_0sm0w")
+animation_player = NodePath("../../MovementAnimationPlayer")
+animation = &"Run"
 input = NodePath("../../InputComponent")
 movement = NodePath("../../MoveComponent")
 idle_state = NodePath("../Idle")
 fall_state = NodePath("../Falling")
 state_machine = NodePath("..")
 
-[node name="Falling" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("movement", "idle_state", "state_machine")]
+[node name="Falling" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("animation_player", "movement", "idle_state", "state_machine")]
 script = ExtResource("9_0sm0w")
+animation_player = NodePath("../../MovementAnimationPlayer")
+animation = &"Idle"
 movement = NodePath("../../MoveComponent")
 idle_state = NodePath("../Idle")
 state_machine = NodePath("..")
@@ -254,5 +286,17 @@ mouse_mode = 2
 [node name="InventoryComponent" type="Node" parent="."]
 
 [node name="HitBox" parent="." instance=ExtResource("14_p83wy")]
+
+[node name="SoundSource" parent="." instance=ExtResource("15_g4jq6")]
+
+[node name="StanceAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_g4jq6")
+}
+
+[node name="MovementAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_uyddv")
+}
 
 [connection signal="got_hit" from="HitBox" to="." method="die"]

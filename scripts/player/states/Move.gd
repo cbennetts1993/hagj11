@@ -1,10 +1,17 @@
 extends State
 
+@export var animation_player: AnimationPlayer
+@export var animation: StringName
+
 @export var input: InputComponent
 @export var movement: MovementComponent
 
 @export var idle_state: State
 @export var fall_state: State
+
+func enter(from: State):
+	animation_player.play(animation)
+
 
 func update(delta: float):
 	
@@ -14,8 +21,9 @@ func update(delta: float):
 		return
 	
 	if not owner.is_on_floor():
-		state_machine.change_state(fall_state)
+		#state_machine.change_state(fall_state)
 		return
+
 
 func physics_update(delta: float) -> void:
 	var input_dir: = input.get_movement_input_vector_direction()

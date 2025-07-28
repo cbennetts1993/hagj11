@@ -22,7 +22,7 @@ uniform sampler2D SCREEN_TEXTURE: hint_screen_texture;
 vec3 wave_strength(vec2 uv){
 	vec3 wave_strength = texture(noise_texture_1, uv + vec2(TIME * speed, 0.0)).rgb;
 	vec3 ripple_strength = texture(noise_texture_2, uv + vec2(0.0, TIME * speed)).rgb;
-	return wave_strength + (ripple_strength * 0.2);
+	return mix(wave_strength, ripple_strength, 0.5);
 }
 
 void vertex() {
@@ -36,13 +36,10 @@ void fragment() {
 	float fresnel_value = fresnel(NORMAL, VIEW);
 	final_color = mix(final_color, fresnel_color, fresnel_value);
 	
-	vec3 normal_blend = mix(
-		texture(noise_texture_1, UV + vec2(TIME * speed)).rgb,
-		texture(noise_texture_2, UV + vec2(TIME * speed)).rgb,
-		0.5
-	);
+	vec3 normal_blend = wave_strength(UV);
 	NORMAL_MAP = normal_blend;
 	
+	//ALBEDO = normal_blend;
 	ALBEDO = final_color;
 	METALLIC = metallic;
 	ROUGHNESS = roughness;

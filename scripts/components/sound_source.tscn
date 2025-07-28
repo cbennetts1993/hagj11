@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwqrv743gcoqs"]
+
+[ext_resource type="Script" uid="uid://bym2dioadcv5t" path="res://scripts/components/sound_emitter.gd" id="1_7jops"]
+
+[node name="SoundSource" type="Area3D"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_7jops")

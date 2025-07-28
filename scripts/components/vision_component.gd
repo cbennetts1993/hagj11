@@ -9,8 +9,10 @@ class_name VisionComponent extends Node3D
 @onready var vision_area: Area3D = %Area3D
 @onready var vision_ray: RayCast3D = %RayCast3D
 
+
 func get_visible_nodes() -> Array[Node3D]:
 	return vision_area.get_overlapping_bodies()
+
 
 func is_node_in_vision_radius(node: Node3D) -> bool:
 	return get_visible_nodes().has(node) 
@@ -22,17 +24,11 @@ func is_node_in_vision_cone(node: Node3D) -> bool:
 	var dot = my_facing.dot(player_direction)
 	return dot > vision_angle
 
+
 func is_node_in_line_of_sight(node: Node3D) -> bool:
 	vision_ray.target_position = node.global_position - self.global_position
 	return vision_ray.is_colliding() and vision_ray.get_collider() == node
-	
-	#var space = get_world_3d().direct_space_state
-	#var query: = PhysicsRayQueryParameters3D.new()
-	#query.from = self.global_position
-	#query.to = node.global_position
-	#query.collision_mask = collision_mask
-	#var result = space.intersect_ray(query)
-	#return result and result.collider == node
+
 
 func is_node_visible(node: Node3D) -> bool:
 	return is_node_in_vision_cone(node) and is_node_in_line_of_sight(node)

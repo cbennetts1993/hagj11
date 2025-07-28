@@ -22,8 +22,13 @@ Global="*res://scripts/globals/global.gd"
 
 [display]
 
-window/size/mode=2
+window/size/viewport_width=2560
+window/size/viewport_height=1600
 window/stretch/mode="viewport"
+
+[global_group]
+
+Player="Reference to the player"
 
 [input]
 
@@ -90,3 +95,4 @@ interact={
 3d_physics/layer_2="Visibility"
 3d_physics/layer_3="Interact"
 3d_physics/layer_4="Damage"
+3d_physics/layer_5="Sound"

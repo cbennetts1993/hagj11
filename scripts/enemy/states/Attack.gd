@@ -6,10 +6,6 @@ extends State
 
 var return_state: State
 
-var player: Player: get = get_player
-
-func get_player() -> Player:
-	return Global.player
 
 func enter(from: State):
 	return_state = from

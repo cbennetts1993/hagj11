@@ -1,10 +1,13 @@
-[gd_scene load_steps=23 format=3 uid="uid://fvtsy1iv4dkv"]
+[gd_scene load_steps=27 format=3 uid="uid://fvtsy1iv4dkv"]
 
 [ext_resource type="PackedScene" uid="uid://c60x122x18yca" path="res://scripts/player/player.tscn" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://dhlv4uictmf4l" path="res://textures/33-50/Asset 4.png" id="2_0xm2m"]
 [ext_resource type="Shader" uid="uid://c3komeodyogmp" path="res://shaders/water_shader.gdshader" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://btblysv6mlgr4" path="res://assets/REMOVE/VikingLongboat.webp" id="4_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://b41ytihj2ky0p" path="res://scripts/enemy/enemy.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://d1dyx6e7evx6x" path="res://media/props/longboats/parallax_longboat_01.tscn" id="5_7mycd"]
+[ext_resource type="PackedScene" uid="uid://bfbv168tuucfp" path="res://media/props/longboats/parallax_longboat_02.tscn" id="6_272bh"]
+[ext_resource type="PackedScene" uid="uid://buka3k8cuu2s" path="res://scripts/components/sound_detector.tscn" id="7_272bh"]
+[ext_resource type="PackedScene" uid="uid://b41ytihj2ky0p" path="res://scripts/enemy/enemy.tscn" id="8_5vw27"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -51,10 +54,14 @@ fractal_type = 2
 fractal_weighted_strength = 1.0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lquwl"]
+generate_mipmaps = false
 seamless = true
 as_normal_map = true
-bump_strength = 5.0
+normalize = false
 noise = SubResource("FastNoiseLite_1bvp3")
+
+[sub_resource type="Gradient" id="Gradient_7mycd"]
+interpolation_mode = 2
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_h2yge"]
 noise_type = 3
@@ -63,15 +70,18 @@ fractal_gain = 1.0
 fractal_weighted_strength = 1.0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1bvp3"]
+generate_mipmaps = false
 seamless = true
 as_normal_map = true
-bump_strength = 1.5
+bump_strength = 5.0
+normalize = false
+color_ramp = SubResource("Gradient_7mycd")
 noise = SubResource("FastNoiseLite_h2yge")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7mycd"]
 render_priority = 0
 shader = ExtResource("3_h2yge")
-shader_parameter/amount = 8.0
+shader_parameter/amount = 4.0
 shader_parameter/intensity = 1.0
 shader_parameter/fresnel_color = Color(0, 0.482353, 0.411765, 1)
 shader_parameter/z_near = 0.0
@@ -80,10 +90,10 @@ shader_parameter/depth_fade_color = Color(3.60981e-07, 0.150793, 0.247881, 1)
 shader_parameter/beers_law = 5.0
 shader_parameter/depth_offset = -0.75
 shader_parameter/base_color = Color(0.0987552, 0.288992, 0.405499, 1)
-shader_parameter/metallic = 0.33
+shader_parameter/metallic = 0.0
 shader_parameter/roughness = 0.0
-shader_parameter/speed = 0.005
-shader_parameter/wave_height = 3.5
+shader_parameter/speed = 0.001
+shader_parameter/wave_height = 6.0
 shader_parameter/noise_texture_1 = SubResource("NoiseTexture2D_lquwl")
 shader_parameter/noise_texture_2 = SubResource("NoiseTexture2D_1bvp3")
 
@@ -176,10 +186,6 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -3.5732, 0)
 mesh = SubResource("PlaneMesh_272bh")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.1046, -0.215174, -27.3729)
-mesh = SubResource("QuadMesh_7mycd")
-
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.0582, -0.215173, -18.8352)
 mesh = SubResource("QuadMesh_7mycd")
@@ -196,14 +202,16 @@ mesh = SubResource("QuadMesh_7mycd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2581, -0.215173, -8.19541)
 mesh = SubResource("QuadMesh_7mycd")
 
-[node name="Enemy" parent="." instance=ExtResource("5_lquwl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+[node name="ParalaxLongboat" parent="." instance=ExtResource("5_7mycd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.02891, 2.69924, -40.4449)
 
-[node name="IdleTimer" parent="Enemy/StateMachine/Idle" index="0"]
-one_shot = true
+[node name="ParalaxLongboat2" parent="." instance=ExtResource("6_272bh")]
+transform = Transform3D(0.818701, 0, -0.57422, 0, 1, 0, 0.57422, 0, 0.818701, 12.4668, 2.69924, -40.4449)
 
-[node name="LeashPoint3D" parent="Enemy/StateMachine/Wander" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+[node name="ParalaxLongboat3" parent="." instance=ExtResource("6_272bh")]
+transform = Transform3D(0.997514, 0, 0.0704699, 0, 1, 0, -0.0704699, 0, 0.997514, 5.47175, 2.69924, -48.524)
 
-[editable path="Enemy"]
-[editable path="Enemy/VisionComponent"]
+[node name="SoundDetector" parent="." instance=ExtResource("7_272bh")]
+
+[node name="Enemy" parent="." instance=ExtResource("8_5vw27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.2141)
