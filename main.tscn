@@ -1,13 +1,13 @@
-[gd_scene load_steps=27 format=3 uid="uid://fvtsy1iv4dkv"]
+[gd_scene load_steps=25 format=3 uid="uid://fvtsy1iv4dkv"]
 
 [ext_resource type="PackedScene" uid="uid://c60x122x18yca" path="res://scripts/player/player.tscn" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://dhlv4uictmf4l" path="res://textures/33-50/Asset 4.png" id="2_0xm2m"]
 [ext_resource type="Shader" uid="uid://c3komeodyogmp" path="res://shaders/water_shader.gdshader" id="3_h2yge"]
-[ext_resource type="Texture2D" uid="uid://btblysv6mlgr4" path="res://assets/REMOVE/VikingLongboat.webp" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://d1dyx6e7evx6x" path="res://media/props/longboats/parallax_longboat_01.tscn" id="5_7mycd"]
 [ext_resource type="PackedScene" uid="uid://bfbv168tuucfp" path="res://media/props/longboats/parallax_longboat_02.tscn" id="6_272bh"]
 [ext_resource type="PackedScene" uid="uid://buka3k8cuu2s" path="res://scripts/components/sound_detector.tscn" id="7_272bh"]
 [ext_resource type="PackedScene" uid="uid://b41ytihj2ky0p" path="res://scripts/enemy/enemy.tscn" id="8_5vw27"]
+[ext_resource type="PackedScene" uid="uid://bo0bjkhdcbr5i" path="res://media/props/longboats/parallax_longboat_03.tscn" id="8_kek77"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -92,7 +92,7 @@ shader_parameter/depth_offset = -0.75
 shader_parameter/base_color = Color(0.0987552, 0.288992, 0.405499, 1)
 shader_parameter/metallic = 0.0
 shader_parameter/roughness = 0.0
-shader_parameter/speed = 0.001
+shader_parameter/speed = 0.005
 shader_parameter/wave_height = 6.0
 shader_parameter/noise_texture_1 = SubResource("NoiseTexture2D_lquwl")
 shader_parameter/noise_texture_2 = SubResource("NoiseTexture2D_1bvp3")
@@ -102,17 +102,6 @@ material = SubResource("ShaderMaterial_7mycd")
 size = Vector2(100, 100)
 subdivide_width = 25
 subdivide_depth = 25
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lquwl"]
-transparency = 2
-alpha_scissor_threshold = 0.5
-alpha_antialiasing_mode = 0
-albedo_texture = ExtResource("4_1bvp3")
-billboard_mode = 2
-
-[sub_resource type="QuadMesh" id="QuadMesh_7mycd"]
-material = SubResource("StandardMaterial3D_lquwl")
-size = Vector2(6, 4)
 
 [node name="Node3D" type="Node3D"]
 
@@ -186,32 +175,19 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -3.5732, 0)
 mesh = SubResource("PlaneMesh_272bh")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.0582, -0.215173, -18.8352)
-mesh = SubResource("QuadMesh_7mycd")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.7382, -0.215173, -24.395)
-mesh = SubResource("QuadMesh_7mycd")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.8, -0.215173, -16.352)
-mesh = SubResource("QuadMesh_7mycd")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2581, -0.215173, -8.19541)
-mesh = SubResource("QuadMesh_7mycd")
-
 [node name="ParalaxLongboat" parent="." instance=ExtResource("5_7mycd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.02891, 2.69924, -40.4449)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.02891, -1.46403, -40.4449)
 
 [node name="ParalaxLongboat2" parent="." instance=ExtResource("6_272bh")]
-transform = Transform3D(0.818701, 0, -0.57422, 0, 1, 0, 0.57422, 0, 0.818701, 12.4668, 2.69924, -40.4449)
+transform = Transform3D(0.818701, 0, -0.57422, 0, 1, 0, 0.57422, 0, 0.818701, 12.4668, -1.46403, -40.4449)
 
 [node name="ParalaxLongboat3" parent="." instance=ExtResource("6_272bh")]
-transform = Transform3D(0.997514, 0, 0.0704699, 0, 1, 0, -0.0704699, 0, 0.997514, 5.47175, 2.69924, -48.524)
+transform = Transform3D(0.997514, 0, 0.0704699, 0, 1, 0, -0.0704699, 0, 0.997514, 5.47175, -1.46403, -48.524)
 
 [node name="SoundDetector" parent="." instance=ExtResource("7_272bh")]
 
 [node name="Enemy" parent="." instance=ExtResource("8_5vw27")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.2141)
+
+[node name="ParalaxLongboat4" parent="." instance=ExtResource("8_kek77")]
+transform = Transform3D(-4.37114e-08, 0, 1, -0.251715, 0.967802, -1.10028e-08, -0.967801, -0.251715, -4.23039e-08, -24.082, -1.55208, -16.1044)

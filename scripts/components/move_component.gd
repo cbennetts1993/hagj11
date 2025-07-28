@@ -23,9 +23,11 @@ func set_speed_multiplier(value):
 
 
 func move(direction: Vector3) -> void:
-	body.velocity = direction.rotated(Vector3.UP, body.rotation.y) * get_current_movement_speed()
+	body.velocity = direction * get_current_movement_speed()
 	body.move_and_slide()
 
+func look_in_direction(direction: Vector3) -> void:
+	body.look_at(body.global_position + direction * Vector3(1, 0, 1))
 
 func apply_gravity():
 	body.velocity = Vector3.DOWN * gravity

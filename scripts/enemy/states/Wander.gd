@@ -41,4 +41,5 @@ func physics_update(delta: float) -> void:
 	var navigation_path_target = navigation.get_next_path_position()
 	var direction = movement.body.global_position.direction_to(navigation_path_target)
 	movement.move(direction)
+	movement.look_in_direction(direction)
 	movement.apply_gravity()

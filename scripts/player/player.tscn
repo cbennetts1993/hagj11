@@ -176,6 +176,7 @@ script = ExtResource("1_hmply")
 
 [node name="View" type="Camera3D" parent="." node_paths=PackedStringArray("input")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+current = true
 script = ExtResource("2_b6sy1")
 input = NodePath("../InputComponent")
 sensitivity = 0.01
@@ -256,12 +257,13 @@ move_state = NodePath("../Moving")
 fall_state = NodePath("../Falling")
 state_machine = NodePath("..")
 
-[node name="Moving" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("animation_player", "input", "movement", "idle_state", "fall_state", "state_machine")]
+[node name="Moving" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("animation_player", "input", "movement", "camera", "idle_state", "fall_state", "state_machine")]
 script = ExtResource("6_0sm0w")
 animation_player = NodePath("../../MovementAnimationPlayer")
 animation = &"Run"
 input = NodePath("../../InputComponent")
 movement = NodePath("../../MoveComponent")
+camera = NodePath("../../View")
 idle_state = NodePath("../Idle")
 fall_state = NodePath("../Falling")
 state_machine = NodePath("..")

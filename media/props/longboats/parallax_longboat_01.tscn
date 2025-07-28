@@ -63,15 +63,16 @@ size = Vector2(13, 10)
 metadata/_edit_group_ = true
 
 [node name="Hull" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 1)
 mesh = SubResource("QuadMesh_dg77c")
 skeleton = NodePath("../..")
 
 [node name="Sail" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 mesh = SubResource("QuadMesh_efxa6")
 skeleton = NodePath("../..")
 
 [node name="Mast" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0138321, 0, -0.996071)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0138321, 5, -0.996071)
 mesh = SubResource("QuadMesh_2cqfq")
 skeleton = NodePath("../..")

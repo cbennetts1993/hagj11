@@ -1,15 +1,17 @@
 shader_type spatial;
+render_mode cull_disabled, depth_draw_always;
 
 uniform sampler2D base_texture;
-uniform sampler2D wind_mask: hint_default_white;
 
 uniform vec2 wind_directional_strength;
 uniform float speed;
 uniform sampler2D noise;
 
 void vertex() {
-	float wind_value = texture(noise, UV + vec2(TIME * speed)).r * texture(wind_mask, UV).r;
-	VERTEX.xy += wind_value * wind_directional_strength;
+	vec2 world_uv = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xz;
+	float wind_value = texture(noise, world_uv + vec2(TIME * speed)).r;
+	float vertex_height = clamp((1.0 - UV.y), 0.0, 1.0);
+	VERTEX.x += wind_value * wind_directional_strength.x * pow(vertex_height, 2);
 }
 
 void fragment() {

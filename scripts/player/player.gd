@@ -9,7 +9,7 @@ func _ready():
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		var pan_direction = event.screen_relative.x
-		rotation.y -= pan_direction * sensitivity
+		#rotation.y -= pan_direction * sensitivity
 
 
 func die():

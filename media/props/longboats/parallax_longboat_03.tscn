@@ -1,0 +1,169 @@
+[gd_scene load_steps=31 format=3 uid="uid://bo0bjkhdcbr5i"]
+
+[ext_resource type="Texture2D" uid="uid://b0bjfu4pwaxr5" path="res://assets/sprites/longboat_03/TwistSail_Front_Rigging.png" id="1_1g004"]
+[ext_resource type="Shader" uid="uid://b0hvd4tqocor2" path="res://shaders/sail_mind_motion.gdshader" id="2_mnu4x"]
+[ext_resource type="Texture2D" uid="uid://j7sh1xt5wr0n" path="res://assets/sprites/longboat_03/TwistSail_FrontSail.png" id="3_38d24"]
+[ext_resource type="Texture2D" uid="uid://c4a6pqob1kwqg" path="res://assets/sprites/longboat_03/TwistSail_TopSail.png" id="3_42qro"]
+[ext_resource type="Texture2D" uid="uid://cvkuab2o7fmwj" path="res://assets/sprites/longboat_03/TwistSail_MidRigging.png" id="4_uues8"]
+[ext_resource type="Texture2D" uid="uid://ngob5vwhpbfu" path="res://assets/sprites/longboat_03/TwistSail_Mast.png" id="5_no8sa"]
+[ext_resource type="Texture2D" uid="uid://sk7mlh1bt2la" path="res://assets/sprites/longboat_03/TwistSail_BackSail.png" id="6_cxnw5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mlalx"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_color = Color(2, 2, 2, 1)
+albedo_texture = ExtResource("1_1g004")
+
+[sub_resource type="QuadMesh" id="QuadMesh_x6605"]
+material = SubResource("StandardMaterial3D_mlalx")
+size = Vector2(13, 10)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ydkb1"]
+frequency = 0.005
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5msny"]
+seamless = true
+noise = SubResource("FastNoiseLite_ydkb1")
+
+[sub_resource type="Gradient" id="Gradient_ecri8"]
+offsets = PackedFloat32Array(0, 0.0864865, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1s2gv"]
+gradient = SubResource("Gradient_ecri8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3w6sg"]
+render_priority = 0
+shader = ExtResource("2_mnu4x")
+shader_parameter/base_texture = ExtResource("3_38d24")
+shader_parameter/wind_mask = SubResource("GradientTexture1D_1s2gv")
+shader_parameter/wind_directional_strength = Vector2(-4, 1)
+shader_parameter/speed = 0.1
+shader_parameter/noise = SubResource("NoiseTexture2D_5msny")
+
+[sub_resource type="QuadMesh" id="QuadMesh_bdjap"]
+material = SubResource("ShaderMaterial_3w6sg")
+size = Vector2(13, 10)
+subdivide_width = 10
+subdivide_depth = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j08a3"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_color = Color(2, 2, 2, 1)
+albedo_texture = ExtResource("4_uues8")
+
+[sub_resource type="QuadMesh" id="QuadMesh_03euy"]
+material = SubResource("StandardMaterial3D_j08a3")
+size = Vector2(13, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2vmlk"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 1
+alpha_antialiasing_edge = 0.3
+albedo_color = Color(2, 2, 2, 1)
+albedo_texture = ExtResource("5_no8sa")
+
+[sub_resource type="QuadMesh" id="QuadMesh_xghvx"]
+material = SubResource("StandardMaterial3D_2vmlk")
+size = Vector2(13, 10)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_omnjw"]
+render_priority = 0
+shader = ExtResource("2_mnu4x")
+shader_parameter/base_texture = ExtResource("6_cxnw5")
+shader_parameter/wind_mask = SubResource("GradientTexture1D_1s2gv")
+shader_parameter/wind_directional_strength = Vector2(-4, 1)
+shader_parameter/speed = 0.1
+shader_parameter/noise = SubResource("NoiseTexture2D_5msny")
+
+[sub_resource type="QuadMesh" id="QuadMesh_5xg1v"]
+material = SubResource("ShaderMaterial_omnjw")
+size = Vector2(13, 10)
+subdivide_width = 10
+subdivide_depth = 2
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_idg2e"]
+load_path = "res://.godot/imported/TwistSail_THATBOD.png-6b3c645b662219ffdbd20a787b7196b2.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d1urh"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_color = Color(2, 2, 2, 1)
+albedo_texture = SubResource("CompressedTexture2D_idg2e")
+
+[sub_resource type="QuadMesh" id="QuadMesh_dg77c"]
+material = SubResource("StandardMaterial3D_d1urh")
+size = Vector2(13, 10)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mnu4x"]
+frequency = 0.005
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5dxp1"]
+seamless = true
+noise = SubResource("FastNoiseLite_mnu4x")
+
+[sub_resource type="Gradient" id="Gradient_g7n5g"]
+offsets = PackedFloat32Array(0.666667, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8ltum"]
+gradient = SubResource("Gradient_g7n5g")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1g004"]
+render_priority = 0
+shader = ExtResource("2_mnu4x")
+shader_parameter/base_texture = ExtResource("3_42qro")
+shader_parameter/wind_mask = SubResource("GradientTexture1D_8ltum")
+shader_parameter/wind_directional_strength = Vector2(4, 5)
+shader_parameter/speed = 0.2
+shader_parameter/noise = SubResource("NoiseTexture2D_5dxp1")
+
+[sub_resource type="QuadMesh" id="QuadMesh_38d24"]
+material = SubResource("ShaderMaterial_1g004")
+size = Vector2(13, 10)
+subdivide_width = 10
+subdivide_depth = 10
+
+[node name="ParalaxLongboat" type="Node3D"]
+metadata/_edit_group_ = true
+
+[node name="FrontRigging" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0.3)
+mesh = SubResource("QuadMesh_x6605")
+skeleton = NodePath("../..")
+
+[node name="MidSection" type="Node3D" parent="."]
+
+[node name="FrontSail" type="MeshInstance3D" parent="MidSection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0.2)
+mesh = SubResource("QuadMesh_bdjap")
+skeleton = NodePath("../../..")
+
+[node name="MidRigging" type="MeshInstance3D" parent="MidSection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0.1)
+mesh = SubResource("QuadMesh_03euy")
+skeleton = NodePath("../../..")
+
+[node name="Mast" type="MeshInstance3D" parent="MidSection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+mesh = SubResource("QuadMesh_xghvx")
+skeleton = NodePath("../../..")
+
+[node name="BackSail" type="MeshInstance3D" parent="MidSection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -0.1)
+mesh = SubResource("QuadMesh_5xg1v")
+skeleton = NodePath("../../..")
+
+[node name="Hull" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.039, 5, -0.3)
+mesh = SubResource("QuadMesh_dg77c")
+skeleton = NodePath("../..")
+
+[node name="SailTop" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0.05)
+mesh = SubResource("QuadMesh_38d24")
+skeleton = NodePath("../..")

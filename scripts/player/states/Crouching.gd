@@ -30,9 +30,11 @@ func can_stand() -> bool:
 	query.shape = crouch_collider.shape
 	query.collide_with_bodies = true
 	query.collision_mask = 1
+	query.exclude = [owner.get_rid()]
 	
 	var transform = crouch_collider.global_transform
 	transform.origin += Vector3.UP
 	query.transform = transform
 	
-	return space.intersect_shape(query).is_empty()
+	var result = space.intersect_shape(query)
+	return result.is_empty()

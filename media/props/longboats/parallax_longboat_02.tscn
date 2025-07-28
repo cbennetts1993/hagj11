@@ -71,25 +71,25 @@ albedo_texture = ExtResource("2_r8au8")
 material = SubResource("StandardMaterial3D_vivmo")
 size = Vector2(13, 10)
 
-[node name="ParalaxLongboat2" type="Node3D"]
-transform = Transform3D(0.818701, 0, -0.57422, 0, 1, 0, 0.57422, 0, 0.818701, 0, 0, 0)
+[node name="ParalaxLongboat" type="Node3D"]
 metadata/_edit_group_ = true
 
 [node name="Hull2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 1)
 mesh = SubResource("QuadMesh_ycdy4")
 skeleton = NodePath("../..")
 
 [node name="Hull" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 1)
 mesh = SubResource("QuadMesh_dg77c")
 skeleton = NodePath("../..")
 
 [node name="Sail" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 mesh = SubResource("QuadMesh_g3ka2")
 skeleton = NodePath("../..")
 
 [node name="Mast" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -1)
 mesh = SubResource("QuadMesh_2cqfq")
 skeleton = NodePath("../..")

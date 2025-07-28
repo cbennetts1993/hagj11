@@ -31,4 +31,4 @@ func is_node_in_line_of_sight(node: Node3D) -> bool:
 
 
 func is_node_visible(node: Node3D) -> bool:
-	return is_node_in_vision_cone(node) and is_node_in_line_of_sight(node)
+	return get_visible_nodes().has(node) and is_node_in_vision_cone(node) and is_node_in_line_of_sight(node)

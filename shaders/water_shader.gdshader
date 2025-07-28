@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode blend_mix; 
+render_mode blend_mix, depth_draw_always; 
 
 #include "shaderincludes/fresnel.gdshaderinc"
 #include "shaderincludes/linear_depth.gdshaderinc"
