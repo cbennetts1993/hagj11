@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbuiblgkqt4g7"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qbs51"]
+lifetime_randomness = 0.25
+particle_flag_align_y = true
+emission_shape = 3
+emission_box_extents = Vector3(10, 1, 10)
+scale_min = 0.6
+scale_max = 1.2
+color = Color(0, 0.109804, 0.156863, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lur4x"]
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_7psnh"]
+material = SubResource("StandardMaterial3D_lur4x")
+size = Vector2(0.1, 0.2)
+
+[node name="rain_fx" type="GPUParticles3D"]
+amount = 20
+lifetime = 4.0
+explosiveness = 0.1
+randomness = 1.0
+local_coords = true
+draw_order = 3
+transform_align = 3
+process_material = SubResource("ParticleProcessMaterial_qbs51")
+draw_pass_1 = SubResource("QuadMesh_7psnh")

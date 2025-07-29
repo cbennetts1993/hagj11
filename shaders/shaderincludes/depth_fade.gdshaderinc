@@ -13,15 +13,14 @@ float depth_fade_value(vec3 vertex, vec2 screen_uv, mat4 inv_view_matrix, mat4 i
 	vec4 view = inv_projection_matrix * vec4(ndc, 1.0);
 	view.xyz /= view.w;
 	float linear_depth = -view.z;
-	
+
 	// fragment world position
 	vec4 world = inv_view_matrix * inv_projection_matrix * vec4(ndc, 1.0);
 	vec3 world_pos = world.xyz / world.w;
-	
+
 	vec3 vertex_pos = (inv_view_matrix * vec4(vertex, 1.0)).xyz;
-	
+
 	float vert_depth = vertex_pos.y - world_pos.y;
-	
+
 	return vert_depth;
 }
-

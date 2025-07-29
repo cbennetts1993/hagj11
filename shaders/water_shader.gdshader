@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode blend_mix, depth_draw_always; 
+render_mode blend_mix, depth_draw_always;
 
 #include "shaderincludes/fresnel.gdshaderinc"
 #include "shaderincludes/linear_depth.gdshaderinc"
@@ -31,14 +31,14 @@ void vertex() {
 
 void fragment() {
 	vec3 final_color = base_color;
-	
+
 	// Fresnel color
 	float fresnel_value = fresnel(NORMAL, VIEW);
 	final_color = mix(final_color, fresnel_color, fresnel_value);
-	
+
 	vec3 normal_blend = wave_strength(UV);
 	NORMAL_MAP = normal_blend;
-	
+
 	//ALBEDO = normal_blend;
 	ALBEDO = final_color;
 	METALLIC = metallic;

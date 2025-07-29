@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c60x122x18yca"]
+[gd_scene load_steps=40 format=3 uid="uid://c60x122x18yca"]
 
 [ext_resource type="Script" uid="uid://cmlbdl25wtr5x" path="res://scripts/player/player.gd" id="1_hmply"]
 [ext_resource type="Script" uid="uid://bt2rpuuexcdqw" path="res://scripts/player/view.gd" id="2_b6sy1"]
@@ -16,7 +16,17 @@
 [ext_resource type="PackedScene" uid="uid://7l8f2mnhn2of" path="res://scripts/components/hitshapes/hit_box.tscn" id="14_p83wy"]
 [ext_resource type="Script" uid="uid://cihu6ca2jckx3" path="res://scripts/item/inventory_component.gd" id="14_yj7se"]
 [ext_resource type="PackedScene" uid="uid://dwqrv743gcoqs" path="res://scripts/components/senses/sound_source.tscn" id="15_g4jq6"]
+[ext_resource type="AudioStream" uid="uid://m7p0f5dkwktr" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 1.wav" id="17_p5jbr"]
 [ext_resource type="Script" uid="uid://bf7qj2wyefj1f" path="res://scripts/projectile/projectile_spawner.gd" id="18_8clcj"]
+[ext_resource type="Texture2D" uid="uid://c68nwvuhd31at" path="res://assets/ui/GameplayBorder_-_LeftCorner.png" id="18_kcr71"]
+[ext_resource type="AudioStream" uid="uid://cyb5xsa4juuba" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 2.wav" id="18_ww5gr"]
+[ext_resource type="AudioStream" uid="uid://t7ige8s0ptyo" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 3.wav" id="19_sg88g"]
+[ext_resource type="Texture2D" uid="uid://dahjx8r0u4uxk" path="res://assets/ui/GameplayBorder_-_RightCorner.png" id="19_vtmsy"]
+[ext_resource type="AudioStream" uid="uid://dqxidcw0sjw58" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 4.wav" id="20_ksv7p"]
+[ext_resource type="AudioStream" uid="uid://c3d7o8dsblhcb" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 5.wav" id="21_4gavd"]
+[ext_resource type="AudioStream" uid="uid://bpxp80p7lconk" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 6.wav" id="22_vyxf7"]
+[ext_resource type="AudioStream" uid="uid://cqi8ioiqqlif2" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 7.wav" id="23_1a147"]
+[ext_resource type="AudioStream" uid="uid://dp2vs0rhaymji" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 8.wav" id="24_pf1ci"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p83wy"]
 transparency = 2
@@ -30,6 +40,17 @@ normal_texture = ExtResource("5_j77er")
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_enrq2"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ws782"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ho210"]
+streams_count = 8
+stream_0/stream = ExtResource("17_p5jbr")
+stream_1/stream = ExtResource("18_ww5gr")
+stream_2/stream = ExtResource("19_sg88g")
+stream_3/stream = ExtResource("20_ksv7p")
+stream_4/stream = ExtResource("21_4gavd")
+stream_5/stream = ExtResource("22_vyxf7")
+stream_6/stream = ExtResource("23_1a147")
+stream_7/stream = ExtResource("24_pf1ci")
 
 [sub_resource type="Animation" id="Animation_p83wy"]
 resource_name = "Crouch"
@@ -165,6 +186,20 @@ tracks/0/keys = {
 "method": &"create_sound"
 }]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uyddv"]
 _data = {
@@ -289,6 +324,10 @@ mouse_mode = 2
 
 [node name="SoundSource" parent="." instance=ExtResource("15_g4jq6")]
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_ho210")
+volume_db = -20.0
+
 [node name="StanceAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_g4jq6")
@@ -340,6 +379,28 @@ text = "Item Description. This is the item description"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("18_kcr71")
+expand_mode = 1
+stretch_mode = 4
+flip_v = true
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_vtmsy")
+expand_mode = 1
 
 [connection signal="pick_up_item" from="View/InteractRay" to="InventoryComponent" method="add_item"]
 [connection signal="interact_pressed" from="InputComponent" to="View/InteractRay" method="_on_interact"]
