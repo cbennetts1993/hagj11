@@ -15,7 +15,7 @@ func set_player(new_player: Player):
 ## 
 
 var investigate_location: Vector3: set = set_investigation_position
-var has_been_investigated: bool = false
+var has_been_investigated: bool = true
 
 func set_investigation_position(at_position: Vector3):
 	investigate_location = at_position

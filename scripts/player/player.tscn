@@ -1,20 +1,22 @@
-[gd_scene load_steps=26 format=3 uid="uid://c60x122x18yca"]
+[gd_scene load_steps=29 format=3 uid="uid://c60x122x18yca"]
 
 [ext_resource type="Script" uid="uid://cmlbdl25wtr5x" path="res://scripts/player/player.gd" id="1_hmply"]
 [ext_resource type="Script" uid="uid://bt2rpuuexcdqw" path="res://scripts/player/view.gd" id="2_b6sy1"]
 [ext_resource type="Script" uid="uid://bgclr5b06nrag" path="res://scripts/state/StateMachine.gd" id="2_enrq2"]
 [ext_resource type="Script" uid="uid://eq72tai6grx7" path="res://scripts/player/states/Standing.gd" id="3_5amry"]
-[ext_resource type="Script" uid="uid://dx3gufri5f4yk" path="res://scripts/components/interact_ray.gd" id="3_ws782"]
+[ext_resource type="Script" uid="uid://dx3gufri5f4yk" path="res://scripts/components/input/interact_ray.gd" id="3_ws782"]
 [ext_resource type="Script" uid="uid://d34apem2rl34r" path="res://scripts/player/states/Crouching.gd" id="4_b6sy1"]
 [ext_resource type="Script" uid="uid://bjf5ygse8a66o" path="res://scripts/components/move_component.gd" id="4_dolh7"]
 [ext_resource type="Texture2D" uid="uid://dsdob8i5i52bh" path="res://assets/sprites/Hand_Test.png" id="4_g0bbo"]
-[ext_resource type="Script" uid="uid://c5cd0lxe4hvy0" path="res://scripts/components/input_component.gd" id="4_kai5h"]
+[ext_resource type="Script" uid="uid://c5cd0lxe4hvy0" path="res://scripts/components/input/input_component.gd" id="4_kai5h"]
 [ext_resource type="Texture2D" uid="uid://cw32wut8m3x7u" path="res://assets/sprites/Hand_Test_n.png" id="5_j77er"]
 [ext_resource type="Script" uid="uid://cxsnelnl6fr6r" path="res://scripts/player/states/Idle.gd" id="5_ws782"]
 [ext_resource type="Script" uid="uid://bwrnvumrlu58t" path="res://scripts/player/states/Move.gd" id="6_0sm0w"]
 [ext_resource type="Script" uid="uid://d1xtvn5e2ed2" path="res://scripts/player/states/Falling.gd" id="9_0sm0w"]
-[ext_resource type="PackedScene" uid="uid://7l8f2mnhn2of" path="res://scripts/components/hit_box.tscn" id="14_p83wy"]
-[ext_resource type="PackedScene" uid="uid://dwqrv743gcoqs" path="res://scripts/components/sound_source.tscn" id="15_g4jq6"]
+[ext_resource type="PackedScene" uid="uid://7l8f2mnhn2of" path="res://scripts/components/hitshapes/hit_box.tscn" id="14_p83wy"]
+[ext_resource type="Script" uid="uid://cihu6ca2jckx3" path="res://scripts/item/inventory_component.gd" id="14_yj7se"]
+[ext_resource type="PackedScene" uid="uid://dwqrv743gcoqs" path="res://scripts/components/senses/sound_source.tscn" id="15_g4jq6"]
+[ext_resource type="Script" uid="uid://bf7qj2wyefj1f" path="res://scripts/projectile/projectile_spawner.gd" id="18_8clcj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p83wy"]
 transparency = 2
@@ -159,7 +161,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [4.0],
+"args": [],
 "method": &"create_sound"
 }]
 }
@@ -169,6 +171,9 @@ _data = {
 &"Idle": SubResource("Animation_g4jq6"),
 &"Run": SubResource("Animation_yj7se")
 }
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_yj7se"]
+thickness = 4
 
 [node name="CharacterBody3D" type="CharacterBody3D" groups=["Player"]]
 rotation_edit_mode = 2
@@ -184,14 +189,12 @@ sensitivity = 0.01
 [node name="InteractRay" type="RayCast3D" parent="View"]
 target_position = Vector3(0, 0, -1.5)
 collision_mask = 4
-collide_with_areas = true
-collide_with_bodies = false
 script = ExtResource("3_ws782")
 
 [node name="ItemAttachment" type="Marker3D" parent="View"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, -0.6, -1.2)
 
-[node name="ItemSprite" type="Sprite3D" parent="View/ItemAttachment"]
+[node name="Sprite" type="Sprite3D" parent="View/ItemAttachment"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_p83wy")
 cast_shadow = 0
@@ -199,15 +202,10 @@ shaded = true
 no_depth_test = true
 texture = ExtResource("4_g0bbo")
 
-[node name="ItemAttachment2" type="Marker3D" parent="View"]
-transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, -1.2, -0.7, -1.2)
-
-[node name="ItemSprite" type="Sprite3D" parent="View/ItemAttachment2"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-flip_h = true
-shaded = true
-no_depth_test = true
-texture = ExtResource("4_g0bbo")
+[node name="ProjectileSpawner" type="Node3D" parent="View" node_paths=PackedStringArray("owner_hit_box")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+script = ExtResource("18_8clcj")
+owner_hit_box = NodePath("../../HitBox")
 
 [node name="StandCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -231,11 +229,13 @@ input = NodePath("../../InputComponent")
 crouch_state = NodePath("../Crouching")
 state_machine = NodePath("..")
 
-[node name="Crouching" type="Node" parent="StanceStateMachine" node_paths=PackedStringArray("animation_player", "movement", "crouch_collider", "input", "stand_state", "state_machine")]
+[node name="Crouching" type="Node" parent="StanceStateMachine" node_paths=PackedStringArray("animation_player", "sound", "movement", "crouch_collider", "input", "stand_state", "state_machine")]
 script = ExtResource("4_b6sy1")
 animation = &"Crouch"
 move_speed_modifier = 0.6
+sound_modifier = 0.5
 animation_player = NodePath("../../StanceAnimationPlayer")
+sound = NodePath("../../SoundSource")
 movement = NodePath("../../MoveComponent")
 crouch_collider = NodePath("../../CrouchCollision")
 input = NodePath("../../InputComponent")
@@ -285,8 +285,6 @@ movement_speed = 1.5
 script = ExtResource("4_kai5h")
 mouse_mode = 2
 
-[node name="InventoryComponent" type="Node" parent="."]
-
 [node name="HitBox" parent="." instance=ExtResource("14_p83wy")]
 
 [node name="SoundSource" parent="." instance=ExtResource("15_g4jq6")]
@@ -301,4 +299,50 @@ libraries = {
 &"": SubResource("AnimationLibrary_uyddv")
 }
 
+[node name="InventoryComponent" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("14_yj7se")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InventoryComponent"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InventoryComponent/VBoxContainer"]
+layout_mode = 2
+
+[node name="left" type="PanelContainer" parent="InventoryComponent/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+
+[node name="centre" type="PanelContainer" parent="InventoryComponent/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+
+[node name="right" type="PanelContainer" parent="InventoryComponent/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+
+[node name="Item" type="Label" parent="InventoryComponent/VBoxContainer"]
+layout_mode = 2
+text = "Item Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="InventoryComponent/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxLine_yj7se")
+
+[node name="Description" type="Label" parent="InventoryComponent/VBoxContainer"]
+layout_mode = 2
+text = "Item Description. This is the item description"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[connection signal="pick_up_item" from="View/InteractRay" to="InventoryComponent" method="add_item"]
+[connection signal="interact_pressed" from="InputComponent" to="View/InteractRay" method="_on_interact"]
+[connection signal="throw_pressed" from="InputComponent" to="InventoryComponent" method="_on_throw_pressed"]
 [connection signal="got_hit" from="HitBox" to="." method="die"]
+[connection signal="item_dropped" from="InventoryComponent" to="View/ProjectileSpawner" method="spawn_from_item"]

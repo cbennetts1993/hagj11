@@ -11,7 +11,6 @@ load_path = "res://.godot/imported/Hor._Ship_Body.png-ad5d13dee84ef72bbe3ca9fa1a
 transparency = 2
 alpha_scissor_threshold = 0.5
 alpha_antialiasing_mode = 0
-albedo_color = Color(2, 2, 2, 1)
 albedo_texture = SubResource("CompressedTexture2D_5vw27")
 
 [sub_resource type="QuadMesh" id="QuadMesh_dg77c"]
@@ -52,7 +51,6 @@ transparency = 2
 alpha_scissor_threshold = 0.5
 alpha_antialiasing_mode = 1
 alpha_antialiasing_edge = 0.3
-albedo_color = Color(2, 2, 2, 1)
 albedo_texture = ExtResource("2_qrd8q")
 
 [sub_resource type="QuadMesh" id="QuadMesh_2cqfq"]

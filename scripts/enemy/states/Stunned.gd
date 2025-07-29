@@ -15,6 +15,8 @@ func update(delta: float):
 	if not animation_player.is_playing():
 		state_machine.change_state(return_state)
 		return
+	
+	print("stunned!")
 
 
 func stun():

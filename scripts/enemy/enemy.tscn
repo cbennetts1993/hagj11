@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b41ytihj2ky0p"]
+[gd_scene load_steps=26 format=3 uid="uid://b41ytihj2ky0p"]
 
 [ext_resource type="Script" uid="uid://cbmptno52lpj3" path="res://scripts/enemy/enemy.gd" id="1_otvh8"]
 [ext_resource type="Texture2D" uid="uid://cnwi1aty3t0fo" path="res://assets/REMOVE/Viking.webp" id="2_5bwyd"]
@@ -7,15 +7,15 @@
 [ext_resource type="Script" uid="uid://bhj0st6dmq61i" path="res://scripts/enemy/states/Idle.gd" id="3_x7lgl"]
 [ext_resource type="Script" uid="uid://cdlbo6knk1juo" path="res://scripts/enemy/states/Patrol.gd" id="4_su13s"]
 [ext_resource type="Script" uid="uid://bjf5ygse8a66o" path="res://scripts/components/move_component.gd" id="4_x7lgl"]
-[ext_resource type="PackedScene" uid="uid://dgj8pixxegnhw" path="res://scripts/components/vision_component.tscn" id="5_uwy72"]
+[ext_resource type="PackedScene" uid="uid://dgj8pixxegnhw" path="res://scripts/components/senses/vision_component.tscn" id="5_uwy72"]
 [ext_resource type="Script" uid="uid://tmxesv8kg4q2" path="res://scripts/enemy/states/Wander.gd" id="5_x7lgl"]
 [ext_resource type="Script" uid="uid://dkkpifsllj6ru" path="res://scripts/enemy/states/Follow.gd" id="7_hhlal"]
 [ext_resource type="Script" uid="uid://bskldlbnanqgw" path="res://scripts/enemy/states/Attack.gd" id="8_escsu"]
 [ext_resource type="Script" uid="uid://cl4v3edg31e4b" path="res://scripts/enemy/states/Stunned.gd" id="9_escsu"]
 [ext_resource type="Script" uid="uid://dtvxjp0ypvow6" path="res://scripts/enemy/states/Investigate.gd" id="9_qcsh8"]
-[ext_resource type="PackedScene" uid="uid://dafxdtgaudq7s" path="res://scripts/components/damage_shape.tscn" id="11_p5k8n"]
-[ext_resource type="PackedScene" uid="uid://7l8f2mnhn2of" path="res://scripts/components/hit_box.tscn" id="12_wohgq"]
-[ext_resource type="PackedScene" uid="uid://buka3k8cuu2s" path="res://scripts/components/sound_detector.tscn" id="14_aijuq"]
+[ext_resource type="PackedScene" uid="uid://dafxdtgaudq7s" path="res://scripts/components/hitshapes/damage_shape.tscn" id="11_p5k8n"]
+[ext_resource type="PackedScene" uid="uid://7l8f2mnhn2of" path="res://scripts/components/hitshapes/hit_box.tscn" id="12_wohgq"]
+[ext_resource type="PackedScene" uid="uid://buka3k8cuu2s" path="res://scripts/components/senses/sound_detector.tscn" id="14_aijuq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_su13s"]
 
@@ -91,7 +91,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_wohgq"]
 resource_name = "Stunned"
-length = 0.5
+length = 1.5
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ipal1"]
 _data = {
@@ -99,6 +99,9 @@ _data = {
 &"RESET": SubResource("Animation_escsu"),
 &"Stunned": SubResource("Animation_wohgq")
 }
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qcsh8"]
+size = Vector3(1.5, 1.5, 1.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hhlal"]
 size = Vector3(10, 2, 10)
@@ -221,8 +224,14 @@ libraries = {
 }
 
 [node name="DamageShape" parent="." node_paths=PackedStringArray("exclude") instance=ExtResource("11_p5k8n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 monitoring = true
 exclude = [NodePath("../HitBox")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DamageShape"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+shape = SubResource("BoxShape3D_qcsh8")
+debug_color = Color(0.998937, 0, 0.128371, 0.42)
 
 [node name="HitBox" parent="." instance=ExtResource("12_wohgq")]
 
@@ -244,4 +253,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 [connection signal="got_hit" from="HitBox" to="StateMachine/Stunned" method="stun"]
 [connection signal="sound_detected" from="SoundDetector" to="Blackboard" method="set_investigation_position"]
 
+[editable path="HitBox"]
 [editable path="VisionComponent"]

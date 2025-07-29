@@ -12,4 +12,4 @@ func _unhandled_input(event: InputEvent) -> void:
 		rotation.x = clampf(rotation.x, -1.0, 1.0)
 		
 		## Rotation camera along side to side (rotating around the y axis)
-		rotation.y -= pan_direction.x * sensitivity
+		rotate_y(-pan_direction.x * sensitivity)

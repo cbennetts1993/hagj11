@@ -5,7 +5,7 @@
 [ext_resource type="Shader" uid="uid://c3komeodyogmp" path="res://shaders/water_shader.gdshader" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://d1dyx6e7evx6x" path="res://media/props/longboats/parallax_longboat_01.tscn" id="5_7mycd"]
 [ext_resource type="PackedScene" uid="uid://bfbv168tuucfp" path="res://media/props/longboats/parallax_longboat_02.tscn" id="6_272bh"]
-[ext_resource type="PackedScene" uid="uid://buka3k8cuu2s" path="res://scripts/components/sound_detector.tscn" id="7_272bh"]
+[ext_resource type="PackedScene" uid="uid://buka3k8cuu2s" path="res://scripts/components/senses/sound_detector.tscn" id="7_272bh"]
 [ext_resource type="PackedScene" uid="uid://b41ytihj2ky0p" path="res://scripts/enemy/enemy.tscn" id="8_5vw27"]
 [ext_resource type="PackedScene" uid="uid://bo0bjkhdcbr5i" path="res://media/props/longboats/parallax_longboat_03.tscn" id="8_kek77"]
 
@@ -48,7 +48,7 @@ uv1_scale = Vector3(10, 2, 1)
 material = SubResource("StandardMaterial3D_1bvp3")
 size = Vector3(10, 2, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_1bvp3"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5vw27"]
 noise_type = 3
 fractal_type = 2
 fractal_weighted_strength = 1.0
@@ -58,12 +58,12 @@ generate_mipmaps = false
 seamless = true
 as_normal_map = true
 normalize = false
-noise = SubResource("FastNoiseLite_1bvp3")
+noise = SubResource("FastNoiseLite_5vw27")
 
-[sub_resource type="Gradient" id="Gradient_7mycd"]
+[sub_resource type="Gradient" id="Gradient_kek77"]
 interpolation_mode = 2
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_h2yge"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4c57u"]
 noise_type = 3
 fractal_type = 2
 fractal_gain = 1.0
@@ -75,10 +75,10 @@ seamless = true
 as_normal_map = true
 bump_strength = 5.0
 normalize = false
-color_ramp = SubResource("Gradient_7mycd")
-noise = SubResource("FastNoiseLite_h2yge")
+color_ramp = SubResource("Gradient_kek77")
+noise = SubResource("FastNoiseLite_4c57u")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7mycd"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_efxa6"]
 render_priority = 0
 shader = ExtResource("3_h2yge")
 shader_parameter/amount = 4.0
@@ -98,7 +98,7 @@ shader_parameter/noise_texture_1 = SubResource("NoiseTexture2D_lquwl")
 shader_parameter/noise_texture_2 = SubResource("NoiseTexture2D_1bvp3")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_272bh"]
-material = SubResource("ShaderMaterial_7mycd")
+material = SubResource("ShaderMaterial_efxa6")
 size = Vector2(100, 100)
 subdivide_width = 25
 subdivide_depth = 25
@@ -190,4 +190,4 @@ transform = Transform3D(0.997514, 0, 0.0704699, 0, 1, 0, -0.0704699, 0, 0.997514
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.2141)
 
 [node name="ParalaxLongboat4" parent="." instance=ExtResource("8_kek77")]
-transform = Transform3D(-4.37114e-08, 0, 1, -0.251715, 0.967802, -1.10028e-08, -0.967801, -0.251715, -4.23039e-08, -24.082, -1.55208, -16.1044)
+transform = Transform3D(-0.0987961, 0.0471667, 0.993989, -0.144086, 0.987672, -0.0611881, -0.984621, -0.149265, -0.090782, -24.082, -1.99017, -16.1044)

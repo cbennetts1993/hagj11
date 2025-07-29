@@ -1,1 +1,0 @@
-class_name InteractableComponent extends Area3D

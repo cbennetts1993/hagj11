@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bv03oqmyll885"]
+
+[ext_resource type="Script" uid="uid://cykwq0xgkdj3s" path="res://scripts/item/ItemComponent.gd" id="1_ub2n6"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_50f5s"]
+radius = 0.2
+
+[node name="InteractableItem" type="CharacterBody3D"]
+collision_layer = 5
+collision_mask = 0
+script = ExtResource("1_ub2n6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_50f5s")
+
+[node name="ItemSprite" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+billboard = 2
+
+[connection signal="interacted" from="." to="." method="queue_free"]

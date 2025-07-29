@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://7l8f2mnhn2of"]
+
+[ext_resource type="Script" uid="uid://b2p2wv8rxt0oe" path="res://scripts/components/hitshapes/hit_box.gd" id="1_slx35"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7lgl"]
+
+[node name="HitBox" type="Area3D"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_slx35")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_x7lgl")

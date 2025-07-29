@@ -2,9 +2,11 @@ extends State
 
 @export var animation: StringName
 @export var move_speed_modifier: float = 1.0
+@export var sound_modifier: float = 1.0
 
 @export_group("Components")
 @export var animation_player: AnimationPlayer
+@export var sound: SoundSource
 @export var movement: MovementComponent
 @export var crouch_collider: CollisionShape3D
 @export var input: InputComponent
@@ -15,6 +17,7 @@ extends State
 func enter(from: State) -> void:
 	animation_player.play(animation)
 	movement.set_speed_multiplier(move_speed_modifier)
+	sound.sound_radius *= sound_modifier
 
 
 func update(delta: float) -> void:
@@ -22,6 +25,10 @@ func update(delta: float) -> void:
 	if not input.is_crouch_pressed() and can_stand():
 		state_machine.change_state(stand_state)
 		return
+
+
+func exit(to: State) -> void:
+	sound.sound_radius *= 1 / sound_modifier
 
 
 func can_stand() -> bool:
