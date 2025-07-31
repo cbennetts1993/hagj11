@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://buka3k8cuu2s" path="res://scripts/components/senses/sound_detector.tscn" id="14_aijuq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_su13s"]
+radius = 0.4
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hhlal"]
 atlas = ExtResource("2_5bwyd")
@@ -104,7 +105,7 @@ _data = {
 size = Vector3(1.5, 1.5, 1.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hhlal"]
-size = Vector3(10, 2, 10)
+size = Vector3(15, 2, 20)
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_otvh8")
@@ -241,7 +242,7 @@ collision_mask = 1
 vision_angle = 0.0
 
 [node name="CollisionShape3D" parent="VisionComponent/Area3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 shape = SubResource("BoxShape3D_hhlal")
 
 [node name="RayCast3D" parent="VisionComponent" index="1"]

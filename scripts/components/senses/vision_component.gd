@@ -26,8 +26,14 @@ func is_node_in_vision_cone(node: Node3D) -> bool:
 
 
 func is_node_in_line_of_sight(node: Node3D) -> bool:
-	vision_ray.target_position = node.global_position - self.global_position
-	return vision_ray.is_colliding() and vision_ray.get_collider() == node
+	var world = get_world_3d().direct_space_state
+	var query: = PhysicsRayQueryParameters3D.create(
+		self.global_position,
+		node.global_position,
+		collision_mask
+	)
+	var result = world.intersect_ray(query)
+	return result and result.collider == node
 
 
 func is_node_visible(node: Node3D) -> bool:
