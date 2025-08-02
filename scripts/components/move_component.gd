@@ -17,8 +17,6 @@ func get_current_movement_speed() -> float:
 
 var speed_multiplier: float = 1.0
 
-var velocity: Vector3 = Vector3.ZERO
-
 func set_speed_multiplier(value):
 	speed_multiplier = value
 	speed_multiplier_changed.emit()

@@ -1,6 +1,7 @@
 shader_type spatial;
-render_mode alpha_to_coverage, blend_mix;
+render_mode blend_mix, unshaded;
 
+uniform vec3 modulate: source_color = vec3(1.0);
 uniform sampler2D base_texture;
 
 uniform vec2 wind_directional_strength;
@@ -22,7 +23,7 @@ void vertex() {
 			vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0),
 			vec4(0.0, 0.0, 0.0, 1.0));
 	MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
-	
+
 	vec2 world_uv = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xz;
 	float wind_value = texture(noise, world_uv + vec2(TIME * speed)).r;
 	float vertex_height = clamp((1.0 - UV.y), 0.0, 1.0);
@@ -31,8 +32,8 @@ void vertex() {
 
 void fragment() {
 	vec4 texture_color = texture(base_texture, UV);
-	ALBEDO = texture_color.rgb;
-	ALPHA_SCISSOR_THRESHOLD = 0.5;
+	ALBEDO = texture_color.rgb * modulate;
+	ALPHA_SCISSOR_THRESHOLD = 0.7;
 	ALPHA = texture_color.a;
 }
 

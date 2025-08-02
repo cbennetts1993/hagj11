@@ -1,0 +1,145 @@
+[gd_scene load_steps=9 format=3 uid="uid://1bohvsgxrwoc"]
+
+[ext_resource type="Script" uid="uid://bubmdchyak73v" path="res://scripts/main_menu.gd" id="1_0o4t1"]
+[ext_resource type="Texture2D" uid="uid://bi1bqlph2x6td" path="res://assets/ui/button_ui.png" id="1_06t4h"]
+[ext_resource type="Theme" uid="uid://bmgb7v1fr26om" path="res://media/ui_themes/base_theme.tres" id="1_fu7sn"]
+[ext_resource type="PackedScene" uid="uid://u3ma70jls48l" path="res://media/background_scene.tscn" id="2_nlkkf"]
+[ext_resource type="Texture2D" uid="uid://bnqkgpnwdhbh0" path="res://assets/ui/title_card.png" id="3_jix8l"]
+[ext_resource type="Texture2D" uid="uid://cpyfdvcte6dlb" path="res://assets/ui/button_ui_pressed.png" id="6_8qtwp"]
+[ext_resource type="Texture2D" uid="uid://ci05lpdshp7yw" path="res://assets/ui/button_ui_glow.png" id="6_qe12f"]
+[ext_resource type="Texture2D" uid="uid://cifmvaydxm63i" path="res://assets/ui/Paint_Stroke (1).png" id="8_0k4wn"]
+
+[node name="StartMenu" type="Node"]
+script = ExtResource("1_0o4t1")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Control/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Background_scene" parent="Control/SubViewportContainer/SubViewport" instance=ExtResource("2_nlkkf")]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 496.0
+grow_vertical = 2
+texture = ExtResource("8_0k4wn")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+offset_left = 176.0
+offset_top = 384.0
+offset_right = 467.0
+offset_bottom = 632.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_fu7sn")
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="Start" type="TextureButton" parent="Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("1_06t4h")
+texture_pressed = ExtResource("6_8qtwp")
+texture_hover = ExtResource("6_qe12f")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Buttons/Start"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.5
+offset_top = -42.0
+offset_right = 52.5
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_fu7sn")
+theme_override_font_sizes/font_size = 32
+text = "Start"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Quit" type="TextureButton" parent="Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("1_06t4h")
+texture_pressed = ExtResource("6_8qtwp")
+texture_hover = ExtResource("6_qe12f")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Buttons/Quit"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.5
+offset_top = -42.0
+offset_right = 52.5
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+offset_left = 112.0
+offset_top = 64.0
+offset_right = 624.0
+offset_bottom = 294.0
+texture = ExtResource("3_jix8l")
+expand_mode = 1
+stretch_mode = 4
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="TextureRect2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = -43.0
+offset_right = 157.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_fu7sn")
+theme_override_font_sizes/font_size = 48
+text = "Lindisfarne"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Buttons/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Buttons/Quit" to="." method="_on_quit_pressed"]

@@ -42,3 +42,8 @@ func physics_update(delta: float) -> void:
 	movement.move(direction)
 	movement.rotate_to_direction(direction * Vector3(1, 0, 1))
 	movement.apply_gravity()
+
+
+
+func assign_patrol_path(new_path: Path3D) -> void:
+	path = new_path

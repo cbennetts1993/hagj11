@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://cg456ksbl6we2"]
+
+[ext_resource type="Script" uid="uid://dseg4i2kndpkd" path="res://scripts/item/item_data.gd" id="1_c45cw"]
+[ext_resource type="Texture2D" uid="uid://da1uhy4f0i4dk" path="res://assets/sprites/items/Te_Deum_Sheet_Music.png" id="2_ro1cl"]
+
+[resource]
+script = ExtResource("1_c45cw")
+sprite = ExtResource("2_ro1cl")
+name = &"Te Deum Sheet Music"
+display_color = Color(1, 1, 1, 1)
+description = "Sheet music for a canticle by St. Ambrose, a significant part of Anglican liturgy."
+world_scale = Vector3(0.1, 0.1, 0.1)
+metadata/_custom_type_script = "uid://dseg4i2kndpkd"

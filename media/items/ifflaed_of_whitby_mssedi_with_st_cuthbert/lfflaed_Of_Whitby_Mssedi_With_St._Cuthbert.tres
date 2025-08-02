@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://drejojurymkpj"]
+
+[ext_resource type="Script" uid="uid://dseg4i2kndpkd" path="res://scripts/item/item_data.gd" id="1_l25g7"]
+[ext_resource type="Texture2D" uid="uid://cx4ampgua76jl" path="res://assets/sprites/items/lfflaed_Of_Whitby_Mssedi_With_St._Cuthbert_.png" id="2_eitv8"]
+
+[resource]
+script = ExtResource("1_l25g7")
+sprite = ExtResource("2_eitv8")
+name = &"lfflaed Of Whitby Mssedi With St. Cuthbert"
+display_color = Color(1, 1, 1, 1)
+description = "Accounts of St. Princess Abbess Ifflaed attending a banquet with St. cuthbert."
+world_scale = Vector3(0.1, 0.1, 0.1)
+metadata/_custom_type_script = "uid://dseg4i2kndpkd"

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://b8ypdlnf1iv7h"]
+
+[ext_resource type="Script" uid="uid://dseg4i2kndpkd" path="res://scripts/item/item_data.gd" id="1_bq5oh"]
+[ext_resource type="Texture2D" uid="uid://ry54hd7nmnb4" path="res://assets/sprites/items/Name_Stane.png" id="2_efhxu"]
+
+[resource]
+script = ExtResource("1_bq5oh")
+sprite = ExtResource("2_efhxu")
+name = &"Name Stone"
+display_color = Color(1, 1, 1, 1)
+description = "A beryl jewel that was set into the gravemarker of Osgyth."
+world_scale = Vector3(0.1, 0.1, 0.1)
+metadata/_custom_type_script = "uid://dseg4i2kndpkd"

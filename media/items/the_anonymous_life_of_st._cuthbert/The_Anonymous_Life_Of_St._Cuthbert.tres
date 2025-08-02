@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://c215clfl84nl4"]
+
+[ext_resource type="Script" uid="uid://dseg4i2kndpkd" path="res://scripts/item/item_data.gd" id="1_0g86w"]
+[ext_resource type="Texture2D" uid="uid://da2yq35a7vqe8" path="res://assets/sprites/items/The_Anonymous_Life_Of_St._Cuthbert.png" id="2_x7ypw"]
+
+[resource]
+script = ExtResource("1_0g86w")
+sprite = ExtResource("2_x7ypw")
+name = &"The anonymous life of St. Cuthbert"
+display_color = Color(1, 1, 1, 1)
+description = "Distinct for being written at Lindisfarne, one of multiple vita sancti Cuthberti.
+
+"
+world_scale = Vector3(0.1, 0.1, 0.1)
+metadata/_custom_type_script = "uid://dseg4i2kndpkd"

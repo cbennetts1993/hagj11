@@ -3,6 +3,9 @@ class_name InputComponent extends Node
 signal interact_pressed
 signal throw_pressed
 
+signal inventory_scrolled_up
+signal inventory_scrolled_down
+
 @export var mouse_mode: Input.MouseMode:
 	set = set_mouse_mode
 
@@ -17,6 +20,11 @@ func _process(delta: float) -> void:
 	
 	if is_throw_just_pressed():
 		throw_pressed.emit()
+	
+	if is_scroll_up_just_pressed():
+		inventory_scrolled_up.emit()
+	elif is_scroll_down_just_pressed():
+		inventory_scrolled_down.emit()
 
 
 ## Returns the normalized vector of movement input
@@ -40,3 +48,9 @@ func is_interact_just_pressed() -> bool:
 
 func is_throw_just_pressed() -> bool:
 	return Input.is_action_just_pressed("throw")
+
+func is_scroll_up_just_pressed() -> bool:
+	return Input.is_action_just_pressed("inventory_scroll_up")
+
+func is_scroll_down_just_pressed() -> bool:
+	return Input.is_action_just_pressed("inventory_scroll_down")

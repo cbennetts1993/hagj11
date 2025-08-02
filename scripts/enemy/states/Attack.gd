@@ -3,6 +3,7 @@ extends State
 @export var animation: StringName
 @export var attack_speed: float = 1.0
 @export var animation_player: AnimationPlayer
+@export var movement: MovementComponent
 
 var return_state: State
 

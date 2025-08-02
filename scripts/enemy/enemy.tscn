@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b41ytihj2ky0p"]
+[gd_scene load_steps=43 format=3 uid="uid://b41ytihj2ky0p"]
 
 [ext_resource type="Script" uid="uid://cbmptno52lpj3" path="res://scripts/enemy/enemy.gd" id="1_otvh8"]
 [ext_resource type="Texture2D" uid="uid://cnwi1aty3t0fo" path="res://assets/REMOVE/Viking.webp" id="2_5bwyd"]
@@ -16,6 +16,15 @@
 [ext_resource type="PackedScene" uid="uid://dafxdtgaudq7s" path="res://scripts/components/hitshapes/damage_shape.tscn" id="11_p5k8n"]
 [ext_resource type="PackedScene" uid="uid://7l8f2mnhn2of" path="res://scripts/components/hitshapes/hit_box.tscn" id="12_wohgq"]
 [ext_resource type="PackedScene" uid="uid://buka3k8cuu2s" path="res://scripts/components/senses/sound_detector.tscn" id="14_aijuq"]
+[ext_resource type="Texture2D" uid="uid://bu2axkd6bsadu" path="res://assets/particles/star_stunned.png" id="17_gwjr5"]
+[ext_resource type="AudioStream" uid="uid://m7p0f5dkwktr" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 1.wav" id="18_aioj4"]
+[ext_resource type="AudioStream" uid="uid://cyb5xsa4juuba" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 2.wav" id="19_wxuus"]
+[ext_resource type="AudioStream" uid="uid://t7ige8s0ptyo" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 3.wav" id="20_ah5ti"]
+[ext_resource type="AudioStream" uid="uid://dqxidcw0sjw58" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 4.wav" id="21_825ea"]
+[ext_resource type="AudioStream" uid="uid://c3d7o8dsblhcb" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 5.wav" id="22_a154k"]
+[ext_resource type="AudioStream" uid="uid://bpxp80p7lconk" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 6.wav" id="23_litkc"]
+[ext_resource type="AudioStream" uid="uid://cqi8ioiqqlif2" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 7.wav" id="24_aesn3"]
+[ext_resource type="AudioStream" uid="uid://dp2vs0rhaymji" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 8.wav" id="25_d8f5o"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_su13s"]
 radius = 0.4
@@ -37,7 +46,7 @@ animations = [{
 
 [sub_resource type="Animation" id="Animation_hhlal"]
 resource_name = "Attack"
-length = 0.5
+length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -45,7 +54,7 @@ tracks/0/path = NodePath("DamageShape:monitoring")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5),
+"times": PackedFloat32Array(0, 0.5, 0.533333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -57,7 +66,7 @@ tracks/1/path = NodePath("DamageShape:monitorable")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5),
+"times": PackedFloat32Array(0, 0.5, 0.533333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -75,7 +84,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -93,6 +102,20 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_wohgq"]
 resource_name = "Stunned"
 length = 1.5
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("stun_fx")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"restart"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ipal1"]
 _data = {
@@ -107,6 +130,60 @@ size = Vector3(1.5, 1.5, 1.5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_hhlal"]
 size = Vector3(15, 2, 20)
 
+[sub_resource type="Curve" id="Curve_c3oii"]
+
+[sub_resource type="Curve" id="Curve_gwjr5"]
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_axpba"]
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_c3oii"]
+curve_x = SubResource("Curve_c3oii")
+curve_y = SubResource("Curve_gwjr5")
+curve_z = SubResource("Curve_axpba")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_axpba"]
+emission_shape_scale = Vector3(1, 0, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 1.0
+emission_ring_radius = 0.5
+emission_ring_inner_radius = 0.5
+emission_ring_cone_angle = 90.0
+orbit_velocity_min = 1.5
+orbit_velocity_max = 1.5
+orbit_velocity_curve = SubResource("CurveXYZTexture_c3oii")
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gwjr5"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 0.298039, 1)
+albedo_texture = ExtResource("17_gwjr5")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_c3oii"]
+material = SubResource("StandardMaterial3D_gwjr5")
+size = Vector2(0.2, 0.2)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_21wb1"]
+streams_count = 8
+stream_0/stream = ExtResource("18_aioj4")
+stream_1/stream = ExtResource("19_wxuus")
+stream_2/stream = ExtResource("20_ah5ti")
+stream_3/stream = ExtResource("21_825ea")
+stream_4/stream = ExtResource("22_a154k")
+stream_5/stream = ExtResource("23_litkc")
+stream_6/stream = ExtResource("24_aesn3")
+stream_7/stream = ExtResource("25_d8f5o")
+
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_otvh8")
 
@@ -116,7 +193,7 @@ rotation_edit_mode = 2
 shape = SubResource("CapsuleShape3D_su13s")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.0911385, 1, 0)
 shaded = true
 sprite_frames = SubResource("SpriteFrames_escsu")
 
@@ -226,7 +303,6 @@ libraries = {
 
 [node name="DamageShape" parent="." node_paths=PackedStringArray("exclude") instance=ExtResource("11_p5k8n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-monitoring = true
 exclude = [NodePath("../HitBox")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DamageShape"]
@@ -250,6 +326,20 @@ target_position = Vector3(0, 0, 10)
 
 [node name="SoundDetector" parent="." instance=ExtResource("14_aijuq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="stun_fx" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0407, 0)
+emitting = false
+amount = 5
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_axpba")
+draw_pass_1 = SubResource("QuadMesh_c3oii")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_21wb1")
+volume_db = -20.0
 
 [connection signal="got_hit" from="HitBox" to="StateMachine/Stunned" method="stun"]
 [connection signal="sound_detected" from="SoundDetector" to="Blackboard" method="set_investigation_position"]

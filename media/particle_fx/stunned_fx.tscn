@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://b2cwjck1vur5"]
+
+[ext_resource type="Texture2D" uid="uid://bu2axkd6bsadu" path="res://assets/particles/star_stunned.png" id="1_nc65e"]
+
+[sub_resource type="Curve" id="Curve_x4ely"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.213311, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_nc65e"]
+curve = SubResource("Curve_x4ely")
+
+[sub_resource type="Curve" id="Curve_gwjr5"]
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_52yso"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_c3oii"]
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_56qgn"]
+curve_x = SubResource("Curve_gwjr5")
+curve_y = SubResource("Curve_52yso")
+curve_z = SubResource("Curve_c3oii")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2iviy"]
+emission_shape_scale = Vector3(1, 0, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 1.0
+emission_ring_radius = 0.5
+emission_ring_inner_radius = 0.5
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 0, 0)
+spread = 0.0
+orbit_velocity_min = 1.5
+orbit_velocity_max = 1.5
+orbit_velocity_curve = SubResource("CurveXYZTexture_56qgn")
+gravity = Vector3(0, 0, 0)
+color = Color(1, 1, 0.282353, 1)
+alpha_curve = SubResource("CurveTexture_nc65e")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mim8t"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_nc65e")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_nc65e"]
+material = SubResource("StandardMaterial3D_mim8t")
+size = Vector2(0.1, 0.1)
+
+[node name="Stunned_fx" type="GPUParticles3D"]
+emitting = false
+amount = 5
+lifetime = 2.5
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 665895830
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_2iviy")
+draw_pass_1 = SubResource("QuadMesh_nc65e")

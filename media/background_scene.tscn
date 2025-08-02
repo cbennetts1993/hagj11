@@ -1,0 +1,187 @@
+[gd_scene load_steps=20 format=3 uid="uid://u3ma70jls48l"]
+
+[ext_resource type="Shader" uid="uid://c3komeodyogmp" path="res://shaders/water_shader.gdshader" id="1_h333j"]
+[ext_resource type="PackedScene" uid="uid://d1dyx6e7evx6x" path="res://media/props/longboats/parallax_longboat_01.tscn" id="2_hgjcb"]
+[ext_resource type="PackedScene" uid="uid://bfbv168tuucfp" path="res://media/props/longboats/parallax_longboat_02.tscn" id="3_pxggk"]
+[ext_resource type="PackedScene" uid="uid://bo0bjkhdcbr5i" path="res://media/props/longboats/parallax_longboat_03.tscn" id="4_1yhyc"]
+[ext_resource type="PackedScene" uid="uid://doxges0ggre02" path="res://media/props/longboats/parallax_longboat_04.tscn" id="5_t1fqs"]
+[ext_resource type="PackedScene" uid="uid://xrqvkfm11ipl" path="res://media/props/longboats/parallax_longboat_05.tscn" id="6_nawo7"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_v7sqt"]
+noise_type = 3
+fractal_type = 2
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_glbon"]
+generate_mipmaps = false
+seamless = true
+as_normal_map = true
+normalize = false
+noise = SubResource("FastNoiseLite_v7sqt")
+
+[sub_resource type="Gradient" id="Gradient_u3yai"]
+interpolation_mode = 2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fj6e6"]
+noise_type = 3
+fractal_type = 2
+fractal_gain = 1.0
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nlkkf"]
+generate_mipmaps = false
+seamless = true
+as_normal_map = true
+bump_strength = 5.0
+normalize = false
+color_ramp = SubResource("Gradient_u3yai")
+noise = SubResource("FastNoiseLite_fj6e6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2h3vt"]
+render_priority = 0
+shader = ExtResource("1_h333j")
+shader_parameter/amount = 4.0
+shader_parameter/intensity = 1.0
+shader_parameter/fresnel_color = Color(0, 0.482353, 0.411765, 1)
+shader_parameter/z_near = 0.0
+shader_parameter/z_far = 0.0
+shader_parameter/depth_fade_color = Color(3.60981e-07, 0.150793, 0.247881, 1)
+shader_parameter/beers_law = 5.0
+shader_parameter/depth_offset = -0.75
+shader_parameter/base_color = Color(0.224479, 0.528709, 0.718574, 1)
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.0
+shader_parameter/speed = 0.005
+shader_parameter/wave_height = 6.0
+shader_parameter/noise_texture_1 = SubResource("NoiseTexture2D_glbon")
+shader_parameter/noise_texture_2 = SubResource("NoiseTexture2D_nlkkf")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qe12f"]
+material = SubResource("ShaderMaterial_2h3vt")
+size = Vector2(100, 100)
+subdivide_width = 25
+subdivide_depth = 25
+
+[sub_resource type="Gradient" id="Gradient_jix8l"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.45098, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_glbon"]
+frequency = 0.0055
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_y3bce"]
+in_3d_space = true
+seamless = true
+color_ramp = SubResource("Gradient_jix8l")
+noise = SubResource("FastNoiseLite_glbon")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nlkkf"]
+sky_horizon_color = Color(0.505671, 0.708538, 0.771084, 1)
+sky_cover = SubResource("NoiseTexture2D_y3bce")
+ground_bottom_color = Color(0.079109, 0.246033, 0.34817, 1)
+ground_horizon_color = Color(0.0434619, 0.367788, 0.543444, 1)
+
+[sub_resource type="Sky" id="Sky_0xm2m"]
+sky_material = SubResource("ProceduralSkyMaterial_nlkkf")
+
+[sub_resource type="Environment" id="Environment_dy7ct"]
+background_mode = 2
+sky = SubResource("Sky_0xm2m")
+tonemap_mode = 2
+fog_sun_scatter = 0.1
+fog_aerial_perspective = 1.0
+fog_depth_begin = 0.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.1
+volumetric_fog_albedo = Color(0.790427, 0.779049, 0.740063, 1)
+volumetric_fog_emission = Color(1, 1, 1, 1)
+volumetric_fog_emission_energy = 0.1
+volumetric_fog_anisotropy = 0.83
+volumetric_fog_length = 10.0
+volumetric_fog_ambient_inject = 0.01
+
+[node name="Background_scene" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.4211, 0)
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.4211, 0)
+mesh = SubResource("PlaneMesh_qe12f")
+skeleton = NodePath("../../..")
+
+[node name="Water2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10.4211, 0)
+mesh = SubResource("PlaneMesh_qe12f")
+skeleton = NodePath("../../..")
+
+[node name="Water4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.4211, 100)
+mesh = SubResource("PlaneMesh_qe12f")
+skeleton = NodePath("../../..")
+
+[node name="Water5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10.4211, 100)
+mesh = SubResource("PlaneMesh_qe12f")
+skeleton = NodePath("../../..")
+
+[node name="Water7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.4211, -100)
+mesh = SubResource("PlaneMesh_qe12f")
+skeleton = NodePath("../../..")
+
+[node name="Water8" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10.4211, -100)
+mesh = SubResource("PlaneMesh_qe12f")
+skeleton = NodePath("../../..")
+
+[node name="Water9" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.4211, -200)
+mesh = SubResource("PlaneMesh_qe12f")
+skeleton = NodePath("../../..")
+
+[node name="Water11" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 10.4211, -200)
+mesh = SubResource("PlaneMesh_qe12f")
+skeleton = NodePath("../../..")
+
+[node name="Water12" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 10.4211, -100)
+mesh = SubResource("PlaneMesh_qe12f")
+skeleton = NodePath("../../..")
+
+[node name="Water13" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 10.4211, 0)
+mesh = SubResource("PlaneMesh_qe12f")
+skeleton = NodePath("../../..")
+
+[node name="Water10" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10.4211, -200)
+mesh = SubResource("PlaneMesh_qe12f")
+skeleton = NodePath("../../..")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dy7ct")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.663966, 0.330352, 0.670833, 0.480997, -0.875572, -0.0448977, 0.57253, 0.352479, -0.740249, 0, 19.0892, 0)
+light_color = Color(1, 0.768627, 0, 1)
+light_energy = 0.6
+light_volumetric_fog_energy = 0.1
+light_angular_distance = 5.0
+shadow_enabled = true
+
+[node name="ParalaxLongboat" parent="." instance=ExtResource("2_hgjcb")]
+transform = Transform3D(1.89024, 0, -0.653445, 0, 2, 0, 0.653445, 0, 1.89024, 58.3406, 11.2557, -40.3346)
+
+[node name="ParalaxLongboat2" parent="." instance=ExtResource("3_pxggk")]
+transform = Transform3D(1.89024, 0, -0.653445, 0, 2, 0, 0.653445, 0, 1.89024, 17.4192, 10.5277, -39.358)
+
+[node name="ParalaxLongboat3" parent="." instance=ExtResource("4_1yhyc")]
+transform = Transform3D(1.8588, 0.343303, -0.653445, -0.363237, 1.96674, -6.23695e-08, 0.642577, 0.118678, 1.89024, 20.9344, 12.8508, -107.23)
+
+[node name="ParalaxLongboat4" parent="." instance=ExtResource("5_t1fqs")]
+transform = Transform3D(1.84657, 0.402731, -0.654209, -0.436565, 1.95153, -0.0308887, 0.632136, 0.171322, 1.88972, 2.76074, 11.3296, -83.0087)
+
+[node name="ParalaxLongboat5" parent="." instance=ExtResource("6_nawo7")]
+transform = Transform3D(1.87927, 0.20339, -0.653445, -0.2152, 1.98839, -2.09099e-08, 0.649655, 0.0703106, 1.89024, 40.8753, 11.3468, -69.4645)

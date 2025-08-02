@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://c60x122x18yca"]
+[gd_scene load_steps=44 format=3 uid="uid://c60x122x18yca"]
 
 [ext_resource type="Script" uid="uid://cmlbdl25wtr5x" path="res://scripts/player/player.gd" id="1_hmply"]
 [ext_resource type="Script" uid="uid://bt2rpuuexcdqw" path="res://scripts/player/view.gd" id="2_b6sy1"]
@@ -29,8 +29,10 @@
 [ext_resource type="AudioStream" uid="uid://dp2vs0rhaymji" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 8.wav" id="24_pf1ci"]
 [ext_resource type="Texture2D" uid="uid://bqqd8uuma54jy" path="res://assets/ui/InventoryBorder_-_Lindisfarne.png" id="25_ww5gr"]
 [ext_resource type="Theme" uid="uid://bmgb7v1fr26om" path="res://media/ui_themes/base_theme.tres" id="27_sg88g"]
+[ext_resource type="Texture2D" uid="uid://bmiudrx1kcg4p" path="res://assets/ui/BiscopHygebaldFrame.png" id="28_ksv7p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p83wy"]
+render_priority = 1
 transparency = 2
 alpha_scissor_threshold = 0.5
 alpha_antialiasing_mode = 0
@@ -347,73 +349,16 @@ libraries = {
 &"": SubResource("AnimationLibrary_uyddv")
 }
 
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_left = 150.0
-offset_top = 504.0
-offset_right = 530.0
-offset_bottom = 636.0
-texture = ExtResource("25_ww5gr")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="InventoryComponent" type="PanelContainer" parent="."]
-offset_left = 260.0
-offset_top = 547.0
-offset_right = 606.0
-offset_bottom = 653.0
-scale = Vector2(0.5, 0.5)
-theme_override_styles/panel = SubResource("StyleBoxEmpty_sg88g")
-script = ExtResource("14_yj7se")
-metadata/_edit_group_ = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="InventoryComponent"]
-layout_mode = 2
-alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="InventoryComponent/VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="left" type="PanelContainer" parent="InventoryComponent/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="centre" type="PanelContainer" parent="InventoryComponent/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="centre2" type="PanelContainer" parent="InventoryComponent/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="centre3" type="PanelContainer" parent="InventoryComponent/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="right" type="PanelContainer" parent="InventoryComponent/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Item" type="Label" parent="InventoryComponent/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("27_sg88g")
-text = "Item Name"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Panel" type="Panel" parent="InventoryComponent/VBoxContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxLine_yj7se")
-
-[node name="Description" type="Label" parent="InventoryComponent/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("27_sg88g")
-text = "Item Description. This is the item description"
-horizontal_alignment = 1
-vertical_alignment = 1
-justification_flags = 162
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer"]
+offset_left = 43.0
+offset_top = 407.0
+offset_right = 216.0
+offset_bottom = 620.0
+texture = ExtResource("28_ksv7p")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 15
@@ -424,7 +369,6 @@ grow_vertical = 2
 texture = ExtResource("18_kcr71")
 expand_mode = 1
 stretch_mode = 4
-flip_v = true
 
 [node name="TextureRect2" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 15
@@ -435,8 +379,88 @@ grow_vertical = 2
 texture = ExtResource("19_vtmsy")
 expand_mode = 1
 
-[connection signal="pick_up_item" from="View/InteractRay" to="InventoryComponent" method="add_item"]
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer"]
+offset_left = 150.0
+offset_top = 504.0
+offset_right = 530.0
+offset_bottom = 636.0
+texture = ExtResource("25_ww5gr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="InventoryComponent" type="PanelContainer" parent="CanvasLayer" node_paths=PackedStringArray("item_name_label", "item_description_label", "left_icon", "centre_icon", "right_icon")]
+offset_left = 260.0
+offset_top = 547.0
+offset_right = 606.0
+offset_bottom = 653.0
+scale = Vector2(0.5, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxEmpty_sg88g")
+script = ExtResource("14_yj7se")
+item_name_label = NodePath("VBoxContainer/Item")
+item_description_label = NodePath("VBoxContainer/Description")
+left_icon = NodePath("VBoxContainer/HBoxContainer/left/TextureRect")
+centre_icon = NodePath("VBoxContainer/HBoxContainer/center/TextureRect")
+right_icon = NodePath("VBoxContainer/HBoxContainer/right/TextureRect")
+metadata/_edit_group_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/InventoryComponent"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/InventoryComponent/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="left" type="PanelContainer" parent="CanvasLayer/InventoryComponent/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/InventoryComponent/VBoxContainer/HBoxContainer/left"]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 4
+
+[node name="center" type="PanelContainer" parent="CanvasLayer/InventoryComponent/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/InventoryComponent/VBoxContainer/HBoxContainer/center"]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 4
+
+[node name="right" type="PanelContainer" parent="CanvasLayer/InventoryComponent/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/InventoryComponent/VBoxContainer/HBoxContainer/right"]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Item" type="Label" parent="CanvasLayer/InventoryComponent/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("27_sg88g")
+text = "Item Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="CanvasLayer/InventoryComponent/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxLine_yj7se")
+
+[node name="Description" type="Label" parent="CanvasLayer/InventoryComponent/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("27_sg88g")
+text = "Item Description. This is the item description"
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 162
+
+[connection signal="pick_up_item" from="View/InteractRay" to="CanvasLayer/InventoryComponent" method="add_item"]
 [connection signal="interact_pressed" from="InputComponent" to="View/InteractRay" method="_on_interact"]
-[connection signal="throw_pressed" from="InputComponent" to="InventoryComponent" method="_on_throw_pressed"]
+[connection signal="inventory_scrolled_down" from="InputComponent" to="CanvasLayer/InventoryComponent" method="decrease_focus"]
+[connection signal="inventory_scrolled_up" from="InputComponent" to="CanvasLayer/InventoryComponent" method="increase_focus"]
+[connection signal="throw_pressed" from="InputComponent" to="CanvasLayer/InventoryComponent" method="_on_throw_pressed"]
 [connection signal="got_hit" from="HitBox" to="." method="die"]
-[connection signal="item_dropped" from="InventoryComponent" to="View/ProjectileSpawner" method="spawn_from_item"]
+[connection signal="item_dropped" from="CanvasLayer/InventoryComponent" to="View/ProjectileSpawner" method="spawn_from_item"]

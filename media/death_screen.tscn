@@ -1,0 +1,147 @@
+[gd_scene load_steps=8 format=3 uid="uid://6rdx31co8v26"]
+
+[ext_resource type="PackedScene" uid="uid://u3ma70jls48l" path="res://media/background_scene.tscn" id="1_3det7"]
+[ext_resource type="Script" uid="uid://bubmdchyak73v" path="res://scripts/main_menu.gd" id="1_bjnbs"]
+[ext_resource type="Texture2D" uid="uid://dxu8wq5pr01f" path="res://assets/ui/Deathcard_-_Lindisfarne_-_01.08.25-alpha.png" id="1_dcrjm"]
+[ext_resource type="Theme" uid="uid://bmgb7v1fr26om" path="res://media/ui_themes/base_theme.tres" id="2_dcrjm"]
+[ext_resource type="Texture2D" uid="uid://bi1bqlph2x6td" path="res://assets/ui/button_ui.png" id="3_dcrjm"]
+[ext_resource type="Texture2D" uid="uid://ci05lpdshp7yw" path="res://assets/ui/button_ui_glow.png" id="6_utof6"]
+[ext_resource type="Texture2D" uid="uid://cpyfdvcte6dlb" path="res://assets/ui/button_ui_pressed.png" id="6_wifnw"]
+
+[node name="DeathScreen" type="Node"]
+script = ExtResource("1_bjnbs")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Background_scene" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_3det7")]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -25.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_dcrjm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.0
+offset_top = -149.0
+offset_right = 69.0
+offset_bottom = -104.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_dcrjm")
+theme_override_font_sizes/font_size = 32
+text = "You Died"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 192.0
+offset_top = -88.0
+offset_right = -184.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+metadata/_edit_group_ = true
+
+[node name="Try Again" type="TextureButton" parent="Control/HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("3_dcrjm")
+texture_pressed = ExtResource("6_wifnw")
+texture_hover = ExtResource("6_utof6")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Control/HBoxContainer/MarginContainer/Try Again"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.5
+offset_top = -33.5
+offset_right = 56.5
+offset_bottom = 33.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_dcrjm")
+theme_override_font_sizes/font_size = 24
+text = "Try Again"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+metadata/_edit_group_ = true
+
+[node name="Quit" type="TextureButton" parent="Control/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("3_dcrjm")
+texture_pressed = ExtResource("6_wifnw")
+texture_hover = ExtResource("6_utof6")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Control/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme = ExtResource("2_dcrjm")
+theme_override_font_sizes/font_size = 24
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Control/HBoxContainer/MarginContainer/Try Again" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/MarginContainer2/Quit" to="." method="_on_quit_pressed"]

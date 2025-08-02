@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://mycsex26sv1v"]
+
+[ext_resource type="Script" uid="uid://dseg4i2kndpkd" path="res://scripts/item/item_data.gd" id="1_oa08l"]
+[ext_resource type="Texture2D" uid="uid://cpa2iocpvjvdp" path="res://assets/sprites/items/Manifldlice_Medicinal_Herbes.png" id="2_mskvl"]
+
+[resource]
+script = ExtResource("1_oa08l")
+sprite = ExtResource("2_mskvl")
+name = &"Manifldlice Medicinal Herbes"
+display_color = Color(1, 1, 1, 1)
+description = "A scroll containing lists and recipes of medicinal herbs and poultices."
+world_scale = Vector3(0.1, 0.1, 0.1)
+metadata/_custom_type_script = "uid://dseg4i2kndpkd"

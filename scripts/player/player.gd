@@ -13,4 +13,5 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func die():
-	print("Died!")
+	SceneManager.change_to_scene(SceneManager.death_screen)
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
