@@ -13,18 +13,29 @@ extends State
 @export var follow_state: State
 @export var investigate_state: State
 
+@export var animation_name: String = "idle"
+@export var animation_front: AnimatedSprite3D
+@export var animation_back: AnimatedSprite3D
+
 var target_position: Vector3
+
+
+func _ready() -> void:
+	leash_position.global_position = movement.body.global_position
 
 
 func enter(from: State):
 	var rand_direction = Vector3(randf(), 0, randf()).normalized()
-	var rand_length = randf_range(0.0, wander_radius)
+	var rand_length = randf_range(1.0, wander_radius)
 	target_position = leash_position.global_position + (rand_length * rand_direction)
 	navigation.target_position = target_position
+	
+	animation_front.animation = animation_name
+	animation_back.animation = animation_name
 
 
 func update(delta: float):
-	if movement.body.global_position.distance_to(target_position) <= 0.1:
+	if movement.body.global_position.distance_to(target_position) <= 1.0:
 		state_machine.change_state(idle_state)
 		return
 	
@@ -40,6 +51,7 @@ func physics_update(delta: float) -> void:
 	
 	var navigation_path_target = navigation.get_next_path_position()
 	var direction = movement.body.global_position.direction_to(navigation_path_target)
+	
 	movement.move(direction)
 	movement.rotate_to_direction(direction * Vector3(1, 0, 1))
 	movement.apply_gravity()

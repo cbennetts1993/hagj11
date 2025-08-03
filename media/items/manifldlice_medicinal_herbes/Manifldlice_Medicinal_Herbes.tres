@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_oa08l")
 sprite = ExtResource("2_mskvl")
-name = &"Manifldlice Medicinal Herbes"
+name = &"Manifældlice Medicinal Herbes"
 display_color = Color(1, 1, 1, 1)
 description = "A scroll containing lists and recipes of medicinal herbs and poultices."
 world_scale = Vector3(0.1, 0.1, 0.1)

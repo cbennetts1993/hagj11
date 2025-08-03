@@ -12,7 +12,7 @@ config_version=5
 
 config/name="HAGJ11"
 config/tags=PackedStringArray("gamejam")
-run/main_scene="uid://bkfm8safex0py"
+run/main_scene="uid://1bohvsgxrwoc"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 

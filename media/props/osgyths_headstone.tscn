@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://konjkj1upc2u"]
+
+[ext_resource type="PackedScene" uid="uid://bv03oqmyll885" path="res://scripts/item/world_item.tscn" id="1_lvswk"]
+[ext_resource type="Resource" uid="uid://b8ypdlnf1iv7h" path="res://media/items/name_stone/Name_Stone.tres" id="2_k11mx"]
+[ext_resource type="Texture2D" uid="uid://ry54hd7nmnb4" path="res://assets/sprites/items/Name_Stane.png" id="3_15lqo"]
+[ext_resource type="Texture2D" uid="uid://chddb4nif4frw" path="res://assets/sprites/Osgyth_Headstone_Front.png" id="4_25y6n"]
+[ext_resource type="Texture2D" uid="uid://b0sgkpbvl6ta7" path="res://assets/sprites/Osgyth_Headstone_Back.png" id="5_pcsng"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jdob0"]
+size = Vector3(0.765923, 0.867224, 0.143921)
+
+[node name="Osgyths Headstone" type="Node3D"]
+
+[node name="InteractableItem" parent="." instance=ExtResource("1_lvswk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.536235, 0.0317533)
+item_data = ExtResource("2_k11mx")
+
+[node name="ItemSprite" parent="InteractableItem" index="1"]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+billboard = 0
+texture = ExtResource("3_15lqo")
+
+[node name="front" type="Sprite3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.438001, 0)
+double_sided = false
+texture = ExtResource("4_25y6n")
+
+[node name="back" type="Sprite3D" parent="."]
+transform = Transform3D(-0.2, 0, -3.01992e-08, 0, 0.2, 0, 3.01992e-08, 0, -0.2, 0, 0.438001, 0)
+double_sided = false
+texture = ExtResource("5_pcsng")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000110626, 0.487613, -0.00238037)
+shape = SubResource("BoxShape3D_jdob0")
+
+[editable path="InteractableItem"]

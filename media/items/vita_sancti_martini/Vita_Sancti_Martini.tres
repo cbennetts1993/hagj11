@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://l2i41b1ybw8s"]
+
+[ext_resource type="Script" uid="uid://dseg4i2kndpkd" path="res://scripts/item/item_data.gd" id="1_ct23p"]
+[ext_resource type="Texture2D" uid="uid://dvuyy5hvpjw88" path="res://assets/sprites/items/Vita_Sancti_Martini.png" id="2_g6ow0"]
+
+[resource]
+script = ExtResource("1_ct23p")
+sprite = ExtResource("2_g6ow0")
+name = &"Vita Sancti Martini"
+display_color = Color(1, 1, 1, 1)
+description = "Thought to have been a familiar text to the anonymous monk behind Vita Sancti Cuthberti, and in turn the Lindisfarne Gospels."
+world_scale = Vector3(0.1, 0.1, 0.1)
+metadata/_custom_type_script = "uid://dseg4i2kndpkd"

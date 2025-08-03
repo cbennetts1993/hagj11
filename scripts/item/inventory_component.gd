@@ -6,10 +6,7 @@ signal item_dropped(item: ItemData)
 
 @export var item_name_label: Label
 @export var item_description_label: Label
-
-@export var left_icon: TextureRect
-@export var centre_icon: TextureRect
-@export var right_icon: TextureRect
+@export var item_icon: TextureRect
 
 var inventory: Array[ItemData]
 
@@ -31,12 +28,11 @@ func get_item_from_index(idx: int) -> ItemData:
 func has_item(item: ItemData) -> bool:
 	return inventory.has(item)
 
-func get_focus_array(range: int = 1) -> Array[ItemData]:
-	var array: Array[ItemData] = []
-	for x in range(-range, range):
-		var item = get_item_from_index( focus + x )
-		array.append(item)
-	return array
+
+func _ready():
+	self.updated.connect(set_focus_details)
+	self.updated.connect(calculate_score)
+	set_focus_details()
 
 ##
 ## Carousel function
@@ -60,12 +56,6 @@ func decrease_focus() -> void:
 	updated.emit()
 
 
-func _ready():
-	updated.connect(set_left_icon)
-	updated.connect(set_centre_icon)
-	updated.connect(set_right_icon)
-
-
 func _on_throw_pressed():
 	var item = get_focus_item()
 	if not item: return
@@ -75,22 +65,18 @@ func _on_throw_pressed():
 
 
 func set_focus_details(item: ItemData = get_focus_item()) -> void:
-	if not item: return
+	if not item: 
+		item_name_label.text = ""
+		item_description_label.text = ""
+		item_icon.texture = null
+		return
+	
 	item_name_label.text = get_focus_item().name
 	item_description_label.text = get_focus_item().description
+	item_icon.texture = item.sprite
 
 
-func set_left_icon():
-	if inventory.is_empty(): return
-	var item = get_item_from_index(focus - 1)
-	left_icon.texture = item.sprite
-
-func set_centre_icon():
-	if inventory.is_empty(): return
-	var item = get_item_from_index(focus)
-	centre_icon.texture = item.sprite
-
-func set_right_icon():
-	if inventory.is_empty(): return
-	var item = get_item_from_index(focus + 1)
-	centre_icon.texture = item.sprite
+func calculate_score() -> int:
+	var score = Global.compare_relic_array(inventory)
+	Global.update_player_score(score)
+	return score

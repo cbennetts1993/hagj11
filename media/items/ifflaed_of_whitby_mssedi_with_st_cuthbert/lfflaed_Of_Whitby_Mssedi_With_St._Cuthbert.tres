@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_l25g7")
 sprite = ExtResource("2_eitv8")
-name = &"lfflaed Of Whitby Mssedi With St. Cuthbert"
+name = &"Ælfflaed Of Whitby Mæssedæi With St. Cuthbert"
 display_color = Color(1, 1, 1, 1)
-description = "Accounts of St. Princess Abbess Ifflaed attending a banquet with St. cuthbert."
+description = "Accounts of St. Princess Abbess ÆIfflaed sharing a banquet with St. Cuthbert at Lindisfarne. "
 world_scale = Vector3(0.1, 0.1, 0.1)
 metadata/_custom_type_script = "uid://dseg4i2kndpkd"

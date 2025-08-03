@@ -9,8 +9,15 @@ extends State
 @export var idle_state: State
 @export var follow_state: State
 
+@export var animation_name: String = "idle"
+@export var animation_front: AnimatedSprite3D
+@export var animation_back: AnimatedSprite3D
+
 func enter(from: State):
 	navigation.target_position = blackboard.investigate_location
+	
+	animation_front.animation = animation_name
+	animation_back.animation = animation_name
 
 
 func update(delta: float) -> void:

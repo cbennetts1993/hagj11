@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://i3llnay1gb7d"]
+
+[ext_resource type="PackedScene" uid="uid://dkmcd0qgofq1y" path="res://media/house_props/house_middle.tscn" id="1_p72xf"]
+[ext_resource type="PackedScene" uid="uid://ccuv76ex0wugg" path="res://media/house_props/house_corner_l.tscn" id="2_lveiq"]
+[ext_resource type="PackedScene" uid="uid://d6m5d2s7tt5k" path="res://media/house_props/house_corner_r.tscn" id="3_6tntv"]
+[ext_resource type="PackedScene" uid="uid://cirff5lrispai" path="res://media/house_props/house_middle_door.tscn" id="4_2ke5m"]
+[ext_resource type="Texture2D" uid="uid://dcw1mh41ny2lb" path="res://assets/textures/Dirt_Floor_03.08.25.png" id="5_lveiq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6tntv"]
+albedo_texture = ExtResource("5_lveiq")
+uv1_scale = Vector3(4, 4, 4)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2ke5m"]
+material = SubResource("StandardMaterial3D_6tntv")
+size = Vector2(8, 20)
+
+[node name="building_large" type="Node3D"]
+
+[node name="house_middle" parent="." instance=ExtResource("1_p72xf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.151449, 0)
+
+[node name="house_middle2" parent="." instance=ExtResource("1_p72xf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.151449, -3.9981)
+
+[node name="house_middle3" parent="." instance=ExtResource("1_p72xf")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.3935, 0.151449, -3.9981)
+
+[node name="house_middle4" parent="." instance=ExtResource("1_p72xf")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.3935, 0.151449, -8.0188)
+
+[node name="house_corner_l" parent="." instance=ExtResource("2_lveiq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0684477, 0, 4.06054)
+
+[node name="house_corner_r" parent="." instance=ExtResource("3_6tntv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6343, 0, 3.91646)
+
+[node name="house_corner_l2" parent="." instance=ExtResource("2_lveiq")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.29778, 0, -12.0601)
+
+[node name="house_corner_r2" parent="." instance=ExtResource("3_6tntv")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.275504, 0, -11.9289)
+
+[node name="house_middle_door" parent="." instance=ExtResource("4_2ke5m")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.37792, 0.151449, 0)
+
+[node name="house_middle_door2" parent="." instance=ExtResource("4_2ke5m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00142008, 0.151449, -8.03114)
+
+[node name="floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.27518, -0.0790144, -3.928)
+mesh = SubResource("PlaneMesh_2ke5m")

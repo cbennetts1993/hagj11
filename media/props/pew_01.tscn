@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://camwx0ltu24kn"]
+
+[ext_resource type="PackedScene" uid="uid://cgmd8ub5yjdtv" path="res://assets/models/pew_01.blend" id="1_8ja7l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_002m2"]
+size = Vector3(0.611755, 0.527893, 2.38187)
+
+[node name="pew_01" instance=ExtResource("1_8ja7l")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000640869, 0.290863, -0.0111237)
+shape = SubResource("BoxShape3D_002m2")

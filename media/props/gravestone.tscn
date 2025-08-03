@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjrjbxgsox0sn"]
+
+[ext_resource type="Texture2D" uid="uid://c7kw71k7kw6yy" path="res://assets/sprites/Paupers_Headstone_Front.png" id="1_4t3ha"]
+[ext_resource type="Texture2D" uid="uid://di4p5sxqhpw08" path="res://assets/sprites/Paupers_Headstone_Back.png" id="2_ls0q0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jdob0"]
+size = Vector3(0.765923, 0.867224, 0.143921)
+
+[node name="Osgyths Headstone" type="Node3D"]
+
+[node name="front" type="Sprite3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.438001, 0)
+double_sided = false
+texture = ExtResource("1_4t3ha")
+
+[node name="back" type="Sprite3D" parent="."]
+transform = Transform3D(-0.2, 0, -3.01992e-08, 0, 0.2, 0, 3.01992e-08, 0, -0.2, 0, 0.438001, 0)
+double_sided = false
+texture = ExtResource("2_ls0q0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000110626, 0.487613, -0.00238037)
+shape = SubResource("BoxShape3D_jdob0")

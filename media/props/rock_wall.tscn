@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0j73d52kqd8j"]
+
+[ext_resource type="PackedScene" uid="uid://cb6cx42qdpbak" path="res://assets/models/rock_wall.blend" id="1_b6xw2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_84u48"]
+size = Vector3(0.593994, 0.638184, 2.96094)
+
+[node name="rock_wall" instance=ExtResource("1_b6xw2")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="96"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(0.996199, 0, -0.0871036, 0, 1, 0, 0.0871036, 0, 0.996199, 0.12174, 0.180908, -0.242044)
+shape = SubResource("BoxShape3D_84u48")

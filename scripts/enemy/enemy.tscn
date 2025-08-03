@@ -1,14 +1,21 @@
-[gd_scene load_steps=43 format=3 uid="uid://b41ytihj2ky0p"]
+[gd_scene load_steps=48 format=3 uid="uid://b41ytihj2ky0p"]
 
 [ext_resource type="Script" uid="uid://cbmptno52lpj3" path="res://scripts/enemy/enemy.gd" id="1_otvh8"]
-[ext_resource type="Texture2D" uid="uid://cnwi1aty3t0fo" path="res://assets/REMOVE/Viking.webp" id="2_5bwyd"]
+[ext_resource type="Texture2D" uid="uid://boclhmi80mkwy" path="res://assets/sprites/vikings/Viking_Front_Arm.png" id="2_825ea"]
+[ext_resource type="Texture2D" uid="uid://b6vmu3c4gukk5" path="res://assets/sprites/vikings/Viking_Front_Arm_-_Down.png" id="2_a154k"]
 [ext_resource type="Script" uid="uid://bgclr5b06nrag" path="res://scripts/state/StateMachine.gd" id="2_uwy72"]
+[ext_resource type="Texture2D" uid="uid://brivl0ql811ss" path="res://assets/sprites/vikings/V._-_Arms_Idle_Rear.png" id="3_ah5ti"]
 [ext_resource type="Script" uid="uid://bnfngf7xp2uco" path="res://scripts/enemy/data.gd" id="3_aijuq"]
 [ext_resource type="Script" uid="uid://bhj0st6dmq61i" path="res://scripts/enemy/states/Idle.gd" id="3_x7lgl"]
+[ext_resource type="Texture2D" uid="uid://d1hop0alhn3p5" path="res://assets/sprites/vikings/V._-_LLU_Idle_Rear.png" id="4_825ea"]
+[ext_resource type="Texture2D" uid="uid://c1m8gb7w0rse8" path="res://assets/sprites/vikings/Viking_Front_Bod.png" id="4_ah5ti"]
 [ext_resource type="Script" uid="uid://cdlbo6knk1juo" path="res://scripts/enemy/states/Patrol.gd" id="4_su13s"]
 [ext_resource type="Script" uid="uid://bjf5ygse8a66o" path="res://scripts/components/move_component.gd" id="4_x7lgl"]
+[ext_resource type="Texture2D" uid="uid://x8nr0gyurs42" path="res://assets/sprites/vikings/Idle_SHuffle_.png" id="5_aesn3"]
+[ext_resource type="Texture2D" uid="uid://bruosi8ky6dub" path="res://assets/sprites/vikings/V._-_RLU_Walking_Rear.png" id="5_litkc"]
 [ext_resource type="PackedScene" uid="uid://dgj8pixxegnhw" path="res://scripts/components/senses/vision_component.tscn" id="5_uwy72"]
 [ext_resource type="Script" uid="uid://tmxesv8kg4q2" path="res://scripts/enemy/states/Wander.gd" id="5_x7lgl"]
+[ext_resource type="Texture2D" uid="uid://cl572rm7e0bti" path="res://assets/sprites/vikings/V._-_LLU_Walking_Rear.png" id="7_aesn3"]
 [ext_resource type="Script" uid="uid://dkkpifsllj6ru" path="res://scripts/enemy/states/Follow.gd" id="7_hhlal"]
 [ext_resource type="Script" uid="uid://bskldlbnanqgw" path="res://scripts/enemy/states/Attack.gd" id="8_escsu"]
 [ext_resource type="Script" uid="uid://cl4v3edg31e4b" path="res://scripts/enemy/states/Stunned.gd" id="9_escsu"]
@@ -16,31 +23,64 @@
 [ext_resource type="PackedScene" uid="uid://dafxdtgaudq7s" path="res://scripts/components/hitshapes/damage_shape.tscn" id="11_p5k8n"]
 [ext_resource type="PackedScene" uid="uid://7l8f2mnhn2of" path="res://scripts/components/hitshapes/hit_box.tscn" id="12_wohgq"]
 [ext_resource type="PackedScene" uid="uid://buka3k8cuu2s" path="res://scripts/components/senses/sound_detector.tscn" id="14_aijuq"]
+[ext_resource type="Texture2D" uid="uid://cj2brrciceyc5" path="res://assets/sprites/vikings/V._-_RLU_Idle_Rear.png" id="15_825ea"]
 [ext_resource type="Texture2D" uid="uid://bu2axkd6bsadu" path="res://assets/particles/star_stunned.png" id="17_gwjr5"]
-[ext_resource type="AudioStream" uid="uid://m7p0f5dkwktr" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 1.wav" id="18_aioj4"]
-[ext_resource type="AudioStream" uid="uid://cyb5xsa4juuba" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 2.wav" id="19_wxuus"]
-[ext_resource type="AudioStream" uid="uid://t7ige8s0ptyo" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 3.wav" id="20_ah5ti"]
-[ext_resource type="AudioStream" uid="uid://dqxidcw0sjw58" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 4.wav" id="21_825ea"]
-[ext_resource type="AudioStream" uid="uid://c3d7o8dsblhcb" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 5.wav" id="22_a154k"]
-[ext_resource type="AudioStream" uid="uid://bpxp80p7lconk" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 6.wav" id="23_litkc"]
-[ext_resource type="AudioStream" uid="uid://cqi8ioiqqlif2" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 7.wav" id="24_aesn3"]
-[ext_resource type="AudioStream" uid="uid://dp2vs0rhaymji" path="res://assets/sound_fx/NA_Character Footsteps (Dirt & Grass) - Pack 1/Walk/Grass/GRASS - Walk short 8.wav" id="25_d8f5o"]
+[ext_resource type="Texture2D" uid="uid://cu4d3ypats4t3" path="res://assets/sprites/vikings/V._-_Axe_Up_Rear.png" id="18_aesn3"]
+[ext_resource type="Texture2D" uid="uid://chopglqcwj4ib" path="res://assets/sprites/vikings/V._-_Axe_Down_Rear.png" id="19_ah5ti"]
+[ext_resource type="AudioStream" uid="uid://c76wql5nc62nk" path="res://assets/sound_fx/Sword Attack 1.wav" id="24_wxuus"]
+[ext_resource type="AudioStream" uid="uid://b71ecevshk2pw" path="res://assets/sound_fx/Sword Attack 2.wav" id="25_ah5ti"]
+[ext_resource type="AudioStream" uid="uid://cck0nmfp8ey3x" path="res://assets/sound_fx/Sword Attack 3.wav" id="26_825ea"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_su13s"]
 radius = 0.4
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hhlal"]
-atlas = ExtResource("2_5bwyd")
-region = Rect2(0, 0, 474, 547)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_escsu"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_wxuus"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hhlal")
+"texture": ExtResource("4_ah5ti")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ah5ti")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_aesn3")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_21wb1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_825ea")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_litkc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_825ea")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_aesn3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_825ea")
+}],
+"loop": true,
+"name": &"walk",
 "speed": 5.0
 }]
 
@@ -71,6 +111,42 @@ tracks/1/keys = {
 "update": 1,
 "values": [false, true, false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("weapon:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.566667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("2_825ea"), ExtResource("2_a154k")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("weapon_back:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.566667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("18_aesn3"), ExtResource("19_ah5ti")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_escsu"]
 length = 0.001
@@ -98,6 +174,54 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("stun_fx:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("weapon_back:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_ah5ti")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("weapon:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_a154k")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_wohgq"]
 resource_name = "Stunned"
@@ -115,6 +239,18 @@ tracks/0/keys = {
 "args": [false],
 "method": &"restart"
 }]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("stun_fx:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ipal1"]
@@ -173,16 +309,12 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_gwjr5")
 size = Vector2(0.2, 0.2)
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_21wb1"]
-streams_count = 8
-stream_0/stream = ExtResource("18_aioj4")
-stream_1/stream = ExtResource("19_wxuus")
-stream_2/stream = ExtResource("20_ah5ti")
-stream_3/stream = ExtResource("21_825ea")
-stream_4/stream = ExtResource("22_a154k")
-stream_5/stream = ExtResource("23_litkc")
-stream_6/stream = ExtResource("24_aesn3")
-stream_7/stream = ExtResource("25_d8f5o")
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wxuus"]
+playback_mode = 1
+streams_count = 3
+stream_0/stream = ExtResource("26_825ea")
+stream_1/stream = ExtResource("25_ah5ti")
+stream_2/stream = ExtResource("24_wxuus")
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_otvh8")
@@ -192,10 +324,37 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 rotation_edit_mode = 2
 shape = SubResource("CapsuleShape3D_su13s")
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.0911385, 1, 0)
+[node name="weapon" type="Sprite3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.091, 1, 0.01)
+layers = 2
 shaded = true
-sprite_frames = SubResource("SpriteFrames_escsu")
+double_sided = false
+texture = ExtResource("2_a154k")
+
+[node name="weapon_back" type="Sprite3D" parent="."]
+transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, -0.091, 1, 0.01)
+layers = 2
+shaded = true
+double_sided = false
+texture = ExtResource("3_ah5ti")
+
+[node name="front" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.0911385, 1, 0)
+layers = 2
+shaded = true
+double_sided = false
+sprite_frames = SubResource("SpriteFrames_wxuus")
+animation = &"walk"
+frame_progress = 0.0859327
+
+[node name="back" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(-0.1, 0, -1.50996e-08, 0, 0.1, 0, 1.50996e-08, 0, -0.1, -0.0911385, 1, 0)
+layers = 2
+shaded = true
+double_sided = false
+sprite_frames = SubResource("SpriteFrames_21wb1")
+animation = &"walk"
+frame_progress = 0.0929235
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
@@ -207,7 +366,7 @@ script = ExtResource("2_uwy72")
 base_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://bgclr5b06nrag"
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("blackboard", "vision", "movement", "wander_timer", "wander_state", "follow_state", "patrol_state", "investigate_state", "state_machine")]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("blackboard", "vision", "movement", "wander_timer", "wander_state", "follow_state", "patrol_state", "investigate_state", "animation_front", "animation_back", "state_machine")]
 script = ExtResource("3_x7lgl")
 blackboard = NodePath("../../Blackboard")
 vision = NodePath("../../VisionComponent")
@@ -217,14 +376,17 @@ wander_state = NodePath("../Wander")
 follow_state = NodePath("../Follow")
 patrol_state = NodePath("../Patrol")
 investigate_state = NodePath("../Investigate")
+animation_front = NodePath("../../front")
+animation_back = NodePath("../../back")
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://ojl4g8pguu4x"
 
 [node name="IdleTimer" type="Timer" parent="StateMachine/Idle"]
 wait_time = 2.5
+one_shot = true
 autostart = true
 
-[node name="Patrol" type="Node" parent="StateMachine" node_paths=PackedStringArray("blackboard", "vision", "movement", "navigation", "idle_state", "follow_state", "investigate_state", "state_machine")]
+[node name="Patrol" type="Node" parent="StateMachine" node_paths=PackedStringArray("blackboard", "vision", "movement", "navigation", "idle_state", "follow_state", "investigate_state", "animation_front", "animation_back", "state_machine")]
 script = ExtResource("4_su13s")
 blackboard = NodePath("../../Blackboard")
 vision = NodePath("../../VisionComponent")
@@ -233,26 +395,32 @@ navigation = NodePath("../../NavigationAgent3D")
 idle_state = NodePath("../Idle")
 follow_state = NodePath("../Follow")
 investigate_state = NodePath("../Investigate")
+animation_name = "walk"
+animation_front = NodePath("../../front")
+animation_back = NodePath("../../back")
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://ojl4g8pguu4x"
 
-[node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("blackboard", "vision", "movement", "navigation", "leash_position", "idle_state", "follow_state", "investigate_state", "state_machine")]
+[node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("blackboard", "vision", "movement", "navigation", "leash_position", "idle_state", "follow_state", "investigate_state", "animation_front", "animation_back", "state_machine")]
 script = ExtResource("5_x7lgl")
 blackboard = NodePath("../../Blackboard")
 vision = NodePath("../../VisionComponent")
 movement = NodePath("../../MovementComponent")
 navigation = NodePath("../../NavigationAgent3D")
-wander_radius = 5.0
+wander_radius = 10.0
 leash_position = NodePath("LeashPoint3D")
 idle_state = NodePath("../Idle")
 follow_state = NodePath("../Follow")
 investigate_state = NodePath("../Investigate")
+animation_name = "walk"
+animation_front = NodePath("../../front")
+animation_back = NodePath("../../back")
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://ojl4g8pguu4x"
 
 [node name="LeashPoint3D" type="Marker3D" parent="StateMachine/Wander"]
 
-[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("blackboard", "vision", "movement", "navigation", "investigate_state", "attack_state", "state_machine")]
+[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("blackboard", "vision", "movement", "navigation", "investigate_state", "attack_state", "animation_front", "animation_back", "state_machine")]
 script = ExtResource("7_hhlal")
 blackboard = NodePath("../../Blackboard")
 vision = NodePath("../../VisionComponent")
@@ -261,10 +429,13 @@ navigation = NodePath("../../NavigationAgent3D")
 investigate_state = NodePath("../Investigate")
 attack_state = NodePath("../Attack")
 attack_range = 1.5
+animation_name = "walk"
+animation_front = NodePath("../../front")
+animation_back = NodePath("../../back")
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://ojl4g8pguu4x"
 
-[node name="Investigate" type="Node" parent="StateMachine" node_paths=PackedStringArray("blackboard", "vision", "movement", "navigation", "idle_state", "follow_state", "state_machine")]
+[node name="Investigate" type="Node" parent="StateMachine" node_paths=PackedStringArray("blackboard", "vision", "movement", "navigation", "idle_state", "follow_state", "animation_front", "animation_back", "state_machine")]
 script = ExtResource("9_qcsh8")
 blackboard = NodePath("../../Blackboard")
 vision = NodePath("../../VisionComponent")
@@ -272,21 +443,28 @@ movement = NodePath("../../MovementComponent")
 navigation = NodePath("../../NavigationAgent3D")
 idle_state = NodePath("../Idle")
 follow_state = NodePath("../Follow")
+animation_name = "walk"
+animation_front = NodePath("../../front")
+animation_back = NodePath("../../back")
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://ojl4g8pguu4x"
 
-[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "state_machine")]
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "animation_front", "animation_back", "state_machine")]
 script = ExtResource("8_escsu")
 animation = &"Attack"
 attack_speed = 0.5
 animation_player = NodePath("../../AnimationPlayer")
+animation_front = NodePath("../../front")
+animation_back = NodePath("../../back")
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://ojl4g8pguu4x"
 
-[node name="Stunned" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "state_machine")]
+[node name="Stunned" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "animation_front", "animation_back", "state_machine")]
 script = ExtResource("9_escsu")
 animation = &"Stunned"
 animation_player = NodePath("../../AnimationPlayer")
+animation_front = NodePath("../../front")
+animation_back = NodePath("../../back")
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://ojl4g8pguu4x"
 
@@ -338,8 +516,8 @@ process_material = SubResource("ParticleProcessMaterial_axpba")
 draw_pass_1 = SubResource("QuadMesh_c3oii")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = SubResource("AudioStreamRandomizer_21wb1")
-volume_db = -20.0
+stream = SubResource("AudioStreamRandomizer_wxuus")
+volume_db = 1.0
 
 [connection signal="got_hit" from="HitBox" to="StateMachine/Stunned" method="stun"]
 [connection signal="sound_detected" from="SoundDetector" to="Blackboard" method="set_investigation_position"]

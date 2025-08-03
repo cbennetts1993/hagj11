@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://biw6enjh34cpg"]
+
+[ext_resource type="Script" uid="uid://dseg4i2kndpkd" path="res://scripts/item/item_data.gd" id="1_n4m6d"]
+[ext_resource type="Texture2D" uid="uid://c5qwheq06djxp" path="res://assets/sprites/items/Lindisfarne_Gospels_ChiRo_03.08.25.png" id="2_fpmhr"]
+
+[resource]
+script = ExtResource("1_n4m6d")
+sprite = ExtResource("2_fpmhr")
+name = &"Lindisfarne Gospels Chi Ro"
+display_color = Color(1, 1, 1, 1)
+description = "Prized for their Insular art illumination, including the ‘Chi Ro’ symbol. Made at Lindisfarne in honour of St. Cuthbert, c.715-720 AD."
+world_scale = Vector3(0.1, 0.1, 0.1)
+metadata/_custom_type_script = "uid://dseg4i2kndpkd"

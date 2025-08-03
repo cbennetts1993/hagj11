@@ -14,6 +14,10 @@ func set_mouse_mode(mode: Input.MouseMode):
 	Input.mouse_mode = mode
 
 
+func _ready() -> void:
+	tree_exiting.connect(release_mouse)
+
+
 func _process(delta: float) -> void:
 	if is_interact_just_pressed():
 		interact_pressed.emit()
@@ -54,3 +58,7 @@ func is_scroll_up_just_pressed() -> bool:
 
 func is_scroll_down_just_pressed() -> bool:
 	return Input.is_action_just_pressed("inventory_scroll_down")
+
+
+func release_mouse():
+	set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

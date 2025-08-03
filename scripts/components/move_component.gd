@@ -28,8 +28,9 @@ func move(direction: Vector3) -> void:
 
 
 func rotate_to_direction(direction: Vector3) -> void:
-	if direction.length() > 0:
-		body.look_at(body.global_position + direction, Vector3.UP, true)
+	if direction.is_equal_approx(Vector3.ZERO): return
+	if direction.length() < 0.01: return
+	body.look_at(body.global_position + direction, Vector3.UP, true)
 
 
 func apply_gravity():

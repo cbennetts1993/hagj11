@@ -2,7 +2,17 @@ class_name StateMachine extends Node
 
 @export var base_state: State
 
+var active: bool = true
+
+func activate() -> void:
+	active = true
+
+func deactivate() -> void:
+	active = false
+
+
 var state: State
+
 
 func change_state(target_state: State) -> void:
 	if state == target_state: return
@@ -24,12 +34,15 @@ func _ready():
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if not active: return
 	state.handle_input(event)
 
 
 func _process(delta: float) -> void:
+	if not active: return
 	state.update(delta)
 
 
 func _physics_process(delta: float) -> void:
+	if not active: return
 	state.physics_update(delta)

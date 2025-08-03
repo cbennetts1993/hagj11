@@ -21,7 +21,7 @@ gradient = SubResource("Gradient_2h3vt")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tuywp"]
 render_priority = 0
 shader = ExtResource("2_0n0gd")
-shader_parameter/texture_scale = Vector2(40, 60)
+shader_parameter/texture_scale = Vector2(20, 40)
 shader_parameter/upper_level_texture = SubResource("GradientTexture1D_yjxuc")
 shader_parameter/upper_threshold = 3.0
 shader_parameter/middle_level_texture = ExtResource("3_tuywp")

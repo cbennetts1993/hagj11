@@ -13,8 +13,15 @@ extends State
 @export var investigate_state: State
 
 
+@export var animation_name: String = "idle"
+@export var animation_front: AnimatedSprite3D
+@export var animation_back: AnimatedSprite3D
+
 func enter(from: State):
 	wander_timer.start()
+	
+	animation_front.animation = animation_name
+	animation_back.animation = animation_name
 
 
 func update(delta: float):
@@ -28,7 +35,7 @@ func update(delta: float):
 		return
 	
 	if wander_timer.is_stopped():
-		if patrol_state:
+		if patrol_state and patrol_state.is_valid():
 			state_machine.change_state(patrol_state)
 			return
 		else:

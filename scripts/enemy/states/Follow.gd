@@ -11,6 +11,14 @@ extends State
 
 @export var attack_range: float = 1.0
 
+@export var animation_name: String = "idle"
+@export var animation_front: AnimatedSprite3D
+@export var animation_back: AnimatedSprite3D
+
+
+func enter(from: State) -> void:
+	animation_front.animation = animation_name
+	animation_back.animation = animation_name
 
 func update(delta: float):
 	if not vision.is_node_visible(blackboard.player):
