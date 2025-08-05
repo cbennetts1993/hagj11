@@ -13,10 +13,12 @@ var inventory: Array[ItemData]
 func add_item(item: ItemData) -> void:
 	inventory.append(item)
 	updated.emit()
+	focus_changed.emit(get_focus_item())
 
 func remove_item(item: ItemData) -> void:
 	inventory.erase(item)
 	updated.emit()
+	focus_changed.emit(get_focus_item())
 
 ## Returns the object at 
 func get_item_from_index(idx: int) -> ItemData:
@@ -45,14 +47,14 @@ func get_focus_item() -> ItemData:
 
 func increase_focus() -> void:
 	focus += 1
-	focus_changed.emit()
 	set_focus_details()
+	focus_changed.emit(get_focus_item())
 	updated.emit()
 
 func decrease_focus() -> void:
 	focus -= 1
-	focus_changed.emit()
 	set_focus_details()
+	focus_changed.emit(get_focus_item())
 	updated.emit()
 
 

@@ -1,22 +1,39 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjrjbxgsox0sn"]
+[gd_scene load_steps=8 format=3 uid="uid://cjrjbxgsox0sn"]
 
 [ext_resource type="Texture2D" uid="uid://c7kw71k7kw6yy" path="res://assets/sprites/Paupers_Headstone_Front.png" id="1_4t3ha"]
 [ext_resource type="Texture2D" uid="uid://di4p5sxqhpw08" path="res://assets/sprites/Paupers_Headstone_Back.png" id="2_ls0q0"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4t3ha"]
+transparency = 1
+albedo_texture = ExtResource("1_4t3ha")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ls0q0"]
+lightmap_size_hint = Vector2i(7, 7)
+material = SubResource("StandardMaterial3D_4t3ha")
+add_uv2 = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ls0q0"]
+transparency = 1
+albedo_texture = ExtResource("2_ls0q0")
+
+[sub_resource type="QuadMesh" id="QuadMesh_etmqj"]
+lightmap_size_hint = Vector2i(7, 7)
+material = SubResource("StandardMaterial3D_ls0q0")
+flip_faces = true
+add_uv2 = true
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_jdob0"]
 size = Vector3(0.765923, 0.867224, 0.143921)
 
-[node name="Osgyths Headstone" type="Node3D"]
+[node name="Headstone" type="Node3D"]
 
-[node name="front" type="Sprite3D" parent="."]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.438001, 0)
-double_sided = false
-texture = ExtResource("1_4t3ha")
+[node name="front" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43, 0)
+mesh = SubResource("QuadMesh_ls0q0")
 
-[node name="back" type="Sprite3D" parent="."]
-transform = Transform3D(-0.2, 0, -3.01992e-08, 0, 0.2, 0, 3.01992e-08, 0, -0.2, 0, 0.438001, 0)
-double_sided = false
-texture = ExtResource("2_ls0q0")
+[node name="back" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000217915, 0.43528, -0.000655651)
+mesh = SubResource("QuadMesh_etmqj")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 

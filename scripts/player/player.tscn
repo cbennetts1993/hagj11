@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://c60x122x18yca"]
+[gd_scene load_steps=48 format=3 uid="uid://c60x122x18yca"]
 
 [ext_resource type="Script" uid="uid://cmlbdl25wtr5x" path="res://scripts/player/player.gd" id="1_hmply"]
 [ext_resource type="Script" uid="uid://bt2rpuuexcdqw" path="res://scripts/player/view.gd" id="2_b6sy1"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cw32wut8m3x7u" path="res://assets/sprites/Hand_Test_n.png" id="5_j77er"]
 [ext_resource type="Script" uid="uid://cxsnelnl6fr6r" path="res://scripts/player/states/Idle.gd" id="5_ws782"]
 [ext_resource type="Script" uid="uid://bwrnvumrlu58t" path="res://scripts/player/states/Move.gd" id="6_0sm0w"]
+[ext_resource type="Script" uid="uid://34hpp2flshk1" path="res://scripts/player/hold_sprite.gd" id="6_1a147"]
 [ext_resource type="Script" uid="uid://d1xtvn5e2ed2" path="res://scripts/player/states/Falling.gd" id="9_0sm0w"]
 [ext_resource type="PackedScene" uid="uid://7l8f2mnhn2of" path="res://scripts/components/hitshapes/hit_box.tscn" id="14_p83wy"]
 [ext_resource type="Script" uid="uid://cihu6ca2jckx3" path="res://scripts/item/inventory_component.gd" id="14_yj7se"]
@@ -252,6 +253,7 @@ shaded = true
 double_sided = false
 no_depth_test = true
 texture = ExtResource("4_g0bbo")
+script = ExtResource("6_1a147")
 
 [node name="ProjectileSpawner" type="Node3D" parent="View" node_paths=PackedStringArray("owner_hit_box")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
@@ -502,4 +504,5 @@ justification_flags = 162
 [connection signal="inventory_scrolled_up" from="InputComponent" to="CanvasLayer/InventoryComponent" method="increase_focus"]
 [connection signal="throw_pressed" from="InputComponent" to="CanvasLayer/InventoryComponent" method="_on_throw_pressed"]
 [connection signal="got_hit" from="HitBox" to="." method="die"]
+[connection signal="focus_changed" from="CanvasLayer/InventoryComponent" to="View/ItemAttachment/Sprite" method="set_current_item"]
 [connection signal="item_dropped" from="CanvasLayer/InventoryComponent" to="View/ProjectileSpawner" method="spawn_from_item"]
