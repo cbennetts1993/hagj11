@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr1d6t1kplcv5"]
+
+[ext_resource type="Texture2D" uid="uid://eqv7em7320b7" path="res://assets/sprites/objects/Frog_Orchid_Dactylhoriza_viridis.png" id="1_o1wqw"]
+[ext_resource type="Texture2D" uid="uid://gapgf5wamwso" path="res://assets/sprites/objects/String_No_Fray.png" id="2_ydrvs"]
+
+[node name="HangingHerbs02" type="Node3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+billboard = 2
+shaded = true
+texture = ExtResource("1_o1wqw")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.365511, 0)
+billboard = 2
+shaded = true
+texture = ExtResource("2_ydrvs")

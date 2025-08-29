@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dugbtg0w73q58"]
+
+[ext_resource type="Texture2D" uid="uid://crxmjq6u16yt8" path="res://assets/sprites/monk/Dead_Monk_-_Brunette_02.png" id="1_6arlw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6arlw"]
+size = Vector3(0.543457, 1.8208, 0.201172)
+
+[node name="Dead_Monk" type="StaticBody3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, 0.203756, 0)
+shaded = true
+texture = ExtResource("1_6arlw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.0104987, 0.214871, 0.00878906)
+shape = SubResource("BoxShape3D_6arlw")

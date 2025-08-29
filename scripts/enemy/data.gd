@@ -6,7 +6,7 @@ class_name Blackboard extends Node
 
 var player: Player
 
-func set_player(new_player: Player):
+func set_player(new_player: Player) -> void:
 	player = new_player
 
 
@@ -17,7 +17,7 @@ func set_player(new_player: Player):
 var investigate_location: Vector3: set = set_investigation_position
 var has_been_investigated: bool = true
 
-func set_investigation_position(at_position: Vector3):
+func set_investigation_position(at_position: Vector3)-> void:
 	investigate_location = at_position
 	has_been_investigated = false
 

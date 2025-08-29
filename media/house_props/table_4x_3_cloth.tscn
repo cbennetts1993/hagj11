@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bchtagbdjgixl"]
+
+[ext_resource type="PackedScene" uid="uid://ds75qa1fm03qo" path="res://assets/models/table_4x3_cloth.blend" id="1_72acb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_72acb"]
+size = Vector3(3.95435, 0.1, 2.62286)
+
+[node name="table_4x3_cloth" instance=ExtResource("1_72acb")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="6"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00102615, 1.01893, 0.00570679)
+shape = SubResource("BoxShape3D_72acb")

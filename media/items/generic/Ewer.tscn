@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://brqsjtnh5yes3"]
+
+[ext_resource type="Script" uid="uid://cykwq0xgkdj3s" path="res://scripts/item/ItemComponent.gd" id="1_1js3l"]
+[ext_resource type="Resource" uid="uid://cgdjebbmd4kx0" path="res://media/items/generic/Ewer.tres" id="2_6nfgj"]
+[ext_resource type="Texture2D" uid="uid://c8n2xl8ix0gfe" path="res://assets/sprites/objects/Vessels_-_Ewer_-_06.08.25.png" id="3_cfkrc"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_50f5s"]
+radius = 0.2
+
+[node name="InteractableItem" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_1js3l")
+item_data = ExtResource("2_6nfgj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_50f5s")
+
+[node name="ItemSprite" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+billboard = 2
+texture = ExtResource("3_cfkrc")
+
+[connection signal="interacted" from="." to="." method="queue_free"]

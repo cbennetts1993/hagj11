@@ -23,7 +23,7 @@ func remove_item(item: ItemData) -> void:
 ## Returns the object at 
 func get_item_from_index(idx: int) -> ItemData:
 	if inventory.is_empty(): return null
-	var idx_mod = idx % inventory.size()
+	var idx_mod: int = idx % inventory.size()
 	return inventory.get(idx_mod)
 
 
@@ -31,7 +31,7 @@ func has_item(item: ItemData) -> bool:
 	return inventory.has(item)
 
 
-func _ready():
+func _ready() -> void:
 	self.updated.connect(set_focus_details)
 	self.updated.connect(calculate_score)
 	set_focus_details()
@@ -58,8 +58,8 @@ func decrease_focus() -> void:
 	updated.emit()
 
 
-func _on_throw_pressed():
-	var item = get_focus_item()
+func _on_throw_pressed() -> void:
+	var item: = get_focus_item()
 	if not item: return
 	
 	remove_item(item)
@@ -79,6 +79,6 @@ func set_focus_details(item: ItemData = get_focus_item()) -> void:
 
 
 func calculate_score() -> int:
-	var score = Global.compare_relic_array(inventory)
+	var score: int = Global.compare_relic_array(inventory)
 	Global.update_player_score(score)
 	return score

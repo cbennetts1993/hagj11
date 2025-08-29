@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_bq5oh")
 sprite = ExtResource("2_efhxu")
-name = &"Name Stone"
+name = &"Name Stane"
 display_color = Color(1, 1, 1, 1)
 description = "A beryl jewel that was set into the gravemarker of Osgyth."
 world_scale = Vector3(0.1, 0.1, 0.1)

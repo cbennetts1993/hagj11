@@ -5,9 +5,11 @@ class_name StateMachine extends Node
 var active: bool = true
 
 func activate() -> void:
+	self.process_mode = Node.PROCESS_MODE_INHERIT
 	active = true
 
 func deactivate() -> void:
+	self.process_mode = Node.PROCESS_MODE_DISABLED
 	active = false
 
 
@@ -26,7 +28,7 @@ func change_state(target_state: State) -> void:
 	state = target_state
 
 
-func _ready():
+func _ready() -> void:
 	for child in get_children():
 		if child is State:
 			child.state_machine = self

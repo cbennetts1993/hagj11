@@ -1,0 +1,56 @@
+[gd_scene load_steps=11 format=3 uid="uid://rm4cf2v6cj8"]
+
+[ext_resource type="PackedScene" uid="uid://bv03oqmyll885" path="res://scripts/item/world_item.tscn" id="1_2unrd"]
+[ext_resource type="Resource" uid="uid://b8ypdlnf1iv7h" path="res://media/items/name_stone/Name_Stone.tres" id="2_lqfbh"]
+[ext_resource type="Texture2D" uid="uid://ry54hd7nmnb4" path="res://assets/sprites/items/Name_Stane.png" id="3_lbks1"]
+[ext_resource type="Texture2D" uid="uid://chddb4nif4frw" path="res://assets/sprites/Osgyth_Headstone_Front.png" id="4_yljyh"]
+[ext_resource type="Texture2D" uid="uid://b0sgkpbvl6ta7" path="res://assets/sprites/Osgyth_Headstone_Back.png" id="5_br2ps"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jdob0"]
+size = Vector3(0.765923, 0.867224, 0.143921)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lvswk"]
+transparency = 1
+albedo_texture = ExtResource("4_yljyh")
+
+[sub_resource type="QuadMesh" id="QuadMesh_k11mx"]
+lightmap_size_hint = Vector2i(7, 7)
+material = SubResource("StandardMaterial3D_lvswk")
+add_uv2 = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_15lqo"]
+transparency = 1
+albedo_texture = ExtResource("5_br2ps")
+
+[sub_resource type="QuadMesh" id="QuadMesh_25y6n"]
+lightmap_size_hint = Vector2i(7, 7)
+material = SubResource("StandardMaterial3D_15lqo")
+flip_faces = true
+add_uv2 = true
+
+[node name="Osgyths Headstone" type="Node3D"]
+
+[node name="InteractableItem" parent="." instance=ExtResource("1_2unrd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.525968, 0.0188998)
+item_data = ExtResource("2_lqfbh")
+
+[node name="ItemSprite" parent="InteractableItem" index="1"]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+billboard = 0
+texture = ExtResource("3_lbks1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000110626, 0.487613, -0.00238037)
+shape = SubResource("BoxShape3D_jdob0")
+
+[node name="front" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43, 0)
+mesh = SubResource("QuadMesh_k11mx")
+
+[node name="back2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000217915, 0.43528, -0.000655651)
+mesh = SubResource("QuadMesh_25y6n")
+
+[editable path="InteractableItem"]

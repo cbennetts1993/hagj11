@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="HAGJ11"
+config/name="Lindisfarne"
+config/description="Lindisfarne is a game for HAGJ11. You will play as the Holy Isle’s Bishop Hygebald during the Viking raid on Lindisfarne abbey in 793 AD which started the \"Viking Age\". Can you salvage the scrolls and save yourself?"
 config/tags=PackedStringArray("gamejam")
 run/main_scene="uid://1bohvsgxrwoc"
 config/features=PackedStringArray("4.4", "Forward Plus")
@@ -21,6 +22,11 @@ config/icon="res://icon.svg"
 Global="*res://scripts/globals/global.gd"
 SceneManager="*res://scripts/globals/scene_manager.tscn"
 
+[debug]
+
+gdscript/warnings/unused_signal=0
+gdscript/warnings/untyped_declaration=1
+
 [display]
 
 window/stretch/mode="canvas_items"
@@ -29,6 +35,7 @@ mouse_cursor/custom_image="uid://d2dgx0qwwcxut"
 [global_group]
 
 Player="Reference to the player"
+Enemy="the eneies in the scene"
 
 [input]
 
@@ -114,3 +121,7 @@ inventory_scroll_down={
 3d_physics/layer_3="Interact"
 3d_physics/layer_4="Damage"
 3d_physics/layer_5="Sound"
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true

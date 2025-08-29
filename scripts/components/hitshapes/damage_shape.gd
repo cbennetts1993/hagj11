@@ -2,7 +2,7 @@ class_name DamageShape extends Area3D
 
 @export var exclude: Array[Area3D]
 
-func _ready():
+func _ready() -> void:
 	self.area_entered.connect(_on_area_entered)
 
 

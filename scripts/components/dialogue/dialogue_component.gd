@@ -3,12 +3,12 @@ class_name DialogueComponent extends Control
 @export var dialogue_label: Label
 @export var default_duration: float = 1.0
 
-func _ready():
+func _ready()-> void:
 	Global.play_dialogue.connect(start_dialogue)
 	hide()
 
 
-func start_dialogue(text: String, duration: float = default_duration) -> void:
+func start_dialogue(text: String, _duration: float = default_duration) -> void:
 	dialogue_label.text = text
 	fade_dialogue()
 	show()
@@ -20,9 +20,9 @@ func dialogue_finished() -> void:
 	hide()
 
 
-func fade_dialogue():
+func fade_dialogue() -> void:
 	self.modulate = Color(Color.WHITE, 0.0)	
-	var tween = create_tween()
+	var tween: = create_tween()
 	tween.tween_property(self, "modulate", Color(Color.WHITE, 1.0), 1.0)
 	
 	await tween.finished

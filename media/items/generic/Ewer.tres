@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://cgdjebbmd4kx0"]
+
+[ext_resource type="Script" uid="uid://dseg4i2kndpkd" path="res://scripts/item/item_data.gd" id="1_1w4yo"]
+[ext_resource type="Texture2D" uid="uid://c8n2xl8ix0gfe" path="res://assets/sprites/objects/Vessels_-_Ewer_-_06.08.25.png" id="2_1w4yo"]
+
+[resource]
+script = ExtResource("1_1w4yo")
+sprite = ExtResource("2_1w4yo")
+name = &"Ewer"
+display_color = Color(1, 1, 1, 1)
+description = "A vessel for holding liquid."
+world_scale = Vector3(0.1, 0.1, 0.1)
+metadata/_custom_type_script = "uid://dseg4i2kndpkd"

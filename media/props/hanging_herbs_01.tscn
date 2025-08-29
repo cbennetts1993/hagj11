@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkbhd4bl1dkgj"]
+
+[ext_resource type="Texture2D" uid="uid://gapgf5wamwso" path="res://assets/sprites/objects/String_No_Fray.png" id="1_1csmq"]
+[ext_resource type="Texture2D" uid="uid://bw10go60an6bx" path="res://assets/sprites/objects/Slender_Thistle_Carduus_tenuiflorus.png" id="1_ln3uq"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+billboard = 2
+shaded = true
+texture = ExtResource("1_ln3uq")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.365511, 0)
+billboard = 2
+shaded = true
+texture = ExtResource("1_1csmq")

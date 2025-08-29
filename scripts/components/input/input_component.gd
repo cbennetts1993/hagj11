@@ -9,7 +9,7 @@ signal inventory_scrolled_down
 @export var mouse_mode: Input.MouseMode:
 	set = set_mouse_mode
 
-func set_mouse_mode(mode: Input.MouseMode):
+func set_mouse_mode(mode: Input.MouseMode) -> void:
 	mouse_mode = mode
 	Input.mouse_mode = mode
 
@@ -18,7 +18,7 @@ func _ready() -> void:
 	tree_exiting.connect(release_mouse)
 
 
-func _process(delta: float) -> void:
+func _unhandled_input(_event: InputEvent) -> void:
 	if is_interact_just_pressed():
 		interact_pressed.emit()
 	
@@ -60,5 +60,5 @@ func is_scroll_down_just_pressed() -> bool:
 	return Input.is_action_just_pressed("inventory_scroll_down")
 
 
-func release_mouse():
+func release_mouse() -> void:
 	set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

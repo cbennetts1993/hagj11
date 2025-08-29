@@ -26,7 +26,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.152124, -3.9981)
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.3935, 0.152124, -3.9981)
 
 [node name="house_corner_l" parent="." instance=ExtResource("2_m65w6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0684477, 0, 4.06054)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0979963, 0.0127624, 4.03891)
 
 [node name="house_corner_r" parent="." instance=ExtResource("3_62ebv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6343, 0, 3.91646)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://b41ytihj2ky0p"]
+[gd_scene load_steps=50 format=3 uid="uid://b41ytihj2ky0p"]
 
 [ext_resource type="Script" uid="uid://cbmptno52lpj3" path="res://scripts/enemy/enemy.gd" id="1_otvh8"]
 [ext_resource type="Texture2D" uid="uid://boclhmi80mkwy" path="res://assets/sprites/vikings/Viking_Front_Arm.png" id="2_825ea"]
@@ -138,7 +138,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/4/path = NodePath("WeaponSwingSFX:playing")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -146,6 +146,57 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("front:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("back:animation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+
+[sub_resource type="Animation" id="Animation_litkc"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("front:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("back:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
 }
 
 [sub_resource type="Animation" id="Animation_escsu"]
@@ -213,7 +264,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/5/path = NodePath("WeaponSwingSFX:playing")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -221,6 +272,30 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("front:animation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"walk"]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("back:animation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"walk"]
 }
 
 [sub_resource type="Animation" id="Animation_wohgq"]
@@ -247,17 +322,70 @@ tracks/1/path = NodePath("stun_fx:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.0333333),
+"times": PackedFloat32Array(0.01),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("front:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("back:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+
+[sub_resource type="Animation" id="Animation_aesn3"]
+resource_name = "Walk"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("front:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"walk"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("back:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"walk"]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ipal1"]
 _data = {
 &"Attack": SubResource("Animation_hhlal"),
+&"Idle": SubResource("Animation_litkc"),
 &"RESET": SubResource("Animation_escsu"),
-&"Stunned": SubResource("Animation_wohgq")
+&"Stunned": SubResource("Animation_wohgq"),
+&"Walk": SubResource("Animation_aesn3")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qcsh8"]
@@ -285,8 +413,8 @@ emission_shape_scale = Vector3(1, 0, 1)
 emission_shape = 6
 emission_ring_axis = Vector3(0, 1, 0)
 emission_ring_height = 1.0
-emission_ring_radius = 0.5
-emission_ring_inner_radius = 0.5
+emission_ring_radius = 0.3
+emission_ring_inner_radius = 0.3
 emission_ring_cone_angle = 90.0
 orbit_velocity_min = 1.5
 orbit_velocity_max = 1.5
@@ -307,7 +435,7 @@ particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_c3oii"]
 material = SubResource("StandardMaterial3D_gwjr5")
-size = Vector2(0.2, 0.2)
+size = Vector2(0.1, 0.1)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wxuus"]
 playback_mode = 1
@@ -316,7 +444,7 @@ stream_0/stream = ExtResource("26_825ea")
 stream_1/stream = ExtResource("25_ah5ti")
 stream_2/stream = ExtResource("24_wxuus")
 
-[node name="Enemy" type="CharacterBody3D"]
+[node name="Enemy" type="CharacterBody3D" groups=["Enemy"]]
 script = ExtResource("1_otvh8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -325,36 +453,35 @@ rotation_edit_mode = 2
 shape = SubResource("CapsuleShape3D_su13s")
 
 [node name="weapon" type="Sprite3D" parent="."]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.091, 1, 0.01)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.091, 1.08378, 0.01)
 layers = 2
 shaded = true
 double_sided = false
 texture = ExtResource("2_a154k")
 
 [node name="weapon_back" type="Sprite3D" parent="."]
-transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, -0.091, 1, 0.01)
+transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, -0.091, 1.08378, 0.01)
 layers = 2
 shaded = true
 double_sided = false
 texture = ExtResource("3_ah5ti")
 
 [node name="front" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.0911385, 1, 0)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.0911385, 1.08378, 0)
 layers = 2
 shaded = true
 double_sided = false
 sprite_frames = SubResource("SpriteFrames_wxuus")
 animation = &"walk"
-frame_progress = 0.0859327
 
 [node name="back" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(-0.1, 0, -1.50996e-08, 0, 0.1, 0, 1.50996e-08, 0, -0.1, -0.0911385, 1, 0)
+transform = Transform3D(-0.1, 0, -1.50996e-08, 0, 0.1, 0, 1.50996e-08, 0, -0.1, -0.0911385, 1.08378, 0)
 layers = 2
 shaded = true
 double_sided = false
 sprite_frames = SubResource("SpriteFrames_21wb1")
 animation = &"walk"
-frame_progress = 0.0929235
+autoplay = "idle"
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
@@ -362,11 +489,12 @@ frame_progress = 0.0929235
 script = ExtResource("3_aijuq")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("base_state")]
+unique_name_in_owner = true
 script = ExtResource("2_uwy72")
 base_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://bgclr5b06nrag"
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("blackboard", "vision", "movement", "wander_timer", "wander_state", "follow_state", "patrol_state", "investigate_state", "animation_front", "animation_back", "state_machine")]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("blackboard", "vision", "movement", "wander_timer", "wander_state", "follow_state", "patrol_state", "investigate_state", "animation_player", "state_machine")]
 script = ExtResource("3_x7lgl")
 blackboard = NodePath("../../Blackboard")
 vision = NodePath("../../VisionComponent")
@@ -376,8 +504,7 @@ wander_state = NodePath("../Wander")
 follow_state = NodePath("../Follow")
 patrol_state = NodePath("../Patrol")
 investigate_state = NodePath("../Investigate")
-animation_front = NodePath("../../front")
-animation_back = NodePath("../../back")
+animation_player = NodePath("../../AnimationPlayer")
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://ojl4g8pguu4x"
 
@@ -386,7 +513,7 @@ wait_time = 2.5
 one_shot = true
 autostart = true
 
-[node name="Patrol" type="Node" parent="StateMachine" node_paths=PackedStringArray("blackboard", "vision", "movement", "navigation", "idle_state", "follow_state", "investigate_state", "animation_front", "animation_back", "state_machine")]
+[node name="Patrol" type="Node" parent="StateMachine" node_paths=PackedStringArray("blackboard", "vision", "movement", "navigation", "idle_state", "follow_state", "investigate_state", "animation_player", "state_machine")]
 script = ExtResource("4_su13s")
 blackboard = NodePath("../../Blackboard")
 vision = NodePath("../../VisionComponent")
@@ -395,13 +522,11 @@ navigation = NodePath("../../NavigationAgent3D")
 idle_state = NodePath("../Idle")
 follow_state = NodePath("../Follow")
 investigate_state = NodePath("../Investigate")
-animation_name = "walk"
-animation_front = NodePath("../../front")
-animation_back = NodePath("../../back")
+animation_player = NodePath("../../AnimationPlayer")
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://ojl4g8pguu4x"
 
-[node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("blackboard", "vision", "movement", "navigation", "leash_position", "idle_state", "follow_state", "investigate_state", "animation_front", "animation_back", "state_machine")]
+[node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("blackboard", "vision", "movement", "navigation", "leash_position", "idle_state", "follow_state", "investigate_state", "animation_player", "state_machine")]
 script = ExtResource("5_x7lgl")
 blackboard = NodePath("../../Blackboard")
 vision = NodePath("../../VisionComponent")
@@ -412,15 +537,13 @@ leash_position = NodePath("LeashPoint3D")
 idle_state = NodePath("../Idle")
 follow_state = NodePath("../Follow")
 investigate_state = NodePath("../Investigate")
-animation_name = "walk"
-animation_front = NodePath("../../front")
-animation_back = NodePath("../../back")
+animation_player = NodePath("../../AnimationPlayer")
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://ojl4g8pguu4x"
 
 [node name="LeashPoint3D" type="Marker3D" parent="StateMachine/Wander"]
 
-[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("blackboard", "vision", "movement", "navigation", "investigate_state", "attack_state", "animation_front", "animation_back", "state_machine")]
+[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("blackboard", "vision", "movement", "navigation", "investigate_state", "attack_state", "animation_player", "state_machine")]
 script = ExtResource("7_hhlal")
 blackboard = NodePath("../../Blackboard")
 vision = NodePath("../../VisionComponent")
@@ -429,13 +552,11 @@ navigation = NodePath("../../NavigationAgent3D")
 investigate_state = NodePath("../Investigate")
 attack_state = NodePath("../Attack")
 attack_range = 1.5
-animation_name = "walk"
-animation_front = NodePath("../../front")
-animation_back = NodePath("../../back")
+animation_player = NodePath("../../AnimationPlayer")
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://ojl4g8pguu4x"
 
-[node name="Investigate" type="Node" parent="StateMachine" node_paths=PackedStringArray("blackboard", "vision", "movement", "navigation", "idle_state", "follow_state", "animation_front", "animation_back", "state_machine")]
+[node name="Investigate" type="Node" parent="StateMachine" node_paths=PackedStringArray("blackboard", "vision", "movement", "navigation", "idle_state", "follow_state", "animation_player", "state_machine")]
 script = ExtResource("9_qcsh8")
 blackboard = NodePath("../../Blackboard")
 vision = NodePath("../../VisionComponent")
@@ -443,38 +564,33 @@ movement = NodePath("../../MovementComponent")
 navigation = NodePath("../../NavigationAgent3D")
 idle_state = NodePath("../Idle")
 follow_state = NodePath("../Follow")
-animation_name = "walk"
-animation_front = NodePath("../../front")
-animation_back = NodePath("../../back")
+animation_player = NodePath("../../AnimationPlayer")
+animation_name = "Walk"
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://ojl4g8pguu4x"
 
-[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "animation_front", "animation_back", "state_machine")]
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "state_machine")]
 script = ExtResource("8_escsu")
-animation = &"Attack"
 attack_speed = 0.5
 animation_player = NodePath("../../AnimationPlayer")
-animation_front = NodePath("../../front")
-animation_back = NodePath("../../back")
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://ojl4g8pguu4x"
 
-[node name="Stunned" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "animation_front", "animation_back", "state_machine")]
+[node name="Stunned" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "state_machine")]
 script = ExtResource("9_escsu")
-animation = &"Stunned"
 animation_player = NodePath("../../AnimationPlayer")
-animation_front = NodePath("../../front")
-animation_back = NodePath("../../back")
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://ojl4g8pguu4x"
 
 [node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("body")]
+unique_name_in_owner = true
 script = ExtResource("4_x7lgl")
 body = NodePath("..")
 movement_speed = 1.75
 metadata/_custom_type_script = "uid://bjf5ygse8a66o"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_ipal1")
 }
@@ -499,23 +615,22 @@ vision_angle = 0.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 shape = SubResource("BoxShape3D_hhlal")
 
-[node name="RayCast3D" parent="VisionComponent" index="1"]
-target_position = Vector3(0, 0, 10)
-
 [node name="SoundDetector" parent="." instance=ExtResource("14_aijuq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="stun_fx" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0407, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0489161, 1.85017, 0)
 emitting = false
 amount = 5
 lifetime = 1.5
 one_shot = true
 explosiveness = 1.0
+draw_order = 3
 process_material = SubResource("ParticleProcessMaterial_axpba")
 draw_pass_1 = SubResource("QuadMesh_c3oii")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="WeaponSwingSFX" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 stream = SubResource("AudioStreamRandomizer_wxuus")
 volume_db = 1.0
 

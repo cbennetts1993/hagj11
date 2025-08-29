@@ -1,5 +1,7 @@
 extends State
 
+@export var enabled: bool = true
+
 @export var blackboard: Blackboard
 
 @export var vision: VisionComponent
@@ -13,9 +15,9 @@ extends State
 @export var follow_state: State
 @export var investigate_state: State
 
-@export var animation_name: String = "idle"
-@export var animation_front: AnimatedSprite3D
-@export var animation_back: AnimatedSprite3D
+@export var animation_player: AnimationPlayer
+@export var animation_name: String = "Walk"
+
 
 var target_position: Vector3
 
@@ -24,17 +26,16 @@ func _ready() -> void:
 	leash_position.global_position = movement.body.global_position
 
 
-func enter(from: State):
-	var rand_direction = Vector3(randf(), 0, randf()).normalized()
-	var rand_length = randf_range(1.0, wander_radius)
+func enter(_from: State) -> void:
+	var rand_direction: = Vector3(randf(), 0, randf()).normalized()
+	var rand_length: float = randf_range(1.0, wander_radius)
 	target_position = leash_position.global_position + (rand_length * rand_direction)
 	navigation.target_position = target_position
 	
-	animation_front.animation = animation_name
-	animation_back.animation = animation_name
+	animation_player.play(animation_name)
 
 
-func update(delta: float):
+func update(_delta: float) -> void:
 	if movement.body.global_position.distance_to(target_position) <= 1.0:
 		state_machine.change_state(idle_state)
 		return
@@ -44,13 +45,13 @@ func update(delta: float):
 		return
 
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	if vision.is_node_visible(blackboard.player):
 		state_machine.change_state(follow_state)
 		return
 	
-	var navigation_path_target = navigation.get_next_path_position()
-	var direction = movement.body.global_position.direction_to(navigation_path_target)
+	var navigation_path_target: Vector3 = navigation.get_next_path_position()
+	var direction: Vector3 = movement.body.global_position.direction_to(navigation_path_target)
 	
 	movement.move(direction)
 	movement.rotate_to_direction(direction * Vector3(1, 0, 1))

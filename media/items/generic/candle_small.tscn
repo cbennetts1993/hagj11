@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://bg6vl7k3wuj6u"]
+
+[ext_resource type="Script" uid="uid://cykwq0xgkdj3s" path="res://scripts/item/ItemComponent.gd" id="1_o5kvm"]
+[ext_resource type="Resource" uid="uid://duce0hym625v6" path="res://media/items/generic/candle_small.tres" id="2_3nfi2"]
+[ext_resource type="Texture2D" uid="uid://bstob2nsm51rp" path="res://assets/sprites/objects/Candles_-_Burnt_Carry.png" id="3_326nk"]
+[ext_resource type="PackedScene" uid="uid://bmt0py3h22utt" path="res://media/particle_fx/candle_fx.tscn" id="4_3nfi2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_50f5s"]
+radius = 0.2
+
+[node name="InteractableItem" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_o5kvm")
+item_data = ExtResource("2_3nfi2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_50f5s")
+
+[node name="ItemSprite" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.0997292, 0)
+billboard = 2
+texture = ExtResource("3_326nk")
+
+[node name="CandleFX" parent="." instance=ExtResource("4_3nfi2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0724035, 0)
+
+[connection signal="interacted" from="." to="." method="queue_free"]

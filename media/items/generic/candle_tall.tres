@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bc344qsel8xuq"]
+
+[ext_resource type="Script" uid="uid://dseg4i2kndpkd" path="res://scripts/item/item_data.gd" id="1_mc2bm"]
+[ext_resource type="Texture2D" uid="uid://diygekp3c0eke" path="res://assets/sprites/objects/Candles_-_Tall_Carry.png" id="2_mc2bm"]
+
+[resource]
+script = ExtResource("1_mc2bm")
+sprite = ExtResource("2_mc2bm")
+name = &"Candle"
+display_color = Color(1, 1, 1, 1)
+description = "A simple candle. This one has barely been used."
+world_scale = Vector3(0.1, 0.1, 0.1)
+metadata/_custom_type_script = "uid://dseg4i2kndpkd"

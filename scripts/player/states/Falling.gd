@@ -6,15 +6,15 @@ extends State
 @export var movement: MovementComponent
 @export var idle_state: State
 
-func enter(from: State):
+func enter(_from: State) -> void:
 	animation_player.play(animation)
 
 
-func update(delta: float):
+func update(_delta: float) -> void:
 	if owner.is_on_floor():
 		state_machine.change_state(idle_state)
 		return
 
 
-func physics_update(delta: float):
+func physics_update(_delta: float) -> void:
 	movement.apply_gravity()

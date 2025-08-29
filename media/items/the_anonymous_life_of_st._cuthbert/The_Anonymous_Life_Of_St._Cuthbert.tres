@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_0g86w")
 sprite = ExtResource("2_x7ypw")
-name = &"The anonymous life of St. Cuthbert"
+name = &"The Anonymous Life of St. Cuthbert"
 display_color = Color(1, 1, 1, 1)
 description = "Distinct for being written at Lindisfarne, one of multiple vita sancti Cuthberti.
 

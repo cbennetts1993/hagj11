@@ -5,7 +5,7 @@ class_name ProjectileSpawner extends Node3D
 
 
 func spawn_from_item(item: ItemData) -> void:
-	var projectile = Projectile.create(item.sprite, item.world_scale, [owner_hit_box])
+	var projectile: = Projectile.create(item.sprite, item.world_scale, [owner_hit_box])
 	add_child(projectile)
 	
 	projectile.top_level = true

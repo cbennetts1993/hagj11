@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://cl7010lhaamqe"]
+
+[ext_resource type="Script" uid="uid://dseg4i2kndpkd" path="res://scripts/item/item_data.gd" id="1_y7qwa"]
+[ext_resource type="Texture2D" uid="uid://bk3roynygri2e" path="res://assets/sprites/objects/Vessels_-_Kettle_-_06.08.25.png" id="2_y7qwa"]
+
+[resource]
+script = ExtResource("1_y7qwa")
+sprite = ExtResource("2_y7qwa")
+name = &"Kettle"
+display_color = Color(1, 1, 1, 1)
+description = "A kettle."
+world_scale = Vector3(0.1, 0.1, 0.1)
+metadata/_custom_type_script = "uid://dseg4i2kndpkd"

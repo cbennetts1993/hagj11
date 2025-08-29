@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://duce0hym625v6"]
+
+[ext_resource type="Script" uid="uid://dseg4i2kndpkd" path="res://scripts/item/item_data.gd" id="1_87daa"]
+[ext_resource type="Texture2D" uid="uid://bstob2nsm51rp" path="res://assets/sprites/objects/Candles_-_Burnt_Carry.png" id="2_wtdu1"]
+
+[resource]
+script = ExtResource("1_87daa")
+sprite = ExtResource("2_wtdu1")
+name = &"Candle"
+display_color = Color(1, 1, 1, 1)
+description = "A simple candle. This one is nearly burnt through."
+world_scale = Vector3(0.1, 0.1, 0.1)
+metadata/_custom_type_script = "uid://dseg4i2kndpkd"

@@ -11,12 +11,12 @@ extends State
 @export_group("States")
 @export var crouch_state: State
 
-func enter(from: State) -> void:
+func enter(_from: State) -> void:
 	animation_player.play(animation)
 	movement.set_speed_multiplier(move_speed_modifier)
 
 
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	
 	if input.is_crouch_pressed():
 		state_machine.change_state(crouch_state)

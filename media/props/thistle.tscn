@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmpy01f4lvt5x"]
+
+[ext_resource type="Texture2D" uid="uid://d3fyi44n74r8a" path="res://assets/sprites/foliage/Live_Slender_Thistle_Carduus_tenuiflorus.png" id="1_v0s2i"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.5, 0)
+shaded = true
+texture = ExtResource("1_v0s2i")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(-8.74228e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.74228e-09, 0, 0.5, 0)
+shaded = true
+texture = ExtResource("1_v0s2i")

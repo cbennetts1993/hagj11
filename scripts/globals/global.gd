@@ -4,8 +4,8 @@ signal register_local_player
 
 var player: Player
 
-func emit_register_local_player(player: Player):
-	self.player = player
+func emit_register_local_player(_player: Player) -> void:
+	self.player = _player
 	register_local_player.emit(player)
 
 
@@ -39,5 +39,5 @@ func compare_relic_array(from: Array[ItemData]) -> int:
 
 signal play_dialogue(text: String, duration: float)
 
-func emit_trigger_dialogue(text: String, duration: float = 1.0):
+func emit_trigger_dialogue(text: String, duration: float = 1.0) -> void:
 	play_dialogue.emit(text, duration)

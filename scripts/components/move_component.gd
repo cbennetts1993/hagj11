@@ -13,11 +13,11 @@ func get_current_movement_speed() -> float:
 
 @export var gravity: float = 9.8
 
-@export_range(0.0, 1.0) var rotation_speed = 1.0
+@export_range(0.0, 1.0) var rotation_speed: float = 1.0
 
 var speed_multiplier: float = 1.0
 
-func set_speed_multiplier(value):
+func set_speed_multiplier(value: float) -> void:
 	speed_multiplier = value
 	speed_multiplier_changed.emit()
 
@@ -33,6 +33,6 @@ func rotate_to_direction(direction: Vector3) -> void:
 	body.look_at(body.global_position + direction, Vector3.UP, true)
 
 
-func apply_gravity():
+func apply_gravity() -> void:
 	body.velocity = Vector3.DOWN * gravity
 	body.move_and_slide()

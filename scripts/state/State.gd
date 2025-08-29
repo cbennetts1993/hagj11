@@ -6,20 +6,20 @@ signal exited
 
 @export var state_machine: StateMachine
 
-func enter(from: State):
+func enter(_from: State) -> void:
 	pass
 
-func exit(to: State):
-	pass
-
-
-func handle_input(event: InputEvent) -> void:
+func exit(_to: State) -> void:
 	pass
 
 
-func update(delta: float) -> void:
+func handle_input(_event: InputEvent) -> void:
 	pass
 
 
-func physics_update(delta: float) -> void:
+func update(_delta: float) -> void:
+	pass
+
+
+func physics_update(_delta: float) -> void:
 	pass

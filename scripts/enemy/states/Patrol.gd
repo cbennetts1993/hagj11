@@ -15,30 +15,28 @@ var current_point_id: int = 0
 
 var target_position: Vector3
 
-@export var animation_name: String = "idle"
-@export var animation_front: AnimatedSprite3D
-@export var animation_back: AnimatedSprite3D
+@export var animation_player: AnimationPlayer
+@export var animation_name: String = "Walk"
 
 
 func is_valid() -> bool:
 	return path != null
 
 
-func enter(from: State):
+func enter(_from: State) -> void:
 	target_position = path.curve.get_point_position(current_point_id)
 	navigation.target_position = target_position
 	
-	animation_front.animation = animation_name
-	animation_back.animation = animation_name
+	animation_player.play(animation_name)
 
 
-func update(delta: float):
+func update(_delta: float) -> void:
 	if not blackboard.has_been_investigated:
 		state_machine.change_state(investigate_state)
 		return
 
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	if vision.is_node_visible(blackboard.player):
 		state_machine.change_state(follow_state)
 		return
@@ -49,8 +47,8 @@ func physics_update(delta: float) -> void:
 		navigation.target_position = target_position
 		return
 	
-	var navigation_path_target = navigation.get_next_path_position()
-	var direction = movement.body.global_position.direction_to(navigation_path_target)
+	var navigation_path_target: Vector3 = navigation.get_next_path_position()
+	var direction: Vector3 = movement.body.global_position.direction_to(navigation_path_target)
 	
 	movement.move(direction)
 	movement.rotate_to_direction(direction * Vector3(1, 0, 1))

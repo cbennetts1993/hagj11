@@ -21,12 +21,12 @@ func change_to_scene(to: PackedScene) -> void:
 
 
 func fade_out() -> Tween:
-	var tween = create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(loading_screen, "modulate", Color(Color.BLACK, 1.0), 0.5)
 	return tween
 
 
 func fade_in() -> Tween:
-	var tween = create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(loading_screen, "modulate", Color(Color.BLACK, 0.0), 0.5)
 	return tween

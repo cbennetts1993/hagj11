@@ -10,11 +10,11 @@ extends State
 @export var idle_state: State
 @export var fall_state: State
 
-func enter(from: State):
+func enter(_from: State) -> void:
 	animation_player.play(animation)
 
 
-func update(delta: float):
+func update(_delta: float) -> void:
 	
 	var input_dir: = input.get_movement_input_vector_direction()
 	if input_dir.is_equal_approx(Vector2.ZERO):
@@ -26,7 +26,7 @@ func update(delta: float):
 		return
 
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	var input_dir: = input.get_movement_input_vector_direction()
 	var move_dir: = Vector3(input_dir.y, 0, input_dir.x).rotated(Vector3.UP, camera.rotation.y)
 	movement.move(move_dir)

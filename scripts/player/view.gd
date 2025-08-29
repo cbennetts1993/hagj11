@@ -5,7 +5,7 @@ extends Camera3D
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		var pan_direction = event.screen_relative
+		var pan_direction: Vector2 = event.screen_relative
 		
 		## Rotation camera along up and down (rotating around the x axis)
 		rotation.x -= pan_direction.y * sensitivity

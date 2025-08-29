@@ -13,18 +13,17 @@ extends State
 @export var investigate_state: State
 
 
-@export var animation_name: String = "idle"
-@export var animation_front: AnimatedSprite3D
-@export var animation_back: AnimatedSprite3D
+@export var animation_player: AnimationPlayer
+@export var animation_name: String = "Idle"
 
-func enter(from: State):
+
+func enter(_from: State) -> void:
 	wander_timer.start()
 	
-	animation_front.animation = animation_name
-	animation_back.animation = animation_name
+	animation_player.play(animation_name)
 
 
-func update(delta: float):
+func update(_delta: float) -> void:
 	
 	if vision.is_node_visible(blackboard.player):
 		state_machine.change_state(follow_state)
@@ -43,5 +42,5 @@ func update(delta: float):
 		return
 	
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	movement.apply_gravity()
